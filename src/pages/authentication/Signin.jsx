@@ -63,7 +63,7 @@ export const Signin = () => {
                         />
                     </label>
 
-                    <label className="text-sm py-1 text-slate-900">Password<span className="form_label">*</span>
+                    <label className="relative text-sm py-1 text-slate-900">Password<span className="form_label">*</span>
                         <input 
                             name="password"
                             value={password}
@@ -73,15 +73,15 @@ export const Signin = () => {
                             onChange={(e) => setFormInputs({...formInputs, password: e.target.value})}
                         />
 
-                        <i className="fa-solid fa-eye show_hide_btn"
+                        <i className="absolute right-2 bottom-2.5 fa-solid fa-eye show_hide_btn"
                             onClick={() => setShowHide((prev) => !prev)}>
                         </i>
 
                     </label>
 
-                    <button className="my-3 text-x cursor-pointer text-center py-1 border-2 text-sky-500 font-semibold" onClick={(e) => formSignIn(e)} >Login</button>
+                    <button className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-slate-900 bg-sky-300" onClick={(e) => formSignIn(e)} >Login</button>
 
-                    <button className="my-3 text-x cursor-pointer text-center py-1 text-slate-900 border bg-sky-300" onClick={(e) => formGuestSignIn(e)} >Guest Login</button>
+                    <button className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold text-sky-500" onClick={(e) => formGuestSignIn(e)} >Guest Login</button>
 
                     <p className="my-2 text-center text-sm self-center text-slate-900 font-medium">
                         <Link to="/signup"> Sign Up Now</Link> 
