@@ -1,9 +1,5 @@
-// import { Header } from "../../components";
 import { Link } from "react-router-dom";
-// import "./auth.css";
 import { useState } from "react";
-// import { useAuth } from "../../utils/authMethods";
-// import { locationType } from "../../types/common.types";
 
 export const Signup = () => {
 
@@ -145,4 +141,3 @@ export const Signup = () => {
             </div>
     )
 }
-

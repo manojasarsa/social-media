@@ -1,9 +1,5 @@
-// import { Header } from "../../components";
 import { Link } from "react-router-dom";
-// import "./auth.css";
 import { useState } from "react";
-// import { useAuth } from "../../utils/authMethods";
-// import { locationType } from "../../types/common.types";
 
 export const Signin = () => {
 
@@ -22,23 +18,13 @@ export const Signin = () => {
 
     const { email, password } = formInputs;
 
-    // const location = useLocation();
-
-    // const { from } = (location.state as locationType) || {
-    //     from :  { pathname: "/" }
-    // }
-
-    // const { signInHandler } = useAuth();
-
     const formSignIn = (e) => {
         e.preventDefault();
-        // signInHandler({ email, password }, from);
     }
     
     const formGuestSignIn = (e) => {
         e.preventDefault();
         setFormInputs({ email: "testuser@gmail.com", password: "testuser@123" })
-        // signInHandler({ email, password } , from);
     }
     
     return (
@@ -93,4 +79,3 @@ export const Signin = () => {
         </div>
     )
 }
-
