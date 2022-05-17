@@ -45,6 +45,8 @@ export const Signin = () => {
         <div className="body">
 
             <div className="flex flex-col mx-auto pb-8 shadow-none border-2 min-w-max ">
+
+                {/* <h1 className="mx-auto font-serif text-5xl p-2 ">Alcon</h1> */}
                 
                 <form className="mx-8 flex flex-col">
 
