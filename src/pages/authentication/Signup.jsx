@@ -5,7 +5,7 @@ import { useState } from "react";
 // import { useAuth } from "../../utils/authMethods";
 // import { locationType } from "../../types/common.types";
 
-export const Signin = () => {
+export const Signup = () => {
 
     const loginInputs = {
         email: "",

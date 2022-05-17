@@ -1,5 +1,6 @@
-import { Home, Signin, Signup } from "../pages";
-import { Routes, Route, Navigate } from "react-router-dom";
+// import { Home } from "../pages";
+import { Routes, Route } from "react-router-dom";
+import { Home, Signup } from "../pages";
 // import { useAuth } from "../utils/authMethods";
 // import { PrivateRoutes } from "./PrivateRoutes";
 
@@ -13,7 +14,8 @@ export const NavRoutes = () => {
 
       return (
             <Routes>
-                  <Route path="/" element = { <Home/> }></Route>
+                  <Route path="/" element = { <Home /> } ></Route>
+                  <Route path="/signup" element = { <Signup /> }></Route>
 
                   {/* <Route path="/explorequiz" element = { <ExploreQuiz/> }></Route> */}
 

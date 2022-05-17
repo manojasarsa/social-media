@@ -1,9 +1,9 @@
 import "./App.css";
-import { Home } from "./pages";
+import { NavRoutes } from "./routes/NavRoutes";
 export default function App() {
   return (
-    <div>
-      <Home />
+    <div className="App">
+      <NavRoutes />
     </div>
   )
 }

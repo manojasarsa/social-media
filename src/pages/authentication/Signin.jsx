@@ -84,8 +84,7 @@ export const Signin = () => {
                     <button className="my-3 text-x cursor-pointer text-center py-1 text-slate-900 border bg-sky-300" onClick={(e) => formGuestSignIn(e)} >Guest Login</button>
 
                     <p className="my-2 text-center text-sm self-center text-slate-900 font-medium">
-                        {/* <Link to="#"> Sign Up Now</Link>  */}
-                        Sign Up Now
+                        <Link to="/signup"> Sign Up Now</Link> 
                     </p>
 
                 </form>
