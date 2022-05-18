@@ -123,7 +123,7 @@ export const Signup = () => {
 
                     </label>
 
-                    <button className="my-3 text-x cursor-pointer text-center py-1 text-slate-900 border2 bg-sky-300 font-semibold" onClick={(e) => formHandler(e)} >Sign Up</button>
+                    <button className="my-3 text-x cursor-pointer text-center py-1 border2 bg-blue-600 hover:bg-blue-700 text-white font-semibold" onClick={(e) => formHandler(e)} >Sign Up</button>
 
                     <p className="my-2 text-center text-sm self-center text-slate-900 font-medium">
                         <Link to="/">Already have an account {">"} </Link>
