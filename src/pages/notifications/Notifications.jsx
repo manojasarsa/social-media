@@ -2,7 +2,7 @@ import { AsideLeft, AsideRight } from "../../component";
 
 export const Notifications = () => {
       return (
-            <div className="">
+            <div>
                   <div className="flex mx-12 my-4">
                         <div className="mx-auto flex px-32 h-screen w-screen">
 
@@ -20,7 +20,7 @@ export const Notifications = () => {
 
                                           <div className="w-full flex flex-col pl-4">
                                                 <h2 className="font-semibold">@veron_d12</h2>
-                                                <h2 className=""> liked your post. </h2>
+                                                <h2> liked your post. </h2>
                                           </div>
                                     </div>
 
@@ -30,7 +30,7 @@ export const Notifications = () => {
 
                                           <div className="w-full flex flex-col pl-4">
                                                 <h2 className="font-semibold">@rachel_dy3</h2>
-                                                <h2 className=""> started following you. </h2>
+                                                <h2> started following you. </h2>
                                           </div>
                                     </div>
                                     

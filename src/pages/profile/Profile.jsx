@@ -2,7 +2,7 @@ import { AsideLeft, AsideRight, Post } from "../../component";
 
 export const Profile = () => {
       return (
-            <div className="">
+            <div>
                   <div className="flex mx-12 my-4">
                         <div className="mx-auto flex px-32 h-screen w-screen">
 
@@ -22,7 +22,7 @@ export const Profile = () => {
 
                                                 <div className="flex flex-col mt-2">
                                                       <h2 className="font-semibold">Veronica Dane</h2>
-                                                      <h2 className=""> @veron_d12 </h2>
+                                                      <h2> @veron_d12 </h2>
                                                       <button className="border my-3 p-1 rounded-lg text-x cursor-pointer text-center font-semibold text-slate-600 hover:bg-slate-200">Edit Profile</button>
                                                 </div>
 

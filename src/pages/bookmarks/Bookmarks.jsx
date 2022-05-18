@@ -2,7 +2,7 @@ import { AsideLeft, AsideRight, Post } from "../../component";
 
 export const Bookmarks = () => {
       return (
-            <div className="">
+            <div>
                   <div className="flex mx-12 my-4">
                         <div className="mx-auto flex px-32 h-screen w-screen">
 

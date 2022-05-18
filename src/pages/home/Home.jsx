@@ -1,10 +1,9 @@
 import { GiSettingsKnobs } from "react-icons/gi";
-
 import { AsideLeft, AsideRight, Post } from "../../component";
 
 export const Home = () => {
       return (
-            <div className="">
+            <div>
                   <div className="flex mx-12 my-4">
                         <div className="mx-auto flex px-32 h-screen w-screen">
 

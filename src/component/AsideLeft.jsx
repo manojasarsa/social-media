@@ -8,7 +8,7 @@ export const AsideLeft = () => {
                         <Link to="/home"> ALCON </Link>
                   </header>
 
-                  <nav className="">
+                  <nav>
                         <ul className="pl-2">
                               <li >
                                     <Link to="/home" className="flex py-4 gap-3 px-3 cursor-pointer">

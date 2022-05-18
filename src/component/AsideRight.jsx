@@ -17,7 +17,7 @@ export const AsideRight = () => {
 
                         <div className="w-full flex flex-col pl-4 shrink">
                               <h2 className="font-semibold flex-nowrap">Veronica Dane</h2>
-                              <h2 className=""> @veron_d12 </h2>
+                              <h2> @veron_d12 </h2>
                         </div>
 
                         <button className="mr-8 px-3 w-18 h-8 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out">Follow</button>
@@ -29,7 +29,7 @@ export const AsideRight = () => {
 
                         <div className="w-full flex flex-col pl-4">
                               <h2 className="font-semibold">Lucy Staniforth</h2>
-                              <h2 className=""> @lucy_st4 </h2>
+                              <h2> @lucy_st4 </h2>
                         </div>
 
                         <button className="mr-8 px-3 w-18 h-8  bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out">Follow</button>
@@ -41,7 +41,7 @@ export const AsideRight = () => {
 
                         <div className="w-full flex flex-col pl-4">
                               <h2 className="font-semibold">Stuart Wood</h2>
-                              <h2 className=""> @stuart_99 </h2>
+                              <h2> @stuart_99 </h2>
                         </div>
 
                         <button className="mr-8 px-3 w-18 h-8  bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out">Follow</button>
@@ -53,7 +53,7 @@ export const AsideRight = () => {
 
                         <div className="w-full flex flex-col pl-4">
                               <h2 className="font-semibold">Rachel Daly</h2>
-                              <h2 className=""> @rachel_dy3 </h2>
+                              <h2> @rachel_dy3 </h2>
                         </div>
 
                         <button className="mr-8 px-3 w-18 h-8 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out">Follow</button>
