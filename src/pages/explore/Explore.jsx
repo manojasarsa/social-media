@@ -1,6 +1,6 @@
-import { AsideLeft, AsideRight } from "../../component";
+import { AsideLeft, AsideRight } from "../../component"
 
-export const Notifications = () => {
+export const Explore = () => {
       return (
             <div className="">
                   <div className="flex mx-12 my-4">
