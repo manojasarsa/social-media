@@ -70,10 +70,16 @@ export const Signin = () => {
 
                                 </label>
 
-                                <button className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-slate-900 bg-sky-300" onClick={(e) => formSignIn(e)} >Login</button>
+                                {/* TODO */}
 
-                                <button className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold text-sky-500" onClick={(e) => formGuestSignIn(e)} >Guest Login</button>
+                                {/* <button className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-slate-900 bg-sky-300" onClick={(e) => formSignIn(e)} >Login</button> */}
 
+                                <Link to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-slate-900 bg-sky-300">Login</Link>
+
+                                {/* <button className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold text-sky-500" onClick={(e) => formGuestSignIn(e)} >Guest Login</button> */}
+
+                                <Link to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-sky-500">Guest Login</Link>
+                                
                                 <p className="my-2 text-center text-sm self-center text-slate-900 font-medium">
                                     <Link to="/signup"> Sign Up Now</Link>
                                 </p>
