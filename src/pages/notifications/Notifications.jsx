@@ -16,7 +16,7 @@ export const Notifications = () => {
 
                                     <div className="mx-6 my-8 flex space-between">
 
-                                          <img src="https://i.pravatar.cc/300?img=5" className="w-12 h-12 rounded-full" />
+                                          <img src="https://i.pravatar.cc/300?img=5" className="w-12 h-12 rounded-full" alt="avatar" />
 
                                           <div className="w-full flex flex-col pl-4">
                                                 <h2 className="font-semibold">@veron_d12</h2>
@@ -26,7 +26,7 @@ export const Notifications = () => {
 
                                     <div className="m-6 flex space-between">
 
-                                          <img src="https://i.pravatar.cc/300?img=4" className="w-12 h-12 rounded-full" />
+                                          <img src="https://i.pravatar.cc/300?img=4" className="w-12 h-12 rounded-full" alt="avatar" />
 
                                           <div className="w-full flex flex-col pl-4">
                                                 <h2 className="font-semibold">@rachel_dy3</h2>

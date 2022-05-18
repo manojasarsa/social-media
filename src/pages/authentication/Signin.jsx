@@ -17,15 +17,6 @@ export const Signin = () => {
     const [showHide, setShowHide] = useState(false);
 
     const { email, password } = formInputs;
-
-    const formSignIn = (e) => {
-        e.preventDefault();
-    }
-    
-    const formGuestSignIn = (e) => {
-        e.preventDefault();
-        setFormInputs({ email: "testuser@gmail.com", password: "testuser@123" })
-    }
     
     return (
 

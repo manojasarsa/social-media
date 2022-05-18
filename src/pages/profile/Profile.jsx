@@ -18,7 +18,7 @@ export const Profile = () => {
 
                                           <div className="flex mx-auto gap-8 ">
 
-                                                <img src="https://i.pravatar.cc/300?img=5" className="w-32 h-32 rounded-full " />
+                                                <img src="https://i.pravatar.cc/300?img=5" className="w-32 h-32 rounded-full" alt="avatar" />
 
                                                 <div className="flex flex-col mt-2">
                                                       <h2 className="font-semibold">Veronica Dane</h2>

@@ -13,7 +13,7 @@ export const AsideRight = () => {
 
                   <div className="ml-5 mt-8 mb-4 flex ">
 
-                        <img src="https://i.pravatar.cc/300?img=5" className="w-12 h-12 rounded-full" />
+                        <img src="https://i.pravatar.cc/300?img=5" className="w-12 h-12 rounded-full" alt="avatar" />
 
                         <div className="w-full flex flex-col pl-4 shrink">
                               <h2 className="font-semibold flex-nowrap">Veronica Dane</h2>
@@ -25,7 +25,7 @@ export const AsideRight = () => {
 
                   <div className="ml-5 my-4 flex space-between">
 
-                        <img src="https://i.pravatar.cc/300?img=32" className="w-12 h-12 rounded-full" />
+                        <img src="https://i.pravatar.cc/300?img=32" className="w-12 h-12 rounded-full" alt="avatar" />
 
                         <div className="w-full flex flex-col pl-4">
                               <h2 className="font-semibold">Lucy Staniforth</h2>
@@ -37,7 +37,7 @@ export const AsideRight = () => {
 
                   <div className="ml-5 my-4 flex space-between">
 
-                        <img src="https://i.pravatar.cc/300?img=4" className="w-12 h-12 rounded-full" />
+                        <img src="https://i.pravatar.cc/300?img=4" className="w-12 h-12 rounded-full" alt="avatar" />
 
                         <div className="w-full flex flex-col pl-4">
                               <h2 className="font-semibold">Stuart Wood</h2>
@@ -49,7 +49,7 @@ export const AsideRight = () => {
 
                   <div className="ml-5 my-4 flex space-between">
 
-                        <img src="https://i.pravatar.cc/300?img=47" className="w-12 h-12 rounded-full" />
+                        <img src="https://i.pravatar.cc/300?img=47" className="w-12 h-12 rounded-full" alt="avatar" />
 
                         <div className="w-full flex flex-col pl-4">
                               <h2 className="font-semibold">Rachel Daly</h2>

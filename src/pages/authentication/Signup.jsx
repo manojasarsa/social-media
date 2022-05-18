@@ -17,30 +17,22 @@ export const Signup = () => {
 
     const [formInputs, setFormInputs] = useState(signUpInputs);
 
-    const [error, setError] = useState("");
-    const [errorState, setErrorState] = useState(false);
-
     const { firstName, lastName, userName, email, password, confirmPassword } = formInputs;
 
     const formHandler = (e) => {
+
+        // TODO 
+        
         e.preventDefault();
         if (firstName && lastName && email && password && confirmPassword) {
                 if (formInputs.password === formInputs.confirmPassword) {
                     // signUpHandler({ email, password, firstName, lastName });
                 }
                 else {
-                    setError("Password does not match!");
-                    setErrorState(true);
-                    setTimeout(() => {
-                            setErrorState(false);
-                    }, 3000);
+                    console.error("password doesn't match");
                 }
         } else {
-                setError("All fields are required!");
-                setErrorState(true);
-                setTimeout(() => {
-                    setErrorState(false);
-                }, 3000);
+                console.log("error");
         }
     }
     
