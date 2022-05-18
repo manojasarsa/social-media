@@ -11,16 +11,16 @@ export const AsideRight = () => {
 
                   <h1 className="m-3 text-xl text-center font-bold">Suggestions for you</h1>
 
-                  <div className="ml-5 mt-8 mb-4 flex space-between">
+                  <div className="ml-5 mt-8 mb-4 flex ">
 
                         <img src="https://i.pravatar.cc/300?img=5" className="w-12 h-12 rounded-full" />
 
-                        <div className="w-full flex flex-col pl-4">
-                              <h2 className="font-semibold">Veronica Dane</h2>
+                        <div className="w-full flex flex-col pl-4 shrink">
+                              <h2 className="font-semibold flex-nowrap">Veronica Dane</h2>
                               <h2 className=""> @veron_d12 </h2>
                         </div>
 
-                        <button className="mr-8 px-4  bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out">Follow</button>
+                        <button className="mr-8 px-3 w-18 h-8 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out">Follow</button>
                   </div>
 
                   <div className="ml-5 my-4 flex space-between">
@@ -32,7 +32,7 @@ export const AsideRight = () => {
                               <h2 className=""> @lucy_st4 </h2>
                         </div>
 
-                        <button className="mr-8 px-4  bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out">Follow</button>
+                        <button className="mr-8 px-3 w-18 h-8  bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out">Follow</button>
                   </div>
 
                   <div className="ml-5 my-4 flex space-between">
@@ -44,7 +44,7 @@ export const AsideRight = () => {
                               <h2 className=""> @stuart_99 </h2>
                         </div>
 
-                        <button className="mr-8 px-4  bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out">Follow</button>
+                        <button className="mr-8 px-3 w-18 h-8  bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out">Follow</button>
                   </div>
 
                   <div className="ml-5 my-4 flex space-between">
@@ -56,7 +56,7 @@ export const AsideRight = () => {
                               <h2 className=""> @rachel_dy3 </h2>
                         </div>
 
-                        <button className="mr-8 px-4 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out">Follow</button>
+                        <button className="mr-8 px-3 w-18 h-8 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out">Follow</button>
                   </div>
             </aside>
 
