@@ -1,2 +1,2 @@
-export { signInHandler } from "./signInHelper";
-export { signUpHandler } from "./signUpHelper";
+export { signInHandler } from "./signInHandler";
+export { signUpHandler } from "./signUpHandler";
