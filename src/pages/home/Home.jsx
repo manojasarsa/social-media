@@ -1,15 +1,10 @@
 import { GiSettingsKnobs } from "react-icons/gi";
 import { AsideLeft, AsideRight, Post } from "../../component";
 import { FiLogOut } from "react-icons/fi";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signOutHandler } from "../../features/auth/authSlice";
-import Loader from 'react-spinner-loader';
 
 export const Home = () => {
-
-      const {
-            auth: { isLoading }
-      } = useSelector( state => state );
 
       const dispatch = useDispatch();
 
