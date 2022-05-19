@@ -20,13 +20,13 @@ export const Signin = () => {
 
     const dispatch = useDispatch();
 
-    const formSignIn = (e) => {
+    const formSignInHandler = (e) => {
         e.preventDefault();
         const { userName, password } = formInputs;
         dispatch(signInHandler({ userName, password }));
     }
     
-    const formGuestSignIn = (e) => {
+    const formGuestSignInHandler = (e) => {
         e.preventDefault();
         const guestUser = { userName: "chrislevin22", password: "chrislevin@123" };
         setFormInputs(guestUser);
@@ -78,13 +78,13 @@ export const Signin = () => {
 
                                 {/* TODO */}
 
-                                {/* <button className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-slate-900 bg-sky-300" onClick={(e) => formSignIn(e)} >Login</button> */}
+                                {/* <button className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-slate-900 bg-sky-300" onClick={(e) => formSignInHandler(e)} >Login</button> */}
 
-                                <Link to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  bg-blue-600 hover:bg-blue-700 text-white" onClick={(e) => formSignIn(e)} > Login </Link>
+                                <Link to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  bg-blue-600 hover:bg-blue-700 text-white" onClick={(e) => formSignInHandler(e)} > Login </Link>
 
-                                {/* <button className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold text-sky-500" onClick={(e) => formGuestSignIn(e)} >Guest Login</button> */}
+                                {/* <button className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold text-sky-500" onClick={(e) => formGuestSignInHandler(e)} >Guest Login</button> */}
 
-                                <Link to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-blue-800" onClick={(e) => formGuestSignIn(e)} > Guest Login </Link>
+                                <Link to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-blue-800" onClick={(e) => formGuestSignInHandler(e)} > Guest Login </Link>
                                 
                                 <p className="my-2 text-center text-sm self-center text-slate-900 font-medium">
                                     <Link to="/signup"> Sign Up Now </Link>

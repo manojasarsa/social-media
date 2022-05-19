@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { signUpHandler } from "../../features/auth/helpers";
 
 export const Signup = () => {
 
@@ -10,29 +12,32 @@ export const Signup = () => {
         firstName: "",
         lastName: "",
         userName: "",
-        email: "",
         password: "",
         confirmPassword: ""
     }
 
+    const {
+        auth: { error, isLoading }
+    } = useSelector( state => state );
+
+    const dispatch = useDispatch();
+
     const [formInputs, setFormInputs] = useState(signUpInputs);
 
-    const { firstName, lastName, userName, email, password, confirmPassword } = formInputs;
+    const { firstName, lastName, userName, password, confirmPassword } = formInputs;
 
-    const formHandler = (e) => {
-
-        // TODO 
-        
+    const formSignUpHandler = (e) => {
         e.preventDefault();
+
         if (firstName && lastName && email && password && confirmPassword) {
                 if (formInputs.password === formInputs.confirmPassword) {
-                    // signUpHandler({ email, password, firstName, lastName });
+                    dispatch(signUpHandler({ firstName, lastName, userName, password }));
                 }
                 else {
                     console.error("password doesn't match");
                 }
         } else {
-                console.log("error");
+                console.error("Enter all values");
         }
     }
     
@@ -80,17 +85,6 @@ export const Signup = () => {
 
                     </label>
 
-                    <label className="text-sm py-1 text-slate-900">Email address<span className="form_label">*</span>
-                        <input 
-                            name="email"
-                            value={email}
-                            className="py-1 w-full mt-4 rounded-none border-2" 
-                            type="email" 
-                            required={true} 
-                            onChange={(e) => setFormInputs({...formInputs, email: e.target.value})}
-                        />
-                    </label>
-
                     <label className="relative text-sm py-1 text-slate-900">Password<span className="form_label">*</span>
                         <input 
                             name="password"
@@ -123,7 +117,7 @@ export const Signup = () => {
 
                     </label>
 
-                    <button className="my-3 text-x cursor-pointer text-center py-1 border2 bg-blue-600 hover:bg-blue-700 text-white font-semibold" onClick={(e) => formHandler(e)} >Sign Up</button>
+                    <button className="my-3 text-x cursor-pointer text-center py-1 border2 bg-blue-600 hover:bg-blue-700 text-white font-semibold" onClick={(e) => formSignUpHandler(e)} >Sign Up</button>
 
                     <p className="my-2 text-center text-sm self-center text-slate-900 font-medium">
                         <Link to="/">Already have an account {">"} </Link>
