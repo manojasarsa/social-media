@@ -1,22 +1,37 @@
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signInHandler } from "../../features/auth/helpers";
 import { useState } from "react";
 
 export const Signin = () => {
 
     const loginInputs = {
-        email: "",
+        userName: "",
         password: ""
     }
 
     const [ formInputs, setFormInputs ] = useState(loginInputs);
 
-    // TODO --
-    // const [error, setError] = useState("");
-    // const [errorState, setErrorState] = useState(false);
-
     const [showHide, setShowHide] = useState(false);
 
-    const { email, password } = formInputs;
+    const {
+        auth: { error, isLoading }
+    } = useSelector( state => state );
+
+    const dispatch = useDispatch();
+
+    const formSignIn = (e) => {
+        e.preventDefault();
+        const { userName, password } = formInputs;
+        dispatch(signInHandler({ userName, password }));
+    }
+    
+    const formGuestSignIn = (e) => {
+        e.preventDefault();
+        const guestUser = { userName: "chrislevin22", password: "chrislevin@123" };
+        setFormInputs(guestUser);
+        dispatch(signInHandler(guestUser));
+    }
     
     return (
 
@@ -34,14 +49,14 @@ export const Signin = () => {
 
                                 <h2 className="my-6 text-left text-slate-900 text-lg">Sign In</h2>
 
-                                <label className="text-sm py-1 text-slate-900">Email address<span className="form_label">*</span>
+                                <label className="text-sm py-1 text-slate-900">Username<span className="form_label">*</span>
                                     <input
-                                        name="email"
-                                        value={email}
+                                        name="userName"
+                                        value={userName}
                                         className="py-1 w-full mt-4 rounded-none border-2"
-                                        type="email"
+                                        type="text"
                                         required={true}
-                                        onChange={(e) => setFormInputs({ ...formInputs, email: e.target.value })}
+                                        onChange={(e) => setFormInputs({ ...formInputs, userName: e.target.value })}
                                     />
                                 </label>
 
@@ -65,14 +80,14 @@ export const Signin = () => {
 
                                 {/* <button className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-slate-900 bg-sky-300" onClick={(e) => formSignIn(e)} >Login</button> */}
 
-                                <Link to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  bg-blue-600 hover:bg-blue-700 text-white">Login</Link>
+                                <Link to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  bg-blue-600 hover:bg-blue-700 text-white" onClick={(e) => formSignIn(e)} > Login </Link>
 
                                 {/* <button className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold text-sky-500" onClick={(e) => formGuestSignIn(e)} >Guest Login</button> */}
 
-                                <Link to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-blue-800">Guest Login</Link>
+                                <Link to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-blue-800" onClick={(e) => formGuestSignIn(e)} > Guest Login </Link>
                                 
                                 <p className="my-2 text-center text-sm self-center text-slate-900 font-medium">
-                                    <Link to="/signup"> Sign Up Now</Link>
+                                    <Link to="/signup"> Sign Up Now </Link>
                                 </p>
 
                             </form>
