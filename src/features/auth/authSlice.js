@@ -25,7 +25,7 @@ export const authSlice = createSlice({
             [signInHandler.fulfilled]: (state, { payload }) => {
                   state.isLoading = false;
                   state.token = payload.encodedToken;
-                  state.userInfo = payload.foundUser
+                  state.userInfo = payload.foundUser;
             },
             [signInHandler.rejected]: (state, { payload }) => {
                   state.isLoading = false;
@@ -37,7 +37,7 @@ export const authSlice = createSlice({
             [signUpHandler.fulfilled]: (state, { payload }) => {
                   state.isLoading = false;
                   state.token = payload.encodedToken;
-                  state.userInfo = payload.createdUser
+                  state.userInfo = payload.createdUser;
             },
             [signUpHandler.rejected]: (state, { payload }) => {
                   state.isLoading = false;
@@ -45,6 +45,6 @@ export const authSlice = createSlice({
       },
 });
 
-export const { signOut } = authSlice.actions;
+export const { signOutHandler } = authSlice.actions;
 
-export default authSlice.reducer ;
+export default authSlice.reducer;

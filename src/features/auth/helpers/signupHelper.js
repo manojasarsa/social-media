@@ -3,10 +3,10 @@ import axios from "axios";
 
 export const signUpHandler = createAsyncThunk(
       "auth/signUp",
-      async ({ firstName, lastName, userName, password }, { rejectWithValue }) => {
+      async ({ firstName, lastName, username, password }, { rejectWithValue }) => {
             try {
                   const { status, data } = await axios.post("/api/auth/signup", { 
-                        firstName, lastName, userName, password 
+                        firstName, lastName, username, password 
                   });
                   
                   if (status === 201 ) {

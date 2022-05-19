@@ -12,7 +12,7 @@ export const Signup = () => {
     const signUpInputs = {
         firstName: "",
         lastName: "",
-        userName: "",
+        username: "",
         password: "",
         confirmPassword: ""
     }
@@ -25,14 +25,14 @@ export const Signup = () => {
 
     const [formInputs, setFormInputs] = useState(signUpInputs);
 
-    const { firstName, lastName, userName, password, confirmPassword } = formInputs;
+    const { firstName, lastName, username, password, confirmPassword } = formInputs;
 
     const formSignUpHandler = (e) => {
         e.preventDefault();
 
         if (firstName && lastName && password && confirmPassword) {
                 if (formInputs.password === formInputs.confirmPassword) {
-                    dispatch(signUpHandler({ firstName, lastName, userName, password }));
+                    dispatch(signUpHandler({ firstName, lastName, username, password }));
                 }
                 else {
                     console.error("password doesn't match");
@@ -78,12 +78,12 @@ export const Signup = () => {
 
                     <label className="text-sm py-1 text-slate-900">User Name<span className="form_label">*</span>
                         <input 
-                            name="userName"
-                            value={userName}
+                            name="username"
+                            value={username}
                             className="py-1 w-full mt-4 rounded-none border-2" 
                             type= "text"
                             required= {true} 
-                            onChange={(e) => setFormInputs({...formInputs, userName: e.target.value})}
+                            onChange={(e) => setFormInputs({...formInputs, username: e.target.value})}
                         />
 
                     </label>
