@@ -11,9 +11,11 @@ export const signInHandler = createAsyncThunk(
                         localStorage.setItem("Alcon_token", data.encodedToken);
                         localStorage.setItem("Alcon_userInfo", JSON.stringify( data.foundUser ));
                   }
+
                   return data;
-            } catch(err) {
-                  rejectWithValue(err.response.data.error[0]);
+
+            } catch (err) {
+                  return rejectWithValue(err.response.data.errors[0]);
             }            
       }
 );
