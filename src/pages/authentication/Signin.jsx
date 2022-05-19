@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signInHandler } from "../../features/auth/helpers";
 import { useState } from "react";
+import Loader from 'react-spinner-loader';
 
 export const Signin = () => {
 
@@ -16,7 +17,7 @@ export const Signin = () => {
 
     const {
         auth: { error, isLoading }
-    } = useSelector( state => state );
+    } = useSelector( state => state.auth );
 
     const dispatch = useDispatch();
 
@@ -36,6 +37,7 @@ export const Signin = () => {
     return (
 
         <div className="flex justify-items-center items-center">
+            <Loader show = {isLoading} />
             <div className="m-16 mx-auto w-full ">
                 <div className="md:container md:mx-auto mx-auto flex">
                     <img src="assets/social1.svg" alt="social-img" className="w-1/2 hidden md:block "></img>

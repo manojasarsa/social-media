@@ -3,17 +3,36 @@ import { Home, Signup, Signin, Explore, Bookmarks, Notifications, Profile } from
 
 export const NavRoutes = () => {
 
+      const {
+            auth: { token }
+        } = useSelector( state => state.auth );
+
       return (
             <Routes>
-                  <Route path="/home" element = { <Home /> } ></Route>
-                  <Route path="/signup" element = { <Signup /> }></Route>
-                  <Route path="/" element = { <Signin /> }></Route>
-                  <Route path="/explore" element = { <Explore /> }></Route>
-                  <Route path="/bookmarks" element = { <Bookmarks /> }></Route>
-                  <Route path="/notifications" element = { <Notifications /> }></Route>
-                  <Route path="/profile" element = { <Profile /> }></Route>
+
+                  <Route path={"/mock"} element={ <Mockman /> } />
                   
-                  <Route path="*" element = { <h2> OOPS! Page Not Found</h2>}></Route>
+                  {token ? (
+                        <>
+                              <Route path="/" element = { <Navigate to="/home" replace /> } />
+
+                              <Route path="/signup" element = { <Navigate to="/home" replace  /> } />
+                        </>
+                  ):(
+                        <>
+                              <Route path="/" element = { <Signin /> } />
+                              <Route path="/signup" element = { <Signup /> } />
+                        </>
+                  )}         
+
+                  <Route element = { <PrivateRoutes /> }>
+                        <Route path="/home" element = { <Home /> }  />
+                        <Route path="/explore" element = { <Explore /> } />
+                        <Route path="/bookmarks" element = { <Bookmarks /> } />
+                        <Route path="/notifications" element = { <Notifications /> } />
+                        <Route path="/profile" element = { <Profile /> } />
+                  </Route>                  
+                  <Route path="*" element = { <h2> OOPS! Page Not Found</h2>} />
             </Routes>
       )
 }
