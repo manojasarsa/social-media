@@ -1,11 +1,15 @@
 import { Routes, Route } from "react-router-dom";
 import { Home, Signup, Signin, Explore, Bookmarks, Notifications, Profile } from "../pages";
+import { Navigate } from "react-router-dom";
+import { PrivateRoutes } from "./PrivateRoutes";
+import { useSelector } from "react-redux";
+import Mockman from "mockman-js";
 
 export const NavRoutes = () => {
 
       const {
             auth: { token }
-        } = useSelector( state => state.auth );
+        } = useSelector( state => state );
 
       return (
             <Routes>

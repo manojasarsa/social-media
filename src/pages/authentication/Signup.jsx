@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signUpHandler } from "../../features/auth/helpers";
+import Loader from 'react-spinner-loader';
 
 export const Signup = () => {
 
@@ -17,7 +18,7 @@ export const Signup = () => {
     }
 
     const {
-        auth: { error, isLoading }
+        auth: { isLoading }
     } = useSelector( state => state );
 
     const dispatch = useDispatch();
@@ -29,7 +30,7 @@ export const Signup = () => {
     const formSignUpHandler = (e) => {
         e.preventDefault();
 
-        if (firstName && lastName && email && password && confirmPassword) {
+        if (firstName && lastName && password && confirmPassword) {
                 if (formInputs.password === formInputs.confirmPassword) {
                     dispatch(signUpHandler({ firstName, lastName, userName, password }));
                 }
@@ -44,6 +45,9 @@ export const Signup = () => {
     return (
             <div className="flex flex-col pb-1 shadow-none border-2 w-1/4 mx-auto mt-12 min-w-max">
 
+            <div className="z-20">
+                <Loader show = {isLoading} type="body" />
+            </div>
                 {/* <h1 className="mx-auto font-serif text-5xl p-2 ">Alcon</h1> */}
                 
                 <form className="mx-8 flex flex-col">

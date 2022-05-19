@@ -15,15 +15,16 @@ export const Signin = () => {
 
     const [showHide, setShowHide] = useState(false);
 
+    const { userName, password } = formInputs;
+
     const {
-        auth: { error, isLoading }
-    } = useSelector( state => state.auth );
+        auth: { isLoading }
+    } = useSelector( state => state );
 
     const dispatch = useDispatch();
 
     const formSignInHandler = (e) => {
         e.preventDefault();
-        const { userName, password } = formInputs;
         dispatch(signInHandler({ userName, password }));
     }
     
@@ -37,7 +38,9 @@ export const Signin = () => {
     return (
 
         <div className="flex justify-items-center items-center">
-            <Loader show = {isLoading} />
+            <div className="z-20">
+                <Loader show = {isLoading} type="body" />
+            </div>
             <div className="m-16 mx-auto w-full ">
                 <div className="md:container md:mx-auto mx-auto flex">
                     <img src="assets/social1.svg" alt="social-img" className="w-1/2 hidden md:block "></img>

@@ -1,4 +1,4 @@
-import { createSlice } from "reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { signInHandler, signUpHandler } from "./helpers";
 
 const initialState = {
