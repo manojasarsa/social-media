@@ -48,8 +48,7 @@ export const Signup = () => {
             <div className="z-20">
                 <Loader show = {isLoading} type="body" />
             </div>
-                {/* <h1 className="mx-auto font-serif text-5xl p-2 ">Alcon</h1> */}
-                
+
                 <form className="mx-8 flex flex-col">
 
                     <h2 className="my-6 text-left text-slate-900 text-lg">Sign Up</h2>
@@ -130,4 +129,4 @@ export const Signup = () => {
                 </form>
             </div>
     )
-}
+};

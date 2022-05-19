@@ -48,8 +48,6 @@ export const Signin = () => {
 
                         <div className="flex flex-col mx-auto pb-8 shadow-none border-2 min-w-max ">
 
-                            {/* <h1 className="mx-auto font-serif text-5xl p-2 ">Alcon</h1> */}
-
                             <form className="mx-8 flex flex-col">
 
                                 <h2 className="my-6 text-left text-slate-900 text-lg">Sign In</h2>
@@ -81,13 +79,7 @@ export const Signin = () => {
 
                                 </label>
 
-                                {/* TODO */}
-
-                                {/* <button className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-slate-900 bg-sky-300" onClick={(e) => formSignInHandler(e)} >Login</button> */}
-
                                 <Link to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  bg-blue-600 hover:bg-blue-700 text-white" onClick={(e) => formSignInHandler(e)} > Login </Link>
-
-                                {/* <button className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold text-sky-500" onClick={(e) => formGuestSignInHandler(e)} >Guest Login</button> */}
 
                                 <Link to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-blue-800" onClick={(e) => formGuestSignInHandler(e)} > Guest Login </Link>
                                 
@@ -102,4 +94,4 @@ export const Signin = () => {
             </div>
         </div>        
     )
-}
+};

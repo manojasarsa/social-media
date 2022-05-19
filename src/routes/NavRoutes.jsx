@@ -39,4 +39,4 @@ export const NavRoutes = () => {
                   <Route path="*" element = { <h2> OOPS! Page Not Found</h2>} />
             </Routes>
       )
-}
+};
