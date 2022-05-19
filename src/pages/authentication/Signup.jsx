@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { signUpHandler } from "../../features/auth/helpers";
+import Loader from 'react-spinner-loader';
 
 export const Signup = () => {
 
@@ -9,38 +12,43 @@ export const Signup = () => {
     const signUpInputs = {
         firstName: "",
         lastName: "",
-        userName: "",
-        email: "",
+        username: "",
         password: "",
         confirmPassword: ""
     }
 
+    const {
+        auth: { isLoading }
+    } = useSelector( state => state );
+
+    const dispatch = useDispatch();
+
     const [formInputs, setFormInputs] = useState(signUpInputs);
 
-    const { firstName, lastName, userName, email, password, confirmPassword } = formInputs;
+    const { firstName, lastName, username, password, confirmPassword } = formInputs;
 
-    const formHandler = (e) => {
-
-        // TODO 
-        
+    const formSignUpHandler = (e) => {
         e.preventDefault();
-        if (firstName && lastName && email && password && confirmPassword) {
+
+        if (firstName && lastName && password && confirmPassword) {
                 if (formInputs.password === formInputs.confirmPassword) {
-                    // signUpHandler({ email, password, firstName, lastName });
+                    dispatch(signUpHandler({ firstName, lastName, username, password }));
                 }
                 else {
                     console.error("password doesn't match");
                 }
         } else {
-                console.log("error");
+                console.error("Enter all values");
         }
     }
     
     return (
             <div className="flex flex-col pb-1 shadow-none border-2 w-1/4 mx-auto mt-12 min-w-max">
 
-                {/* <h1 className="mx-auto font-serif text-5xl p-2 ">Alcon</h1> */}
-                
+            <div className="z-20">
+                <Loader show = {isLoading} type="body" />
+            </div>
+
                 <form className="mx-8 flex flex-col">
 
                     <h2 className="my-6 text-left text-slate-900 text-lg">Sign Up</h2>
@@ -70,25 +78,14 @@ export const Signup = () => {
 
                     <label className="text-sm py-1 text-slate-900">User Name<span className="form_label">*</span>
                         <input 
-                            name="userName"
-                            value={userName}
+                            name="username"
+                            value={username}
                             className="py-1 w-full mt-4 rounded-none border-2" 
                             type= "text"
                             required= {true} 
-                            onChange={(e) => setFormInputs({...formInputs, userName: e.target.value})}
+                            onChange={(e) => setFormInputs({...formInputs, username: e.target.value})}
                         />
 
-                    </label>
-
-                    <label className="text-sm py-1 text-slate-900">Email address<span className="form_label">*</span>
-                        <input 
-                            name="email"
-                            value={email}
-                            className="py-1 w-full mt-4 rounded-none border-2" 
-                            type="email" 
-                            required={true} 
-                            onChange={(e) => setFormInputs({...formInputs, email: e.target.value})}
-                        />
                     </label>
 
                     <label className="relative text-sm py-1 text-slate-900">Password<span className="form_label">*</span>
@@ -123,7 +120,7 @@ export const Signup = () => {
 
                     </label>
 
-                    <button className="my-3 text-x cursor-pointer text-center py-1 border2 bg-blue-600 hover:bg-blue-700 text-white font-semibold" onClick={(e) => formHandler(e)} >Sign Up</button>
+                    <button className="my-3 text-x cursor-pointer text-center py-1 border2 bg-blue-600 hover:bg-blue-700 text-white font-semibold" onClick={(e) => formSignUpHandler(e)} >Sign Up</button>
 
                     <p className="my-2 text-center text-sm self-center text-slate-900 font-medium">
                         <Link to="/">Already have an account {">"} </Link>
@@ -132,4 +129,4 @@ export const Signup = () => {
                 </form>
             </div>
     )
-}
+};

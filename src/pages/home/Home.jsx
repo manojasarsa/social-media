@@ -1,7 +1,13 @@
 import { GiSettingsKnobs } from "react-icons/gi";
 import { AsideLeft, AsideRight, Post } from "../../component";
+import { FiLogOut } from "react-icons/fi";
+import { useDispatch } from "react-redux";
+import { signOutHandler } from "../../features/auth/authSlice";
 
 export const Home = () => {
+
+      const dispatch = useDispatch();
+
       return (
             <div>
                   <div className="flex mx-12 my-4">
@@ -11,8 +17,9 @@ export const Home = () => {
 
                               <main className="w-full basis-2/3">
 
-                                    <header className="flex p-4">
+                                    <header className="flex p-4 w-full justify-between">
                                           <h1 className="text-xl">Home</h1>
+                                          <FiLogOut className="w-5 h-5 text-slate-600 cursor-pointer" onClick={() => dispatch(signOutHandler() )} />
                                     </header>
 
                                     <div className="border ml-3 flex px-5 py-3">
