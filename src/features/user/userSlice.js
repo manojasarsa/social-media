@@ -68,10 +68,10 @@ export const userSlice = createSlice({
 
             //unfollow user
 
-            [UnFollowUser.pending]: (state) => {
+            [unFollowUser.pending]: (state) => {
                   state.isLoading = true;
             },
-            [UnFollowUser.fulfilled]: (state, { payload }) => {
+            [unFollowUser.fulfilled]: (state, { payload }) => {
                   state.users = state.users.map(user => {
                         if (user.username === payload.followUser.username) {
                               return payload.followUser;
@@ -83,7 +83,7 @@ export const userSlice = createSlice({
                   });
                   state.isLoading = false;
             },
-            [UnFollowUser.rejected]: (state) => {
+            [unFollowUser.rejected]: (state) => {
                   state.isLoading = false;
             },
       }
