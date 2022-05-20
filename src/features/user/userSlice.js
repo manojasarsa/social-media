@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getUsers, updateUser, followUser, unFollowUser } from "./helpers";
 
 const initialState = {
       users: [],
