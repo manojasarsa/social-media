@@ -7,7 +7,7 @@ import Loader from 'react-spinner-loader';
 export const Signin = () => {
 
     const loginInputs = {
-        userName: "",
+        username: "",
         password: ""
     }
 
@@ -15,7 +15,7 @@ export const Signin = () => {
 
     const [showHide, setShowHide] = useState(false);
 
-    const { userName, password } = formInputs;
+    const { username, password } = formInputs;
 
     const {
         auth: { isLoading }
@@ -25,12 +25,13 @@ export const Signin = () => {
 
     const formSignInHandler = (e) => {
         e.preventDefault();
-        dispatch(signInHandler({ userName, password }));
+        dispatch(signInHandler({ username, password }));
     }
+
+    const guestUser = { username: "chrislevin22", password: "chrislevin@123" };
     
     const formGuestSignInHandler = (e) => {
         e.preventDefault();
-        const guestUser = { userName: "chrislevin22", password: "chrislevin@123" };
         setFormInputs(guestUser);
         dispatch(signInHandler(guestUser));
     }
@@ -54,12 +55,12 @@ export const Signin = () => {
 
                                 <label className="text-sm py-1 text-slate-900">Username<span className="form_label">*</span>
                                     <input
-                                        name="userName"
-                                        value={userName}
+                                        name="username"
+                                        value={username}
                                         className="py-1 w-full mt-4 rounded-none border-2"
                                         type="text"
                                         required={true}
-                                        onChange={(e) => setFormInputs({ ...formInputs, userName: e.target.value })}
+                                        onChange={(e) => setFormInputs({ ...formInputs, username: e.target.value })}
                                     />
                                 </label>
 
