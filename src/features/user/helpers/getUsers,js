@@ -8,6 +8,6 @@ export const getUsers = createAsyncThunk("user/getUsers", async (_, { rejectWith
                   return data.users;
             }
       } catch (error) {
-            return rejectWithValue(error.response.data.erros[0]);
+            return rejectWithValue(error.response.data.errors[0]);
       }
 });
