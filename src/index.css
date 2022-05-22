@@ -5,12 +5,12 @@
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
 
 * {
-      box-sizing: border-box;
-      padding: 0;
-      margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
     
 html {
-      scroll-behavior: smooth;
-      font-size: 100%;
+    scroll-behavior: smooth;
+    font-size: 100%;
 }

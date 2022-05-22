@@ -7,37 +7,37 @@ import Mockman from "mockman-js";
 
 export const NavRoutes = () => {
 
-      const {
-            auth: { token }
-        } = useSelector( state => state );
+    const {
+        auth: { token }
+    } = useSelector(state => state);
 
-      return (
-            <Routes>
+    return (
+        <Routes>
 
-                  <Route path={"/mock"} element={ <Mockman /> } />
-                  
-                  {token ? (
-                        <>
-                              <Route path="/" element = { <Navigate to="/home" replace /> } />
+            <Route path={"/mock"} element={<Mockman />} />
 
-                              <Route path="/signup" element = { <Navigate to="/home" replace  /> } />
-                        </>
-                  ):(
-                        <>
-                              <Route path="/" element = { <Signin /> } />
-                              <Route path="/signup" element = { <Signup /> } />
-                        </>
-                  )}         
+            {token ? (
+                <>
+                    <Route path="/" element={<Navigate to="/home" replace />} />
 
-                  <Route element = { <PrivateRoutes /> }>
-                        <Route path="/home" element = { <Home /> }  />
-                        <Route path="/explore" element = { <Explore /> } />
-                        <Route path="/bookmarks" element = { <Bookmarks /> } />
-                        <Route path="/notifications" element = { <Notifications /> } />
-                        {/* <Route path="/profile" element = { <Profile /> } /> */}
-                        <Route path="/profile/:username" element = { <Profile /> } />
-                  </Route>                  
-                  <Route path="*" element = { <h2> OOPS! Page Not Found</h2>} />
-            </Routes>
-      )
+                    <Route path="/signup" element={<Navigate to="/home" replace />} />
+                </>
+            ) : (
+                <>
+                    <Route path="/" element={<Signin />} />
+                    <Route path="/signup" element={<Signup />} />
+                </>
+            )}
+
+            <Route element={<PrivateRoutes />}>
+                <Route path="/home" element={<Home />} />
+                <Route path="/explore" element={<Explore />} />
+                <Route path="/bookmarks" element={<Bookmarks />} />
+                <Route path="/notifications" element={<Notifications />} />
+                {/* <Route path="/profile" element = { <Profile /> } /> */}
+                <Route path="/profile/:username" element={<Profile />} />
+            </Route>
+            <Route path="*" element={<h2> OOPS! Page Not Found</h2>} />
+        </Routes>
+    )
 };

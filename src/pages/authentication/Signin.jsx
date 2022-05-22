@@ -11,7 +11,7 @@ export const Signin = () => {
         password: ""
     }
 
-    const [ formInputs, setFormInputs ] = useState(loginInputs);
+    const [formInputs, setFormInputs] = useState(loginInputs);
 
     const [showHide, setShowHide] = useState(false);
 
@@ -19,7 +19,7 @@ export const Signin = () => {
 
     const {
         auth: { isLoading }
-    } = useSelector( state => state );
+    } = useSelector(state => state);
 
     const dispatch = useDispatch();
 
@@ -29,18 +29,18 @@ export const Signin = () => {
     }
 
     const guestUser = { username: "chrislevin22", password: "chrislevin@123" };
-    
+
     const formGuestSignInHandler = (e) => {
         e.preventDefault();
         setFormInputs(guestUser);
         dispatch(signInHandler(guestUser));
     }
-    
+
     return (
 
         <div className="flex justify-items-center items-center">
             <div className="z-20">
-                <Loader show = {isLoading} type="body" />
+                <Loader show={isLoading} type="body" />
             </div>
             <div className="m-16 mx-auto w-full ">
                 <div className="md:container md:mx-auto mx-auto flex">
@@ -83,7 +83,7 @@ export const Signin = () => {
                                 <Link to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  bg-blue-600 hover:bg-blue-700 text-white" onClick={(e) => formSignInHandler(e)} > Login </Link>
 
                                 <Link to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-blue-800" onClick={(e) => formGuestSignInHandler(e)} > Guest Login </Link>
-                                
+
                                 <p className="my-2 text-center text-sm self-center text-slate-900 font-medium">
                                     <Link to="/signup"> Sign Up Now </Link>
                                 </p>
@@ -93,6 +93,6 @@ export const Signin = () => {
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
     )
 };

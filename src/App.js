@@ -5,19 +5,19 @@ import { getUsers } from "./features/user/helpers";
 import { NavRoutes } from "./routes/NavRoutes";
 export default function App() {
 
-  const {
-    auth: { token },
-  } = useSelector(state => state);
+    const {
+        auth: { token },
+    } = useSelector(state => state);
 
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getUsers());
-  }, [token, dispatch]);
-  
-  return (
-    <div className="App scroll-smooth">
-      <NavRoutes />
-    </div>
-  )
+    useEffect(() => {
+        dispatch(getUsers());
+    }, [token, dispatch]);
+
+    return (
+        <div className="App scroll-smooth">
+            <NavRoutes />
+        </div>
+    )
 }
