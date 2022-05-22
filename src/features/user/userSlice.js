@@ -5,6 +5,8 @@ const initialState = {
     users: [],
     uploadingPhoto: false,
     isLoading: false,
+    foundUsers: [],
+    searchTerm: ""
 }
 
 export const userSlice = createSlice({

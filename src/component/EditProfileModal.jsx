@@ -20,35 +20,32 @@ export const EditProfileModal = ({ currentUser, open, setOpen  }) => {
 
     const updateUserInfoHandler = async (e) => {
         e.preventDefault();
-        setOpen(false);
-        
-        dispatch(startUpLoading());
-        const file = fileUrl;
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("upload_preset", "alcon-social");
-        formData.append("folder", "alcon");
+        setOpen(false);          // for closing modal 
+        if(fileUrl) {
+            dispatch(startUpLoading());
+            const file = fileUrl;
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", "alcon-social");
+            formData.append("folder", "alcon");
 
-        try {
-            const res = await fetch(cloudinaryUrl, {
-                method: "POST",
-                body: formData,
-            });
+            try {
+                const res = await fetch(cloudinaryUrl, {
+                    method: "POST",
+                    body: formData,
+                });
 
-            const { url } = await res.json();
+                const { url } = await res.json();
 
-            // dispatch(updateUser({ token, userInfo: { ...profile, profilePicture: url } }));
+                dispatch(updateUser({ token, userData: { ...profile, profilePicture: url } }));
 
-        } catch (err) {
-            console.error("error occured", err);
+            } catch (err) {
+                console.error("error occured", err);
+            }
+        } else {
+            dispatch(updateUser({ token, userData: profile }));
         }
-        setFileUrl("");
-        dispatch(updateUser({ token, userInfo: profile }));
     }   
-    
-
-    // console.log("pic", currentUser.profilePicture); 
-    console.log("profile", profile);
 
     return (
         <Modal

@@ -8,7 +8,7 @@ export const signInHandler = createAsyncThunk(
             const { status, data } = await axios.post("/api/auth/login", { username, password });
 
             if (status === 200) {
-                localStorage.setItem("Alcon_User", JSON.stringify({ token: data.encodedToken, userInfo: data.foundUser }));
+                localStorage.setItem("Alcon_User", JSON.stringify({ token: data.encodedToken, userData: data.foundUser }));
             }
             return data;
         } catch (err) {

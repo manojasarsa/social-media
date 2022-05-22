@@ -10,7 +10,7 @@ export const signUpHandler = createAsyncThunk(
             });
 
             if (status === 201) {
-                localStorage.setItem("Alcon_User", JSON.stringify({ token: data.encodedToken, userInfo: data.createdUser }));
+                localStorage.setItem("Alcon_User", JSON.stringify({ token: data.encodedToken, userData: data.createdUser }));
                 return data;
             }
         } catch (err) {

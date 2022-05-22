@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 export const AsideLeft = () => {
 
-    const { userInfo } = useSelector(state => state.auth);
+    const { userData } = useSelector(state => state.auth);
 
     return (
         <aside className="w-full basis-1/6">
@@ -39,7 +39,7 @@ export const AsideLeft = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to={`/profile/${userInfo?.username}`} className="flex py-4 gap-3 px-3 cursor-pointer">
+                        <Link to={`/profile/${userData?.username}`} className="flex py-4 gap-3 px-3 cursor-pointer">
                             <i className="text-xl fa-solid fa-user"></i>
                             <h2 className="text-xl px-1 hidden xl:block"> Profile </h2>
                         </Link>

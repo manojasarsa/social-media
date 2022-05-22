@@ -3,7 +3,7 @@ import { signInHandler, signUpHandler } from "./helpers";
 
 const initialState = {
     token: localStorage.getItem("Alcon_token")?.token || "",
-    userInfo: JSON.parse(localStorage.getItem("Alcon_user"))?.userInfo || {},
+    userData: JSON.parse(localStorage.getItem("Alcon_user"))?.userData || {},
     isLoading: false,
 }
 
@@ -14,7 +14,7 @@ export const authSlice = createSlice({
         signOutHandler: (state) => {
             localStorage.removeItem("Alcon_User");
             state.token = "";
-            state.userInfo = {};
+            state.userData = {};
         },
     },
     extraReducers: {
@@ -24,7 +24,7 @@ export const authSlice = createSlice({
         [signInHandler.fulfilled]: (state, { payload }) => {
             state.isLoading = false;
             state.token = payload.encodedToken;
-            state.userInfo = payload.foundUser;
+            state.userData = payload.foundUser;
         },
         [signInHandler.rejected]: (state, { payload }) => {
             state.isLoading = false;
@@ -36,7 +36,7 @@ export const authSlice = createSlice({
         [signUpHandler.fulfilled]: (state, { payload }) => {
             state.isLoading = false;
             state.token = payload.encodedToken;
-            state.userInfo = payload.createdUser;
+            state.userData = payload.createdUser;
         },
         [signUpHandler.rejected]: (state, { payload }) => {
             state.isLoading = false;

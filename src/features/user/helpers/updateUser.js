@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const updateUser = createAsyncThunk("user/update", async ({ token, userInfo }, { rejectWithValue }) => {
+export const updateUser = createAsyncThunk("user/update", async ({ token, userData }, { rejectWithValue }) => {
     try {
         const { status, data } = await axios.post("/api/users/edit",
-            { userInfo },
+            { userData },
             {
                 headers: { authorization: token }
             });

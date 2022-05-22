@@ -5,6 +5,7 @@ import { signOutHandler } from "../../features/auth/authSlice";
 import { FiLogOut } from "react-icons/fi";
 import 'react-responsive-modal/styles.css';
 import { useState } from "react";
+import Loader from 'react-spinner-loader';
 
 export const Profile = () => {
 
@@ -13,7 +14,7 @@ export const Profile = () => {
     const { username } = useParams();
 
     const {
-        auth: { token, userInfo },
+        auth: { token, userData },
         user: { users, upLoadingPhoto }
     } = useSelector(state => state);
 
@@ -21,13 +22,14 @@ export const Profile = () => {
 
     const dispatch = useDispatch();
 
-    // const authUser = users.find(user => user.username === userInfo?.username); 
+    const authUser = users.find(user => user.username === userData?.username); 
     
-    // console.log("checkCurrent", currentUser, "checkauth", authUser, "checkBoth:", currentUser === authUser);
+    console.log("lpo",upLoadingPhoto);
 
     return (
         <div>
             <div className="flex mx-12 my-4">
+                <Loader show={upLoadingPhoto} type="body" />
                 <div className="mx-auto flex px-32 h-screen w-screen">
 
                     <AsideLeft />
@@ -55,7 +57,7 @@ export const Profile = () => {
 
                                     {/* Modal for Edit Profile */}
 
-                                    <EditProfileModal currentUser={currentUser} open={open} setOpen={setOpen} />
+                                    <EditProfileModal currentUser={authUser} open={open} setOpen={setOpen} />
 
                                 </div>
                             </div>
@@ -69,9 +71,9 @@ export const Profile = () => {
 
                                 <h3 className="text-xl">0<span className="text-slate-600"> posts</span></h3>
 
-                                <h3 className="text-xl">3<span className="text-slate-600"> followers</span></h3>
+                                <h3 className="text-xl">{ currentUser?.followers.length }<span className="text-slate-600"> followers</span></h3>
 
-                                <h3 className="text-xl">2<span className="text-slate-600"> following</span></h3>
+                                <h3 className="text-xl">{ currentUser?.following.length }<span className="text-slate-600"> following</span></h3>
 
                             </div>
 
