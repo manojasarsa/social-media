@@ -42,7 +42,7 @@ export const signupHandler = function (schema, request) {
       bookmarks: [],
       bio: "",
       website: "",
-      profilePicture: ""
+      profilePicture: "https://raw.githubusercontent.com/manojasarsa/image-assets/main/quiz-app/default_pic.svg"
     };
     const createdUser = schema.users.create(newUser);
     const encodedToken = sign({ _id, username },

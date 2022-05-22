@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import { BiEditAlt } from "react-icons/bi";
+import { useSelector } from "react-redux";
 
 export const AsideLeft = () => {
+
+      const { userInfo } = useSelector(state => state.auth);
+      
       return (
             <aside className="w-full basis-1/6">
                   <header className="font-sans m-4 text-xl xl:text-2xl">
@@ -35,7 +39,7 @@ export const AsideLeft = () => {
                                     </Link>
                               </li>
                               <li>
-                                    <Link to="/profile" className="flex py-4 gap-3 px-3 cursor-pointer">
+                                    <Link to={`/profile/${userInfo?.username}`} className="flex py-4 gap-3 px-3 cursor-pointer">
                                           <i className="text-xl fa-solid fa-user"></i>
                                           <h2 className="text-xl px-1 hidden xl:block"> Profile </h2>
                                     </Link>
