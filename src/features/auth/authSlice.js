@@ -12,8 +12,7 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         signOutHandler: (state) => {
-            localStorage.removeItem("Alcon_token");
-            localStorage.removeItem("Alcon_userInfo");
+            localStorage.removeItem("Alcon_User");
             state.token = "";
             state.userInfo = {};
         },

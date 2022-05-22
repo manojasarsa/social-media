@@ -11,50 +11,44 @@ export const EditProfileModal = ({ currentUser, open, setOpen  }) => {
     const [fileUrl, setFileUrl] = useState("");
 
     const {
-        auth: { token, userInfo },
-        user: { users, upLoadingPhoto }
+        auth: { token },
     } = useSelector(state => state);
 
     const dispatch = useDispatch();
 
+    const cloudinaryUrl = "https://api.cloudinary.com/v1_1/dytvl1fnk/image/upload";
+
     const updateUserInfoHandler = async (e) => {
         e.preventDefault();
         setOpen(false);
-        if (fileUrl) {
-            dispatch(startUpLoading());
-            const file = fileUrl;
-            const formData = new FormData();
-            formData.append("file", file);
-            formData.append("upload_preset", "alcon-social");
-            formData.append("folder", "alcon");
+        
+        dispatch(startUpLoading());
+        const file = fileUrl;
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "alcon-social");
+        formData.append("folder", "alcon");
 
-            try {
-                const res = await fetch(cloudinaryUrl, {
-                    method: "POST",
-                    body: formData
-                });
+        try {
+            const res = await fetch(cloudinaryUrl, {
+                method: "POST",
+                body: formData,
+            });
 
-                console.log("response from cloudinary", res);
+            const { url } = await res.json();
 
-                const { url } = await res.json();
+            // dispatch(updateUser({ token, userInfo: { ...profile, profilePicture: url } }));
 
-                console.log(url);
-
-                dispatch(updateUser({ token, userInfo: { ...profile, profilePicture: url } }));
-                console.log("success");
-
-            } catch (err) {
-                console.error("error occured", err);
-            }
-            setFileUrl("");
-        } else {
-            dispatch(updateUser({ token, userInfo: profile }));
+        } catch (err) {
+            console.error("error occured", err);
         }
-    }
+        setFileUrl("");
+        dispatch(updateUser({ token, userInfo: profile }));
+    }   
+    
 
-    const cloudinaryUrl = "https://api.cloudinary.com/v1_1/dytvl1fnk/image/upload";
-
-    console.log("pic", currentUser.profilePicture);
+    // console.log("pic", currentUser.profilePicture); 
+    console.log("profile", profile);
 
     return (
         <Modal
@@ -99,7 +93,7 @@ export const EditProfileModal = ({ currentUser, open, setOpen  }) => {
                         <input
                             className="my-1.5 bg-transparent border px-1 border-slate-400"
                             type="text"
-                            placeholder={currentUser?.bio}
+                            placeholder={profile?.bio}
                             value={profile?.bio}
                             onChange={(e) => setProfile((prev) => ({ ...prev, bio: e.target.value }))}
                         />
@@ -109,7 +103,7 @@ export const EditProfileModal = ({ currentUser, open, setOpen  }) => {
                         <input
                             className="my-1.5 bg-transparent border px-1 border-slate-400"
                             type="text"
-                            placeholder={currentUser?.website}
+                            placeholder={profile?.website}
                             value={profile?.website}
                             onChange={(e) => setProfile((prev) => ({ ...prev, website: e.target.value }))}
                         />

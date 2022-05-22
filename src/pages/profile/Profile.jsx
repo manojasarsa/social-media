@@ -21,7 +21,9 @@ export const Profile = () => {
 
     const dispatch = useDispatch();
 
-    const authUser = users.find(user => user.username === userInfo?.username);
+    // const authUser = users.find(user => user.username === userInfo?.username); 
+    
+    // console.log("checkCurrent", currentUser, "checkauth", authUser, "checkBoth:", currentUser === authUser);
 
     return (
         <div>
@@ -53,9 +55,8 @@ export const Profile = () => {
 
                                     {/* Modal for Edit Profile */}
 
-                                    <EditProfileModal currentUser={authUser} open={open} setOpen={setOpen} />
+                                    <EditProfileModal currentUser={currentUser} open={open} setOpen={setOpen} />
 
-                                    
                                 </div>
                             </div>
 

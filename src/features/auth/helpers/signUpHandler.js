@@ -10,12 +10,9 @@ export const signUpHandler = createAsyncThunk(
             });
 
             if (status === 201) {
-                localStorage.setItem("Alcon_token", data.encodedToken);
-                localStorage.setItem("Alcon_userInfo", JSON.stringify(data.createdUser));
+                localStorage.setItem("Alcon_User", JSON.stringify({ token: data.encodedToken, userInfo: data.createdUser }));
+                return data;
             }
-
-            return data;
-
         } catch (err) {
             return rejectWithValue(err.response.data.errors[0]);
         }

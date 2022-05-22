@@ -3,17 +3,14 @@ import axios from "axios";
 
 export const signInHandler = createAsyncThunk(
     "auth/signIn",
-    async ({ userName, password }, { rejectWithValue }) => {
+    async ({ username, password }, { rejectWithValue }) => {
         try {
-            const { status, data } = await axios.post("/api/auth/login", { userName, password });
+            const { status, data } = await axios.post("/api/auth/login", { username, password });
 
             if (status === 200) {
-                localStorage.setItem("Alcon_token", data.encodedToken);
-                localStorage.setItem("Alcon_userInfo", JSON.stringify(data.foundUser));
+                localStorage.setItem("Alcon_User", JSON.stringify({ token: data.encodedToken, userInfo: data.foundUser }));
             }
-
             return data;
-
         } catch (err) {
             return rejectWithValue(err.response.data.errors[0]);
         }
