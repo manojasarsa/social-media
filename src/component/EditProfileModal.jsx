@@ -5,7 +5,7 @@ import { startUpLoading } from "../features/user/userSlice";
 import { updateUser } from "../features/user/helpers";
 import { useState } from "react";
 
-export const EditProfileModal = ({ currentUser, open, setOpen  }) => {
+export const EditProfileModal = ({ currentUser, showUpdateProfile, setShowUpdateProfile  }) => {
 
     const [profile, setProfile] = useState(currentUser);
     const [fileUrl, setFileUrl] = useState("");
@@ -20,7 +20,7 @@ export const EditProfileModal = ({ currentUser, open, setOpen  }) => {
 
     const updateUserInfoHandler = async (e) => {
         e.preventDefault();
-        setOpen(false);          // for closing modal 
+        setShowUpdateProfile(false);          // for closing modal 
         if(fileUrl) {
             dispatch(startUpLoading());
             const file = fileUrl;
@@ -52,8 +52,8 @@ export const EditProfileModal = ({ currentUser, open, setOpen  }) => {
             styles={{
                 modal: { width: "20rem" },
             }}
-            open={open}
-            onClose={open}
+            open={showUpdateProfile}
+            onClose={showUpdateProfile}
             showCloseIcon={false}
         >
             <div className="flex flex-col">
@@ -62,7 +62,11 @@ export const EditProfileModal = ({ currentUser, open, setOpen  }) => {
                     <h1 className="text-xl mb-4 mx-auto font-semibold">Edit Profile</h1>
 
                     <div className="relative">
-                        <img src={fileUrl ? URL.createObjectURL(fileUrl) : currentUser?.profilePicture} className="mx-auto w-32 h-32 rounded-full" alt="avatar" />
+                        <img 
+                            src={fileUrl ? URL.createObjectURL(fileUrl) : currentUser?.profilePicture} 
+                            className="mx-auto w-32 h-32 rounded-full" 
+                            alt="avatar" 
+                        />
 
                         <label className="w-8 h-8 absolute right-9 bottom-1 bg-slate-200 p-1 rounded-full border-2 cursor-pointer border-white fill-blue-600 stroke-0 hover:stroke-2 text-2xl">
                             <input
@@ -108,9 +112,18 @@ export const EditProfileModal = ({ currentUser, open, setOpen  }) => {
                 </div>
                 <div className="flex justify-between m-1">
 
-                    <button className="px-3 w-18 h-8 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out" onClick={() => setOpen(false)}>Cancel</button>
+                    <button 
+                        className="px-3 w-18 h-8 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out" 
+                        onClick={() => setShowUpdateProfile(false)}>
+                        Cancel
+                    </button>
 
-                    <button className="px-3 w-18 h-8 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out" onClick={(e) => updateUserInfoHandler(e)}>Update</button>
+                    <button 
+                        className="px-3 w-18 h-8 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out" 
+                        onClick={(e) => updateUserInfoHandler(e)}>
+                        Update
+                    </button>
+
                 </div>
             </div>
         </Modal>

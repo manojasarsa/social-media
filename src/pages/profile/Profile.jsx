@@ -1,4 +1,4 @@
-import { AsideLeft, AsideRight, EditProfileModal, Post } from "../../component";
+import { AsideLeft, AsideRight, EditProfileModal, FollowInfoModal, Post } from "../../component";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutHandler } from "../../features/auth/authSlice";
@@ -9,7 +9,9 @@ import Loader from 'react-spinner-loader';
 
 export const Profile = () => {
 
-    const [open, setOpen] = useState(false);
+    const [showUpdateProfile, setShowUpdateProfile] = useState(false);
+    const [followersInfoModal, setFollowersInfoModal] = useState(false);
+    const [showFollowing, setShowFollowing] = useState(false);
 
     const { username } = useParams();
 
@@ -53,11 +55,11 @@ export const Profile = () => {
 
                                     <h2> @{currentUser?.username} </h2>
 
-                                    <button className="border my-3 p-1 rounded-lg text-x cursor-pointer text-center font-semibold text-slate-600 hover:bg-slate-200" onClick={() => setOpen(true)} >Edit Profile</button>
+                                    <button className="border my-3 p-1 rounded-lg text-x cursor-pointer text-center font-semibold text-slate-600 hover:bg-slate-200" onClick={() => setShowUpdateProfile(true)} >Edit Profile</button>
 
                                     {/* Modal for Edit Profile */}
 
-                                    <EditProfileModal currentUser={authUser} open={open} setOpen={setOpen} />
+                                    <EditProfileModal currentUser={authUser} showUpdateProfile={showUpdateProfile} setShowUpdateProfile={setShowUpdateProfile} />
 
                                 </div>
                             </div>
@@ -69,11 +71,40 @@ export const Profile = () => {
 
                             <div className="flex gap-6 pl-4 mt-4 mb-16 justify-items-center mx-auto">
 
+                                <FollowInfoModal 
+                                    currentUser={currentUser}
+                                    followersInfoModal={followersInfoModal}
+                                    showFollowing={showFollowing}
+                                    setFollowersInfoModal={setFollowersInfoModal}
+                                />
+
                                 <h3 className="text-xl">0<span className="text-slate-600"> posts</span></h3>
 
-                                <h3 className="text-xl">{ currentUser?.followers.length }<span className="text-slate-600"> followers</span></h3>
+                                <h3 
+                                    className="text-xl cursor-pointer" 
+                                    onClick={() => {
+                                            setFollowersInfoModal(true);
+                                            setShowFollowing(true)
+                                        }
+                                    }>
+                                    { currentUser?.following.length } 
+                                    <span className="text-slate-600 pl-1">
+                                        following
+                                    </span>
+                                </h3>
 
-                                <h3 className="text-xl">{ currentUser?.following.length }<span className="text-slate-600"> following</span></h3>
+                                <h3 
+                                    className="text-xl cursor-pointer" 
+                                    onClick={() => {
+                                            setFollowersInfoModal(true);
+                                            setShowFollowing(false)
+                                        }
+                                    }>
+                                    { currentUser?.followers.length } 
+                                    <span className="text-slate-600 pl-1">
+                                        followers
+                                    </span>
+                                </h3>
 
                             </div>
 
