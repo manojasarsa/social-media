@@ -2,92 +2,92 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getUsers, updateUser, followUser, unFollowUser } from "./helpers";
 
 const initialState = {
-      users: [],
-      uploadingPhoto: false,
-      isLoading: false,
+    users: [],
+    uploadingPhoto: false,
+    isLoading: false,
 }
 
 export const userSlice = createSlice({
-      name: "user",
-      initialState,
-      reducers: {
-            setLoading: (state) => {
-                  state.isLoading = true;
-            },
-            startUpLoading: (state) => {
-                  state.uploadingPhoto = true;
-            },
-      },
-      extraReducers: {
+    name: "user",
+    initialState,
+    reducers: {
+        setLoading: (state) => {
+            state.isLoading = true;
+        },
+        startUpLoading: (state) => {
+            state.uploadingPhoto = true;
+        },
+    },
+    extraReducers: {
 
-            //getUser 
+        //getUser 
 
-            [getUsers.pending]: (state) => {
-                  state.isLoading = true;
-            },
-            [getUsers.fulfilled]: (state, { payload }) => {
-                  state.isLoading = false;
-                  state.users = payload;
-            },
-            [getUsers.rejected]: (state) => {
-                  state.isLoading = true;
-            },
+        [getUsers.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [getUsers.fulfilled]: (state, { payload }) => {
+            state.isLoading = false;
+            state.users = payload;
+        },
+        [getUsers.rejected]: (state) => {
+            state.isLoading = true;
+        },
 
-            // updateUser
+        // updateUser
 
-            [updateUser.pending]: (state) => {
-                  state.uploadingPhoto = true;
-            },
-            [updateUser.fulfilled]: (state, { payload }) => {
-                  state.uploadingPhoto = false;
-                  state.users = state.users.map(user => (user.username === payload.username ? payload : user));
-            },
-            [updateUser.rejected]: (state) => {
-                  state.uploadingPhoto = false;
-            },
+        [updateUser.pending]: (state) => {
+            state.uploadingPhoto = true;
+        },
+        [updateUser.fulfilled]: (state, { payload }) => {
+            state.uploadingPhoto = false;
+            state.users = state.users.map(user => (user.username === payload.username ? payload : user));
+        },
+        [updateUser.rejected]: (state) => {
+            state.uploadingPhoto = false;
+        },
 
-            // follow user
+        // follow user
 
-            [followUser.pending]: (state) => {
-                  state.isLoading = true;
-            },
-            [followUser.fulfilled]: (state, { payload }) => {
-                  state.users = state.users.map(user => {
-                        if (user.username === payload.followUser.username) {
-                              return payload.followUser;
-                        } 
-                        if (user.username === payload.user.username) {
-                              return payload.user;
-                        } 
-                        return user;
-                  });
-                  state.isLoading = false;
-            },
-            [followUser.rejected]: (state) => {
-                  state.isLoading = false;
-            },
+        [followUser.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [followUser.fulfilled]: (state, { payload }) => {
+            state.users = state.users.map(user => {
+                if (user.username === payload.followUser.username) {
+                    return payload.followUser;
+                }
+                if (user.username === payload.user.username) {
+                    return payload.user;
+                }
+                return user;
+            });
+            state.isLoading = false;
+        },
+        [followUser.rejected]: (state) => {
+            state.isLoading = false;
+        },
 
-            //unfollow user
+        //unfollow user
 
-            [unFollowUser.pending]: (state) => {
-                  state.isLoading = true;
-            },
-            [unFollowUser.fulfilled]: (state, { payload }) => {
-                  state.users = state.users.map(user => {
-                        if (user.username === payload.followUser.username) {
-                              return payload.followUser;
-                        } 
-                        if (user.username === payload.user.username) {
-                              return payload.user;
-                        } 
-                        return user;
-                  });
-                  state.isLoading = false;
-            },
-            [unFollowUser.rejected]: (state) => {
-                  state.isLoading = false;
-            },
-      }
+        [unFollowUser.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [unFollowUser.fulfilled]: (state, { payload }) => {
+            state.users = state.users.map(user => {
+                if (user.username === payload.followUser.username) {
+                    return payload.followUser;
+                }
+                if (user.username === payload.user.username) {
+                    return payload.user;
+                }
+                return user;
+            });
+            state.isLoading = false;
+        },
+        [unFollowUser.rejected]: (state) => {
+            state.isLoading = false;
+        },
+    }
 });
 
 export const { setLoading, startUpLoading } = userSlice.actions;
