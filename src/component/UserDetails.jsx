@@ -4,8 +4,7 @@ import { followUser, unFollowUser } from "../features/user/helpers";
 export const UserDetails = ({ currentUser, showFollowing }) => {
 
     const {
-        user: { users, searchTerm },
-        auth: { token, userData }
+        auth: { token }
     } = useSelector(state => state);
 
     const dispatch = useDispatch();
@@ -37,4 +36,4 @@ export const UserDetails = ({ currentUser, showFollowing }) => {
             )}
         </div>
     )
-}
+};

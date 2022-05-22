@@ -1,18 +1,7 @@
-import { AiOutlineCamera } from "react-icons/ai";
 import { Modal } from 'react-responsive-modal';
-import { useDispatch, useSelector } from "react-redux";
-import { startUpLoading } from "../features/user/userSlice";
-import { updateUser } from "../features/user/helpers";
-import { useState } from "react";
 import { UserDetails } from "./UserDetails";
 
 export const FollowInfoModal = ({ currentUser, followersInfoModal, showFollowing, setFollowersInfoModal  }) => {
-
-    const {
-        auth: { token, userData },
-    } = useSelector(state => state);
-
-    const dispatch = useDispatch();  
 
     return (
         <Modal

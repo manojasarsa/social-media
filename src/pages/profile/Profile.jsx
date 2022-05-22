@@ -16,7 +16,7 @@ export const Profile = () => {
     const { username } = useParams();
 
     const {
-        auth: { token, userData },
+        auth: { userData },
         user: { users, upLoadingPhoto }
     } = useSelector(state => state);
 
@@ -25,8 +25,6 @@ export const Profile = () => {
     const dispatch = useDispatch();
 
     const authUser = users.find(user => user.username === userData?.username); 
-    
-    console.log("lpo",upLoadingPhoto);
 
     return (
         <div>
@@ -55,7 +53,11 @@ export const Profile = () => {
 
                                     <h2> @{currentUser?.username} </h2>
 
-                                    <button className="border my-3 p-1 rounded-lg text-x cursor-pointer text-center font-semibold text-slate-600 hover:bg-slate-200" onClick={() => setShowUpdateProfile(true)} >Edit Profile</button>
+                                    <button 
+                                        className="border my-3 p-1 rounded-lg text-x cursor-pointer text-center font-semibold text-slate-600 hover:bg-slate-200" 
+                                        onClick={() => setShowUpdateProfile(true)} >
+                                        Edit Profile
+                                    </button>
 
                                     {/* Modal for Edit Profile */}
 
