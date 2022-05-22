@@ -44,7 +44,7 @@ export const Signin = () => {
             </div>
             <div className="m-16 mx-auto w-full ">
                 <div className="md:container md:mx-auto mx-auto flex">
-                    <img src="assets/social1.svg" alt="social-img" className="w-1/2 hidden md:block "></img>
+                    <img src="assets/social1.svg" alt="social-img" className="w-1/2 hidden md:block mx-10"></img>
                     <div className="mx-auto sm:mx-28 mt-16">
 
                         <div className="flex flex-col mx-auto pb-8 shadow-none border-2 min-w-max ">
@@ -96,7 +96,7 @@ export const Signin = () => {
                                 <p className="my-2 text-center text-sm self-center text-slate-900 font-medium">
                                     <Link to="/signup"> Sign Up Now </Link>
                                 </p>
-                                
+
                             </form>
                         </div>
                     </div>
