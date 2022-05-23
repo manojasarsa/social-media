@@ -9,6 +9,8 @@ export const Home = () => {
 
     const [showFilterPostModal, setShowFilterModal] = useState(false);
 
+    const [sortPostBy, setSortPostBy] = useState("Latest");
+
     const {
         post: { posts, isLoading },
         auth: { userData, token },
@@ -31,6 +33,26 @@ export const Home = () => {
         )
     })
 
+    const getSortedPosts = () => {
+        
+        const temp = userFeedPosts.slice();     // for creating new pure array
+
+        if(sortPostBy === "Latest") {
+            temp.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt));
+        }
+
+        if(sortPostBy === "Oldest") {
+            temp.sort((a, b) => new Date(a?.createdAt) - new Date(b?.createdAt));
+        }
+
+        // TODO
+
+        // if(sortPostBy === "Trending") {}
+
+        return temp;
+    }
+
+    const sortedPosts = getSortedPosts();
 
     return (
         <div>
@@ -67,7 +89,7 @@ export const Home = () => {
 
                         <div className="ml-3 flex px-5 py-3 border justify-between relative">
 
-                            <h1 className="text-xl">Latest Posts</h1>
+                            <h1 className="text-xl">{sortPostBy} Posts</h1>
 
                                 <GiSettingsKnobs
                                     className="fill-blue-600 stroke-0 hover:stroke-2 text-2xl cursor-pointer"
@@ -76,11 +98,11 @@ export const Home = () => {
                                 
                                 {/* filter modal */}
 
-                                {showFilterPostModal && <div className="w-20 h-22 p-1 shadow-xl bg-slate-100 border border-slate-300 text-slate-600 font-semibold absolute right-11 top-6 z-20 rounded-xl">
-                                    <ul className="p-1 cursor-pointer text-center">
-                                        <li className="">Latest</li>
-                                        <li className="">Oldest</li>
-                                        <li className="">Trending</li>
+                                {showFilterPostModal && <div className="w-30 h-22 p-1 shadow-xl bg-slate-100 border border-slate-300 text-slate-600 font-semibold absolute right-11 top-6 z-20 rounded-xl">
+                                    <ul className="p-2 cursor-pointer text-center">
+                                        <li onClick={() => setSortPostBy("Latest")}>Latest</li>
+                                        <li onClick={() => setSortPostBy("Oldest")}>Oldest</li>
+                                        <li onClick={() => setSortPostBy("Trending")}>Trending</li>
                                     </ul>
                                 </div> 
                                 }
@@ -88,7 +110,7 @@ export const Home = () => {
 
                         {/* Posts */}
 
-                        {userFeedPosts.map(post => <Post key={post._id} post={post} />)}
+                        {sortedPosts.map(post => <Post key={post._id} post={post} />)}
 
                         {/* <Post /> */}
 

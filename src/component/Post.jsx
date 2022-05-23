@@ -3,6 +3,7 @@ import { GoComment } from "react-icons/go";
 import { BsSuitHeart, BsBookmark, BsShare } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { getFormattedDate } from "../utilities/getFormattedDate";
+import { useState } from "react";
 
 export const Post = ({ post }) => {
 
@@ -14,7 +15,6 @@ export const Post = ({ post }) => {
     const dispatch = useDispatch();
 
     const currentUser = users.find(user => user.username === post?.username);
-
     
     return (
         <div className="border ml-3 flex px-5 py-3 hover:bg-slate-100">
