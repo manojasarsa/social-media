@@ -1,29 +1,29 @@
 import { AsideLeft, AsideRight, Post } from "../../component"
 
 export const Explore = () => {
-      return (
-            <div>
-                  <div className="flex mx-12 my-4">
-                        <div className="mx-auto flex px-32 h-screen w-screen">
+    return (
+        <div>
+            <div className="flex mx-12 my-4">
+                <div className="mx-auto flex px-32 h-screen w-screen">
 
-                              <AsideLeft />
+                    <AsideLeft />
 
-                              <main className="w-full basis-2/3">
+                    <main className="w-full basis-2/3">
 
-                                    <header className="flex p-4">
-                                          <h1 className="text-xl">Explore</h1>
-                                    </header>
+                        <header className="flex p-4">
+                            <h1 className="text-xl">Explore</h1>
+                        </header>
 
-                                    <Post />
-                                    <Post />
-                                    <Post />
-                                    <Post />
-                                    
-                              </main>
+                        <Post />
+                        <Post />
+                        <Post />
+                        <Post />
 
-                              <AsideRight />
-                        </div>
-                  </div>
-            </div>      
-      )
+                    </main>
+
+                    <AsideRight />
+                </div>
+            </div>
+        </div>
+    )
 }

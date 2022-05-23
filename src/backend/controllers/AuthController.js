@@ -40,10 +40,12 @@ export const signupHandler = function (schema, request) {
       followers: [],
       following: [],
       bookmarks: [],
+      bio: "",
+      website: "",
+      profilePicture: "https://raw.githubusercontent.com/manojasarsa/image-assets/main/quiz-app/default_pic.svg"
     };
     const createdUser = schema.users.create(newUser);
-    const encodedToken = sign(
-      { _id, username },
+    const encodedToken = sign({ _id, username },
       process.env.REACT_APP_JWT_SECRET
     );
     return new Response(201, {}, { createdUser, encodedToken });
@@ -80,8 +82,7 @@ export const loginHandler = function (schema, request) {
       );
     }
     if (password === foundUser.password) {
-      const encodedToken = sign(
-        { _id: foundUser._id, username },
+      const encodedToken = sign({ _id: foundUser._id, username },
         process.env.REACT_APP_JWT_SECRET
       );
       return new Response(200, {}, { foundUser, encodedToken });

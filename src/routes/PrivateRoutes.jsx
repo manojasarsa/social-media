@@ -3,11 +3,11 @@ import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export const PrivateRoutes = () => {
-      const {
-            auth: { token }
-      } = useSelector( state => state );
+    const {
+        auth: { token }
+    } = useSelector(state => state);
 
-      const location = useLocation();
+    const location = useLocation();
 
-      return token ? <Outlet /> : <Navigate to="/" state={{ from: location }} replace />;
+    return token ? <Outlet /> : <Navigate to="/" state={{ from: location }} replace />;
 };
