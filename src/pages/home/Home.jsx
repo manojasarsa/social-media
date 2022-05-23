@@ -1,18 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { AsideLeft, AsideRight, Post, PostFilterModal } from "../../component";
-import { setLoading } from "../../features/user/userSlice";
+import { getAllPosts } from "../../features/post/helpers";
+
 
 export const Home = () => {
 
     const [showFilterPostModal, setShowFilterModal] = useState(false);
 
     const {
-        post: { postData }
+        post: { posts, isLoading },
+        auth: { userData, token },
+        user: { users }
     } = useSelector( state => state );
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllPosts());
+    }, [dispatch, token]);
+
+    const getUserName = (username) => users.filter(user => user.username === username)[0];
+
+    const userFeedPosts = posts.filter(post => {
+        return (
+            post.username === userData.username || getUserName(post?.username)?.followers?.find(
+                user => user.username === userData.username
+            )
+        )
+    })
+
 
     return (
         <div>
@@ -26,6 +44,8 @@ export const Home = () => {
                         <header className="flex p-4">
                             <h1 className="text-xl">Home</h1>
                         </header>
+
+                        {/* create post */}
 
                         <div className="border ml-3 flex px-5 py-3">
 
@@ -43,23 +63,18 @@ export const Home = () => {
                             </div>
                         </div>
 
+                        {/* filter posts by date and trending */}
+
                         <div className="ml-3 flex px-5 py-3 border justify-between relative">
 
                             <h1 className="text-xl">Latest Posts</h1>
-                            
-                                {showFilterPostModal ? 
-                                ( <GiSettingsKnobs
-                                    className="fill-blue-600 stroke-0 hover:stroke-2 text-2xl cursor-pointer"
-                                    onClick={() => setShowFilterModal(false)}>
-                                </GiSettingsKnobs>
-                                ) : (
-                                    <GiSettingsKnobs
-                                    className="fill-blue-600 stroke-0 hover:stroke-2 text-2xl cursor-pointer"
-                                    onClick={() => setShowFilterModal(true)}>s
-                                </GiSettingsKnobs>
-                                )}
 
-                                {console.log("boolean", showFilterPostModal)}
+                                <GiSettingsKnobs
+                                    className="fill-blue-600 stroke-0 hover:stroke-2 text-2xl cursor-pointer"
+                                    onClick={() => setShowFilterModal(prev => !prev)}>
+                                </GiSettingsKnobs>
+                                
+                                {/* filter modal */}
 
                                 {showFilterPostModal && <div className="w-20 h-22 p-1 shadow-xl bg-slate-100 border border-slate-300 text-slate-600 font-semibold absolute right-11 top-6 z-20 rounded-xl">
                                     <ul className="p-1 cursor-pointer text-center">
@@ -71,7 +86,11 @@ export const Home = () => {
                                 }
                         </div>
 
-                        <Post />
+                        {/* Posts */}
+
+                        {userFeedPosts.map(post => <Post key={post._id} post={post} />)}
+
+                        {/* <Post /> */}
 
                     </main>
 

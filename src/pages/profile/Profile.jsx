@@ -17,10 +17,13 @@ export const Profile = () => {
 
     const {
         auth: { userData },
-        user: { users, upLoadingPhoto }
+        user: { users, upLoadingPhoto },
+        post: { posts }
     } = useSelector(state => state);
 
     const currentUser = users.find(user => user.username === username);
+
+    const currentUserPosts = posts.filter(post => post.username === username);
 
     const dispatch = useDispatch();
 
@@ -112,7 +115,7 @@ export const Profile = () => {
 
                             <h1 className="text-2xl text-center mb-6">Your Posts</h1>
 
-                            <Post />
+                            {currentUserPosts.map(post => <Post key={post._id} post={post} />)}
 
                         </div>
 
