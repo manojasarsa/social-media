@@ -69,12 +69,7 @@ export const Home = () => {
                                     </ul>
                                 </div> 
                                 }
-                            
                         </div>
-
-                        {/* <PostFilterModal showFilterPostModal={showFilterPostModal} setShowFilterModal={setShowFilterModal} /> */}
-
-                        
 
                         <Post />
 

@@ -1,16 +1,22 @@
 import { Link } from "react-router-dom";
 import { BiEditAlt } from "react-icons/bi";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import { CreatePostModal } from "./CreatePostModal";
 
 export const AsideLeft = () => {
 
     const { userData } = useSelector(state => state.auth);
+
+    const [showCreatePostModal, setShowCreatePostModal] = useState(false);
 
     return (
         <aside className="w-full basis-1/6">
             <header className="font-sans m-4 text-xl xl:text-2xl">
                 <Link to="/home"> ALCON </Link>
             </header>
+
+            <CreatePostModal showCreatePostModal={showCreatePostModal} setShowCreatePostModal={setShowCreatePostModal} />
 
             <nav>
                 <ul className="pl-2">
@@ -45,8 +51,17 @@ export const AsideLeft = () => {
                         </Link>
                     </li>
                     <li className="my-2 mx-1">
-                        <button className="hidden xl:block my-8 mx-0 p-2 rounded-lg w-full text-x cursor-pointer text-center font-semibold text-white bg-blue-600 hover:bg-blue-800">Post</button>
-                        <BiEditAlt className="w-9 h-9 pl-0 rounded-full block xl:hidden"></BiEditAlt>
+                        <button 
+                            className="hidden xl:block my-8 mx-0 p-2 rounded-lg w-full text-x cursor-pointer text-center 
+                            font-semibold text-white bg-blue-600 hover:bg-blue-800" 
+                            onClick={() => setShowCreatePostModal(true)}>
+                            Post
+                        </button>
+
+                        <BiEditAlt 
+                            className="w-9 h-9 pl-0 rounded-full block xl:hidden" 
+                            onClick={() => setShowCreatePostModal(true)}>
+                        </BiEditAlt>
                     </li>
                 </ul>
             </nav>
