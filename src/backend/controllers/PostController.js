@@ -89,6 +89,7 @@ export const createPostHandler = function (schema, request) {
       username: user.username,
       createdAt: formatDate(),
       updatedAt: formatDate(),
+      comments: [],
     };
     this.db.posts.insert(post);
     return new Response(201, {}, { posts: this.db.posts });
