@@ -117,11 +117,11 @@ export const Home = () => {
                                 
                                 {/* filter modal */}
 
-                                {showFilterPostModal && <div className="w-30 h-22 p-1 shadow-xl bg-slate-100 border border-slate-300 text-slate-600 font-semibold absolute right-11 top-6 z-20 rounded-xl">
+                                {showFilterPostModal && <div className="w-30 h-22 px-1 shadow-xl bg-slate-100 border border-slate-300 text-slate-600 font-semibold absolute right-11 top-4 z-20 rounded-xl">
                                     <ul className="p-2 cursor-pointer text-center">
-                                        <li onClick={() => setSortPostBy("Latest")}>Latest</li>
-                                        <li onClick={() => setSortPostBy("Oldest")}>Oldest</li>
-                                        <li onClick={() => setSortPostBy("Trending")}>Trending</li>
+                                        <li className="p-1 hover:bg-slate-200 rounded" onClick={() => setSortPostBy("Latest")}>Latest</li>
+                                        <li className="p-1 hover:bg-slate-200 rounded" onClick={() => setSortPostBy("Oldest")}>Oldest</li>
+                                        <li className="p-1 hover:bg-slate-200 rounded" onClick={() => setSortPostBy("Trending")}>Trending</li>
                                     </ul>
                                 </div> 
                                 }

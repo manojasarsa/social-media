@@ -7,6 +7,8 @@ import { useState } from "react";
 
 export const Post = ({ post }) => {
 
+    const [postOptions, setPostOptions] = useState(false);
+
     const {
         user: { users },
         auth: { token, userData }
@@ -25,14 +27,39 @@ export const Post = ({ post }) => {
 
             <div className="w-full px-4 py-3">
 
-                <div className="w-full flex justify-between">
+                <div className="w-full flex justify-between relative">
                     <h2 className="font-semibold">
                         {`${currentUser?.firstName} ${currentUser?.lastName}`} 
                         <span className="text-slate-600 pl-1.5">
                             @{post?.username}
                         </span>
                     </h2>
-                    <HiDotsHorizontal className="cursor-pointer" />
+
+                    <HiDotsHorizontal className="cursor-pointer" onClick={() => setPostOptions(prev => !prev)} />
+
+                    {/* Post Options Modal */}
+
+                    {post?.username === userData?.username ? (
+                        postOptions && 
+                            <div 
+                                className="w-30 h-22 px-1 shadow-xl bg-white border border-slate-300 text-slate-600 font-semibold 
+                                absolute right-4 top-2 z-20 rounded-xl"> 
+                                <ul className="p-1 cursor-pointer text-center">
+                                    <li className="my-1 p-1 hover:bg-slate-200 rounded">Edit Post</li>
+                                    <li className="my-1 p-1 hover:bg-slate-200 rounded">Delete Post</li>
+                                </ul>
+                            </div> 
+                        
+                    ) : (
+                        postOptions && 
+                            <div className="w-30 h-22 px-1 shadow-xl hover:bg-slate-200 bg-white border border-slate-300 text-slate-600 font-semibold 
+                            absolute right-3 top-2 z-20 rounded-xl">
+                                <ul className="p-1.5 cursor-pointer text-center">
+                                    <li className="rounded">Unfollow</li>
+                                </ul>
+                            </div>  
+                    )}
+
                 </div>
 
                 <p className="py-3">{post?.content}</p>
