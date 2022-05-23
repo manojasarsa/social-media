@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const createPost = createAsyncThunk(
+export const editPost = createAsyncThunk(
     "post/editPost",
     async ({ postData, token, post }, { rejectWithValue }) => {
         try {
@@ -15,7 +15,7 @@ export const createPost = createAsyncThunk(
                 return data.posts;
             }
         } catch (err) {
-            return rejectWithValue(err.response.data.error[0]);
+            return rejectWithValue(err.response.data.errors[0]);
         }
     }
 );
