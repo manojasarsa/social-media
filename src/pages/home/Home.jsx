@@ -1,7 +1,18 @@
+import { useState } from "react";
 import { GiSettingsKnobs } from "react-icons/gi";
-import { AsideLeft, AsideRight, Post } from "../../component";
+import { useDispatch, useSelector } from "react-redux";
+import { AsideLeft, AsideRight, Post, PostFilterModal } from "../../component";
+import { setLoading } from "../../features/user/userSlice";
 
 export const Home = () => {
+
+    const [showFilterPostModal, setShowFilterModal] = useState(false);
+
+    const {
+        post: { postData }
+    } = useSelector( state => state );
+
+    const dispatch = useDispatch();
 
     return (
         <div>
@@ -32,10 +43,38 @@ export const Home = () => {
                             </div>
                         </div>
 
-                        <div className="ml-3 flex px-5 py-3 border justify-between">
+                        <div className="ml-3 flex px-5 py-3 border justify-between relative">
+
                             <h1 className="text-xl">Latest Posts</h1>
-                            <GiSettingsKnobs className="fill-blue-600 stroke-0 hover:stroke-2 text-2xl" />
+                            
+                                {showFilterPostModal ? 
+                                ( <GiSettingsKnobs
+                                    className="fill-blue-600 stroke-0 hover:stroke-2 text-2xl cursor-pointer"
+                                    onClick={() => setShowFilterModal(false)}>
+                                </GiSettingsKnobs>
+                                ) : (
+                                    <GiSettingsKnobs
+                                    className="fill-blue-600 stroke-0 hover:stroke-2 text-2xl cursor-pointer"
+                                    onClick={() => setShowFilterModal(true)}>s
+                                </GiSettingsKnobs>
+                                )}
+
+                                {console.log("boolean", showFilterPostModal)}
+
+                                {showFilterPostModal && <div className="w-20 h-22 p-1 shadow-xl bg-slate-100 border border-slate-300 text-slate-600 font-semibold absolute right-11 top-6 z-20 rounded-xl">
+                                    <ul className="p-1 cursor-pointer text-center">
+                                        <li className="">Latest</li>
+                                        <li className="">Oldest</li>
+                                        <li className="">Trending</li>
+                                    </ul>
+                                </div> 
+                                }
+                            
                         </div>
+
+                        {/* <PostFilterModal showFilterPostModal={showFilterPostModal} setShowFilterModal={setShowFilterModal} /> */}
+
+                        
 
                         <Post />
 

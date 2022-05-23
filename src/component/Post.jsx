@@ -13,7 +13,12 @@ export const Post = () => {
             <div className="w-full px-4 py-3">
 
                 <div className="w-full flex justify-between">
-                    <h2 className="font-semibold">Chris Levin <span className="text-slate-600">@chrislevin22</span></h2>
+                    <h2 className="font-semibold">
+                        Chris Levin 
+                        <span className="text-slate-600">
+                            @chrislevin22
+                        </span>
+                    </h2>
                     <HiDotsHorizontal className="cursor-pointer" />
                 </div>
 

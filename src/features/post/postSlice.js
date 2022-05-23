@@ -5,6 +5,7 @@ const initialState = {
     isLoading: false,
     error: "",
     showCreatePostModal: false,
+    showPostFilterModal: false,
     posts: []
 }
 
@@ -14,6 +15,9 @@ const postSlice = createSlice({
     reducers: {
         openPostModal: state => {
             state.showPostModal = true;
+        },
+        openPostFilterModal: state => {
+            state.showPostFilterModal = true;
         }
     },
     extraReducers: {
