@@ -1,24 +1,27 @@
 import { useState } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { GoComment } from "react-icons/go";
-import { BsSuitHeart, BsBookmark, BsShare, BsFillSuitHeartFill } from "react-icons/bs";
+import { BsSuitHeart, BsBookmark, BsShare, BsSuitHeartFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { getFormattedDate } from "../utilities/getFormattedDate";
 import { openPostModal, setEditPostObj } from "../features/post/postSlice";
 import { CreatePostModal } from "./CreatePostModal";
 import { unFollowUser } from "../features/user/helpers";
 import { likePost, dislikePost, deletePost } from "../features/post/helpers";
+import { useLocation } from "react-router-dom";
 
 export const Post = ({ post }) => {
 
     const [postOptions, setPostOptions] = useState(false);
 
-    const isLiked = post?.likes?.likedBy?.find(user => user.username === userData.username);
+    const { pathname } = useLocation();
 
     const {
         user: { users },
         auth: { token, userData }
     } = useSelector(state => state);
+
+    const isLiked = post?.likes?.likedBy?.find(user => user.username === userData.username);
 
     const dispatch = useDispatch();
 
@@ -91,20 +94,25 @@ export const Post = ({ post }) => {
 
                 <p className="py-3">{post?.content}</p>
 
-                <p className="text-sm text-gray-600">{getFormattedDate(post?.createdAt)}</p>
+                <p className="text-sm text-gray-600">{getFormattedDate(post?.createdAt)}</p>  
 
                 <div className="flex justify-between pt-4">
-                    {isLiked ? (
-                        <BsFillSuitHeartFill lassName="text-xl cursor-pointer text-red-color" onClick={e => {
-                            e.stopPropagation();
-                            dispatch(dislikePost({ postId: post?._id, token }));
-                        }} />
-                    ) : (
-                        <BsSuitHeart className="text-xl cursor-pointer" onClick={e => {
-                            e.stopPropagation();
-                            dispatch(likePost({ postId: post?._id, token }));
-                        }} />
-                    )}
+                    <div className="flex">
+                        {isLiked ? (
+                            <BsSuitHeartFill className="text-xl cursor-pointer text-red-600" onClick={e => {
+                                e.stopPropagation();
+                                dispatch(dislikePost({ postId: post?._id, token }));
+                            }} />
+                        ) : (
+                            <BsSuitHeart className="text-xl cursor-pointer" onClick={e => {
+                                e.stopPropagation();
+                                dispatch(likePost({ postId: post?._id, token }));
+                            }} />
+                        )}
+                        <span className="text-sm pl-4 font-semibold">
+                            {pathname.includes("post") ? "" : post?.likes?.likeCount ? post?.likes?.likeCount : null }
+                        </span>
+                    </div>
 
                     <GoComment className="text-xl cursor-pointer" />
                     <BsBookmark className="text-xl cursor-pointer" />
