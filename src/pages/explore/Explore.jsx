@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AsideLeft, AsideRight, Post } from "../../component";
-import { createPost, getAllPosts } from "../../features/post/helpers";
+import { getAllPosts } from "../../features/post/helpers";
 import Loader from 'react-spinner-loader';
 
 export const Explore = () => {
