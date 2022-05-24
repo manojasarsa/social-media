@@ -1,17 +1,19 @@
 import { useState } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { GoComment } from "react-icons/go";
-import { BsSuitHeart, BsBookmark, BsShare } from "react-icons/bs";
+import { BsSuitHeart, BsBookmark, BsShare, BsFillSuitHeartFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { getFormattedDate } from "../utilities/getFormattedDate";
 import { openPostModal, setEditPostObj } from "../features/post/postSlice";
 import { CreatePostModal } from "./CreatePostModal";
-import { deletePost } from "../features/post/helpers";
 import { unFollowUser } from "../features/user/helpers";
+import { likePost, dislikePost, deletePost } from "../features/post/helpers";
 
 export const Post = ({ post }) => {
 
     const [postOptions, setPostOptions] = useState(false);
+
+    const isLiked = post?.likes?.likedBy?.find(user => user.username === userData.username);
 
     const {
         user: { users },
@@ -92,7 +94,18 @@ export const Post = ({ post }) => {
                 <p className="text-sm text-gray-600">{getFormattedDate(post?.createdAt)}</p>
 
                 <div className="flex justify-between pt-4">
-                    <BsSuitHeart className="text-xl cursor-pointer" />
+                    {isLiked ? (
+                        <BsFillSuitHeartFill lassName="text-xl cursor-pointer text-red-color" onClick={e => {
+                            e.stopPropagation();
+                            dispatch(dislikePost({ postId: post?._id, token }));
+                        }} />
+                    ) : (
+                        <BsSuitHeart className="text-xl cursor-pointer" onClick={e => {
+                            e.stopPropagation();
+                            dispatch(likePost({ postId: post?._id, token }));
+                        }} />
+                    )}
+
                     <GoComment className="text-xl cursor-pointer" />
                     <BsBookmark className="text-xl cursor-pointer" />
                     <BsShare className="text-xl cursor-pointer" />

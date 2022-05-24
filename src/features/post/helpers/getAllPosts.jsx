@@ -10,7 +10,7 @@ export const getAllPosts = createAsyncThunk(
                 return data.posts;
             }
         } catch (err) {
-            return rejectWithValue(err.response.data.error[0]);
+            return rejectWithValue(err.response.data.errors[0]);
         }
     }
 );

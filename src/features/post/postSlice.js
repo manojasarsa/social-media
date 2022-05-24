@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllPosts, createPost, editPost, deletePost } from "./helpers";
+import { getAllPosts, createPost, editPost, deletePost, likePost, dislikePost } from "./helpers";
 
 const initialState = {
     isLoading: false,
@@ -64,6 +64,24 @@ const postSlice = createSlice({
             state.error = "";
         },
         [deletePost.rejected]: (state, { payload }) => {
+            state.error = payload;
+        },
+
+        // like Post
+
+        [likePost.fulfilled]: (state, { payload }) => {
+            state.posts = payload;
+        },
+        [likePost.rejected]: (state, { payload }) => {
+            state.error = payload;
+        },
+
+        // dislike Post
+
+        [dislikePost.fulfilled]: (state, { payload }) => {
+            state.posts = payload;
+        },
+        [dislikePost.rejected]: (state, { payload }) => {
             state.error = payload;
         },
     }
