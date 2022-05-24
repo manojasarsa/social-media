@@ -73,7 +73,6 @@ export const CreatePostModal = () => {
                     </div>
                 </div>
             </div>        
-
         </Modal>
     )
 };

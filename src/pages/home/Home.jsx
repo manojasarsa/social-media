@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
-import { AsideLeft, AsideRight, Post, PostFilterModal } from "../../component";
+import { AsideLeft, AsideRight, Post } from "../../component";
 import { createPost, getAllPosts } from "../../features/post/helpers";
 import Loader from 'react-spinner-loader';
 
@@ -131,11 +131,9 @@ export const Home = () => {
                                 }
                         </div>
 
-                        {/* Posts */}
+                        {/* Show Posts */}
 
                         {sortedPosts.map(post => <Post key={post._id} post={post} />)}
-
-                        {/* <Post /> */}
 
                     </main>
 

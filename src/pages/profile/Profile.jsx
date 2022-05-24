@@ -1,10 +1,10 @@
+import { useState } from "react";
 import { AsideLeft, AsideRight, EditProfileModal, FollowInfoModal, Post } from "../../component";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutHandler } from "../../features/auth/authSlice";
 import { FiLogOut } from "react-icons/fi";
 import 'react-responsive-modal/styles.css';
-import { useState } from "react";
 import Loader from 'react-spinner-loader';
 
 export const Profile = () => {
@@ -120,9 +120,8 @@ export const Profile = () => {
                             {currentUserPosts.map(post => <Post key={post._id} post={post} />)}
 
                         </div>
-
                     </main>
-
+                    
                     <AsideRight />
                 </div>
             </div>

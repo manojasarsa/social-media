@@ -1,9 +1,9 @@
+import { useState } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { GoComment } from "react-icons/go";
 import { BsSuitHeart, BsBookmark, BsShare } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { getFormattedDate } from "../utilities/getFormattedDate";
-import { useState } from "react";
 import { openPostModal, setEditPostObj } from "../features/post/postSlice";
 import { CreatePostModal } from "./CreatePostModal";
 import { deletePost } from "../features/post/helpers";

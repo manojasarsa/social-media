@@ -1,21 +1,12 @@
 import { Link } from "react-router-dom";
 import { BiEditAlt } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-// import { useState } from "react";
-// import { CreatePostModal } from "./CreatePostModal";
 import { openPostModal } from "../features/post/postSlice";
 import { CreatePostModal } from "./CreatePostModal";
 
 export const AsideLeft = () => {
 
     const { userData } = useSelector(state => state.auth);
-
-    // const [showCreatePostModal, setShowCreatePostModal] = useState(false);
-
-    // const {
-    //     auth: { userData },
-    //     posts: { openPostModal },
-    // } = useSelector( state => state );
 
     const dispatch = useDispatch();
 
@@ -24,8 +15,6 @@ export const AsideLeft = () => {
             <header className="font-sans m-4 text-xl xl:text-2xl">
                 <Link to="/home"> ALCON </Link>
             </header>
-
-            {/* <CreatePostModal showCreatePostModal={showCreatePostModal} setShowCreatePostModal={setShowCreatePostModal} /> */}
 
             <CreatePostModal />
 
