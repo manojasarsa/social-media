@@ -4,3 +4,4 @@ export { Post } from "./Post";
 export { EditProfileModal } from "./EditProfileModal";
 export { FollowInfoModal } from "./FollowInfoModal";
 export { UserDetails } from "./UserDetails";
+export { CreatePostModal } from "./CreatePostModal";

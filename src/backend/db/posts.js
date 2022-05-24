@@ -17,7 +17,7 @@ export const posts = [
     },
     comments: [],
     username: "veron_d12",
-    createdAt: formatDate(),
+    createdAt: "12:00 PM May 15, 2022",
     updatedAt: formatDate(),
   },
   {
@@ -30,7 +30,7 @@ export const posts = [
     },
     comments: [],
     username: "lucy_st4",
-    createdAt: formatDate(),
+    createdAt: "09:23 AM December 31, 2020",
     updatedAt: formatDate(),
   },
   {
@@ -42,8 +42,8 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    username: "stuart_99",
-    createdAt: formatDate(),
+    username: "rachel_dy3",
+    createdAt: "10:09 PM August 01, 2021",
     updatedAt: formatDate(),
   },
   {
@@ -59,16 +59,16 @@ export const posts = [
         content: "https://veronicane.info",
         id: uuid(),
         username: "veron_d12",
-        createdAt: formatDate()
+        createdAt: ""
       }
     ],
     username: "stuart_99",
-    createdAt: formatDate(),
+    createdAt: "04:32 PM October 10, 2019",
     updatedAt: formatDate(),
   },
   {
     _id: uuid(),
-    content: "Yesterday, I received around 135+ emails from people exploring career opportunities with us, Do yourself a favour and learn excellent e-mail writing skills. You can beat 99% of your immediate competition if pitching to Startups.",
+    content: "Yesterday, I received around 135+ emails from people exploring career opportunities with us. Do yourself a favour and learn excellent e-mail writing skills. You can beat 99% of your immediate competition if pitching to Startups.",
     likes: {
       likeCount: 0,
       likedBy: [],
@@ -76,7 +76,7 @@ export const posts = [
     },
     comments: [],
     username: "chrislevin22",
-    createdAt: formatDate(),
+    createdAt: "06:00 AM January 23, 2018",
     updatedAt: formatDate(),
   },
 ];

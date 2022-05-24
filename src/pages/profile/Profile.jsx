@@ -1,10 +1,10 @@
+import { useState } from "react";
 import { AsideLeft, AsideRight, EditProfileModal, FollowInfoModal, Post } from "../../component";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutHandler } from "../../features/auth/authSlice";
 import { FiLogOut } from "react-icons/fi";
 import 'react-responsive-modal/styles.css';
-import { useState } from "react";
 import Loader from 'react-spinner-loader';
 
 export const Profile = () => {
@@ -17,10 +17,13 @@ export const Profile = () => {
 
     const {
         auth: { userData },
-        user: { users, upLoadingPhoto }
+        user: { users, upLoadingPhoto },
+        posts: { posts }
     } = useSelector(state => state);
 
     const currentUser = users.find(user => user.username === username);
+
+    const currentUserPosts = posts.filter(post => post.username === username);
 
     const dispatch = useDispatch();
 
@@ -29,7 +32,9 @@ export const Profile = () => {
     return (
         <div>
             <div className="flex mx-12 my-4">
-                <Loader show={upLoadingPhoto} type="body" />
+                <div className="z-20">
+                    <Loader show={upLoadingPhoto} type="body" />
+                </div>
                 <div className="mx-auto flex px-32 h-screen w-screen">
 
                     <AsideLeft />
@@ -112,12 +117,11 @@ export const Profile = () => {
 
                             <h1 className="text-2xl text-center mb-6">Your Posts</h1>
 
-                            <Post />
+                            {currentUserPosts.map(post => <Post key={post._id} post={post} />)}
 
                         </div>
-
                     </main>
-
+                    
                     <AsideRight />
                 </div>
             </div>

@@ -1,25 +1,95 @@
+import { useState } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { GoComment } from "react-icons/go";
 import { BsSuitHeart, BsBookmark, BsShare } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { getFormattedDate } from "../utilities/getFormattedDate";
+import { openPostModal, setEditPostObj } from "../features/post/postSlice";
+import { CreatePostModal } from "./CreatePostModal";
+import { deletePost } from "../features/post/helpers";
+import { unFollowUser } from "../features/user/helpers";
 
-export const Post = () => {
+export const Post = ({ post }) => {
+
+    const [postOptions, setPostOptions] = useState(false);
+
+    const {
+        user: { users },
+        auth: { token, userData }
+    } = useSelector(state => state);
+
+    const dispatch = useDispatch();
+
+    const currentUser = users.find(user => user.username === post?.username);
+  
+    const editHandler = (e) => {
+        e.stopPropagation();            // prevent the post content from re-occurring in new post
+        dispatch(openPostModal());
+        dispatch(setEditPostObj(post));
+        setPostOptions(false);
+    }
+
+    const deletePostHandler = (e) => {
+        e.stopPropagation();
+        dispatch(deletePost({ postId: post?._id, token }));
+        setPostOptions(false);
+    }
+
+    const unFollowHandler = (e) => {
+        e.stopPropagation();
+        dispatch(unFollowUser({ followUserId: currentUser?._id, token }));
+        setPostOptions(false);
+    }
+    
     return (
         <div className="border ml-3 flex px-5 py-3 hover:bg-slate-100">
 
+            <CreatePostModal />
+
             <div className="mt-3 w-12 h-12 text-lg flex-none">
-                <img src="https://i.pravatar.cc/300?img=12" className="flex-none w-12 h-12 rounded-full" alt="avatar" />
+                <img src={currentUser?.profilePicture} className="flex-none w-12 h-12 rounded-full" alt="avatar" />
             </div>
 
             <div className="w-full px-4 py-3">
 
-                <div className="w-full flex justify-between">
-                    <h2 className="font-semibold">Chris Levin <span className="text-slate-600">@chrislevin22</span></h2>
-                    <HiDotsHorizontal className="cursor-pointer" />
+                <div className="w-full flex justify-between relative">
+                    <h2 className="font-semibold">
+                        {`${currentUser?.firstName} ${currentUser?.lastName}`} 
+                        <span className="text-slate-600 pl-1.5">
+                            @{post?.username}
+                        </span>
+                    </h2>
+
+                    <HiDotsHorizontal className="cursor-pointer" onClick={() => setPostOptions(prev => !prev)} />
+
+                    {/* Post Options Modal */}
+
+                    {post?.username === userData?.username ? (
+                        postOptions && 
+                            <div 
+                                className="w-30 h-22 px-1 shadow-xl bg-white border border-slate-300 text-slate-600 font-semibold 
+                                absolute right-4 top-2 z-20 rounded-xl"> 
+                                <ul className="p-1 cursor-pointer text-center">
+                                    <li className="my-1 p-1 hover:bg-slate-200 rounded" onClick={editHandler}>Edit Post</li>
+                                    <li className="my-1 p-1 hover:bg-slate-200 rounded" onClick={deletePostHandler}>Delete Post</li>
+                                </ul>
+                            </div> 
+                        
+                    ) : (
+                        postOptions && 
+                            <div className="w-30 h-22 px-1 shadow-xl hover:bg-slate-200 bg-white border border-slate-300 text-slate-600 font-semibold 
+                            absolute right-3 top-2 z-20 rounded-xl">
+                                <ul className="p-1.5 cursor-pointer text-center">
+                                    <li className="rounded" onClick={unFollowHandler}>Unfollow</li>
+                                </ul>
+                            </div>  
+                    )}
+
                 </div>
 
-                <p className="py-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis omnis laboriosam officia nemo praesentium natus ipsam! Nisi rerum, asperiores eius dignissimos nostrum, quos voluptatum voluptas impedit molestias suscipit omnis obcaecati!</p>
+                <p className="py-3">{post?.content}</p>
 
-                <p className="text-sm text-gray-600">6 hours ago</p>
+                <p className="text-sm text-gray-600">{getFormattedDate(post?.createdAt)}</p>
 
                 <div className="flex justify-between pt-4">
                     <BsSuitHeart className="text-xl cursor-pointer" />
