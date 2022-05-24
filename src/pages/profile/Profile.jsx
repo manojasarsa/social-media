@@ -18,7 +18,7 @@ export const Profile = () => {
     const {
         auth: { userData },
         user: { users, upLoadingPhoto },
-        post: { posts }
+        posts: { posts }
     } = useSelector(state => state);
 
     const currentUser = users.find(user => user.username === username);
@@ -32,7 +32,9 @@ export const Profile = () => {
     return (
         <div>
             <div className="flex mx-12 my-4">
-                <Loader show={upLoadingPhoto} type="body" />
+                <div className="z-20">
+                    <Loader show={upLoadingPhoto} type="body" />
+                </div>
                 <div className="mx-auto flex px-32 h-screen w-screen">
 
                     <AsideLeft />

@@ -3,7 +3,7 @@ import { GiSettingsKnobs } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { AsideLeft, AsideRight, Post, PostFilterModal } from "../../component";
 import { createPost, getAllPosts } from "../../features/post/helpers";
-
+import Loader from 'react-spinner-loader';
 
 export const Home = () => {
 
@@ -14,7 +14,7 @@ export const Home = () => {
     const [content, setContent] = useState("");
 
     const {
-        post: { posts, isLoading },
+        posts: { posts, isLoading },
         auth: { userData, token },
         user: { users }
     } = useSelector( state => state );
@@ -66,6 +66,10 @@ export const Home = () => {
 
     return (
         <div>
+            <div className="z-990">
+                <Loader show={isLoading} type="body" />
+            </div>
+
             <div className="flex mx-12 my-4">
                 <div className="mx-auto flex px-32 h-screen w-screen">
 
@@ -106,7 +110,7 @@ export const Home = () => {
 
                         {/* filter posts by date and trending */}
 
-                        <div className="ml-3 flex px-5 py-3 border justify-between relative">
+                        <div className="ml-3 flex px-5 py-3  justify-between relative">
 
                             <h1 className="text-xl">{sortPostBy} Posts</h1>
 

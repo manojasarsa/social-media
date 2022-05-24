@@ -4,8 +4,9 @@ import { getAllPosts, createPost, editPost, deletePost } from "./helpers";
 const initialState = {
     isLoading: false,
     error: "",
-    showCreatePostModal: false,
-    posts: []
+    showPostModal: false,
+    posts: [],
+    editPostObj: null,
 }
 
 const postSlice = createSlice({
@@ -14,6 +15,12 @@ const postSlice = createSlice({
     reducers: {
         openPostModal: state => {
             state.showPostModal = true;
+        },
+        closePostModal: state => {
+            state.showPostModal = false;
+        },
+        setEditPostObj: (state, { payload }) => {
+            state.editPostObj = payload;
         }
     },
     extraReducers: {
@@ -62,6 +69,6 @@ const postSlice = createSlice({
     }
 });
 
-export const { openPostModal } = postSlice.actions;
+export const { openPostModal, closePostModal, setEditPostObj } = postSlice.actions;
 
 export default postSlice.reducer;

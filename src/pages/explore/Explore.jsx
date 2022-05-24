@@ -1,10 +1,30 @@
-import { AsideLeft, AsideRight, Post } from "../../component"
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AsideLeft, AsideRight, Post } from "../../component";
+import { createPost, getAllPosts } from "../../features/post/helpers";
+import Loader from 'react-spinner-loader';
 
 export const Explore = () => {
+
+    const {
+        auth: { token },
+        posts: { posts, isLoading },
+    } = useSelector( state => state );
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllPosts());
+    }, [dispatch, token]);
+
     return (
         <div>
             <div className="flex mx-12 my-4">
                 <div className="mx-auto flex px-32 h-screen w-screen">
+
+                    <div className="z-20">
+                        <Loader show={isLoading} type="body" />
+                    </div>
 
                     <AsideLeft />
 
@@ -14,10 +34,7 @@ export const Explore = () => {
                             <h1 className="text-xl">Explore</h1>
                         </header>
 
-                        <Post />
-                        <Post />
-                        <Post />
-                        <Post />
+                        {/* {posts.map(post => <Post key={post._id} post={post} />)} */}
 
                     </main>
 

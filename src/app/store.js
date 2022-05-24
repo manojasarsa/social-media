@@ -7,6 +7,6 @@ export default configureStore({
     reducer: {
         auth: authReducer,
         user: userReducer,
-        post: postReducer
+        posts: postReducer
     }
 });

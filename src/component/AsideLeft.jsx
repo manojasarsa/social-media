@@ -1,14 +1,23 @@
 import { Link } from "react-router-dom";
 import { BiEditAlt } from "react-icons/bi";
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import { useState } from "react";
+// import { CreatePostModal } from "./CreatePostModal";
+import { openPostModal } from "../features/post/postSlice";
 import { CreatePostModal } from "./CreatePostModal";
 
 export const AsideLeft = () => {
 
     const { userData } = useSelector(state => state.auth);
 
-    const [showCreatePostModal, setShowCreatePostModal] = useState(false);
+    // const [showCreatePostModal, setShowCreatePostModal] = useState(false);
+
+    // const {
+    //     auth: { userData },
+    //     posts: { openPostModal },
+    // } = useSelector( state => state );
+
+    const dispatch = useDispatch();
 
     return (
         <aside className="w-full basis-1/6">
@@ -16,7 +25,9 @@ export const AsideLeft = () => {
                 <Link to="/home"> ALCON </Link>
             </header>
 
-            <CreatePostModal showCreatePostModal={showCreatePostModal} setShowCreatePostModal={setShowCreatePostModal} />
+            {/* <CreatePostModal showCreatePostModal={showCreatePostModal} setShowCreatePostModal={setShowCreatePostModal} /> */}
+
+            <CreatePostModal />
 
             <nav>
                 <ul className="pl-2">
@@ -54,13 +65,13 @@ export const AsideLeft = () => {
                         <button 
                             className="hidden xl:block my-8 mx-0 p-2 rounded-lg w-full text-x cursor-pointer text-center 
                             font-semibold text-white bg-blue-600 hover:bg-blue-800" 
-                            onClick={() => setShowCreatePostModal(true)}>
+                            onClick={() => dispatch(openPostModal()) }>
                             Post
                         </button>
 
                         <BiEditAlt 
-                            className="w-9 h-9 pl-0 rounded-full block xl:hidden" 
-                            onClick={() => setShowCreatePostModal(true)}>
+                            className="w-9 h-9 pl-0 rounded-full block xl:hidden cursor-pointer" 
+                            onClick={() => dispatch(openPostModal()) }>
                         </BiEditAlt>
                     </li>
                 </ul>

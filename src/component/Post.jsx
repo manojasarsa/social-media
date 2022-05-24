@@ -4,6 +4,10 @@ import { BsSuitHeart, BsBookmark, BsShare } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { getFormattedDate } from "../utilities/getFormattedDate";
 import { useState } from "react";
+import { openPostModal, setEditPostObj } from "../features/post/postSlice";
+import { CreatePostModal } from "./CreatePostModal";
+import { deletePost } from "../features/post/helpers";
+import { unFollowUser } from "../features/user/helpers";
 
 export const Post = ({ post }) => {
 
@@ -17,9 +21,30 @@ export const Post = ({ post }) => {
     const dispatch = useDispatch();
 
     const currentUser = users.find(user => user.username === post?.username);
+  
+    const editHandler = (e) => {
+        e.stopPropagation();            // prevent the post content from re-occurring in new post
+        dispatch(openPostModal());
+        dispatch(setEditPostObj(post));
+        setPostOptions(false);
+    }
+
+    const deletePostHandler = (e) => {
+        e.stopPropagation();
+        dispatch(deletePost({ postId: post?._id, token }));
+        setPostOptions(false);
+    }
+
+    const unFollowHandler = (e) => {
+        e.stopPropagation();
+        dispatch(unFollowUser({ followUserId: currentUser?._id, token }));
+        setPostOptions(false);
+    }
     
     return (
         <div className="border ml-3 flex px-5 py-3 hover:bg-slate-100">
+
+            <CreatePostModal />
 
             <div className="mt-3 w-12 h-12 text-lg flex-none">
                 <img src={currentUser?.profilePicture} className="flex-none w-12 h-12 rounded-full" alt="avatar" />
@@ -45,8 +70,8 @@ export const Post = ({ post }) => {
                                 className="w-30 h-22 px-1 shadow-xl bg-white border border-slate-300 text-slate-600 font-semibold 
                                 absolute right-4 top-2 z-20 rounded-xl"> 
                                 <ul className="p-1 cursor-pointer text-center">
-                                    <li className="my-1 p-1 hover:bg-slate-200 rounded">Edit Post</li>
-                                    <li className="my-1 p-1 hover:bg-slate-200 rounded">Delete Post</li>
+                                    <li className="my-1 p-1 hover:bg-slate-200 rounded" onClick={editHandler}>Edit Post</li>
+                                    <li className="my-1 p-1 hover:bg-slate-200 rounded" onClick={deletePostHandler}>Delete Post</li>
                                 </ul>
                             </div> 
                         
@@ -55,7 +80,7 @@ export const Post = ({ post }) => {
                             <div className="w-30 h-22 px-1 shadow-xl hover:bg-slate-200 bg-white border border-slate-300 text-slate-600 font-semibold 
                             absolute right-3 top-2 z-20 rounded-xl">
                                 <ul className="p-1.5 cursor-pointer text-center">
-                                    <li className="rounded">Unfollow</li>
+                                    <li className="rounded" onClick={unFollowHandler}>Unfollow</li>
                                 </ul>
                             </div>  
                     )}

@@ -6,7 +6,7 @@ export const deletePost = createAsyncThunk(
     async ({ postId, token }, { rejectWithValue }) => {
         try {
             const { status, data } = await axios.delete(
-                `/api/posts/edit/${postId}`,
+                `/api/posts/${postId}`,
                 { headers: { authorization: token }}
             )
 

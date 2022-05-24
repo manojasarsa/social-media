@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal } from 'react-responsive-modal';
-import { createPost } from "../features/post/helpers";
+import { createPost, editPost } from "../features/post/helpers";
+import { closePostModal, setEditPostObj } from "../features/post/postSlice";
 
-export const CreatePostModal = ({ showCreatePostModal, setShowCreatePostModal  }) => {
+export const CreatePostModal = () => {
 
     const [content, setContent] = useState("");
 
     const {
         auth: { userData, token },
+        posts: { showPostModal, editPostObj },
     } = useSelector( state => state );
 
     const dispatch = useDispatch();
@@ -16,26 +18,33 @@ export const CreatePostModal = ({ showCreatePostModal, setShowCreatePostModal  }
     const postHandler = (e) => {
         e.preventDefault();
         if (content) {
-            dispatch(createPost({ postData: { content }, token }));
+            editPostObj
+            ? dispatch(editPost({ postData: { content }, token, post: editPostObj }))
+            : dispatch(createPost({ postData: { content }, token }));
             setContent("");
-            setShowCreatePostModal(false);
+            dispatch(setEditPostObj(null));
+            dispatch(closePostModal());
         }
     }
+
+    useEffect(() => {
+        setContent(editPostObj?.content);
+    }, [editPostObj]);
 
     return (
         <Modal
             styles={{
                 modal: { width: "30rem", height: "fit-content", paddingTop: "0.2rem", borderRadius: "1rem" },
             }}
-            open={showCreatePostModal}
-            onClose={showCreatePostModal}
+            open={showPostModal}
+            onClose={showPostModal}
             showCloseIcon={false}
             center={true}
         >
             <div className="flex justify-end">
                 <button
                     className="text-lg font-semibold"
-                    onClick={() => setShowCreatePostModal(false)}>
+                    onClick={() => dispatch(closePostModal())}>
                     x
                 </button>
             </div>
@@ -59,7 +68,7 @@ export const CreatePostModal = ({ showCreatePostModal, setShowCreatePostModal  }
                             className="p-2.5 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md 
                             hover:shadow-lg transition duration-150 ease-in-out"
                             onClick={postHandler}>
-                            Post
+                            {editPostObj ? "Update" : "Post"}
                         </button>
                     </div>
                 </div>
