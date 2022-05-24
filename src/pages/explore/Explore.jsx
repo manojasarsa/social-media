@@ -34,7 +34,7 @@ export const Explore = () => {
                             <h1 className="text-xl">Explore</h1>
                         </header>
 
-                        {/* {posts.map(post => <Post key={post._id} post={post} />)} */}
+                        {posts.map(post => <Post key={post._id} post={post} />)}
 
                     </main>
 
