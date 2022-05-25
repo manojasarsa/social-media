@@ -71,8 +71,6 @@ export const Home = () => {
                 <Loader show={isLoading} type="body" />
             </div>
 
-            {/* Mobile Nav Bar */}
-
             <MobileNavBar />
 
             <div className="flex justify-center px-5 sm:px-32">

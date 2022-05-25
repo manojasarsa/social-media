@@ -1,17 +1,25 @@
-import { AsideLeft, AsideRight } from "../../component";
+import { AsideLeft, AsideRight, MobileNavBar } from "../../component";
+import { Link } from "react-router-dom";
 
 export const Notifications = () => {
     return (
         <div>
-            <div className="flex mx-12 my-4">
-                <div className="mx-auto flex px-32 h-screen w-screen">
+
+            <MobileNavBar />
+
+            <div className="flex justify-center px-5 sm:px-32">
+                <div className="flex h-screen w-screen">
 
                     <AsideLeft />
 
                     <main className="w-full basis-2/3">
 
-                        <header className="flex p-4">
+                        <header className="p-4 hidden sm:flex">
                             <h1 className="text-xl">Notifications</h1>
+                        </header>
+
+                        <header className="text-xl font-bold flex py-4 text-blue-600 sm:hidden">
+                            <Link to="/home"> ALCON </Link>
                         </header>
 
                         <div className="mx-6 my-8 flex space-between">
