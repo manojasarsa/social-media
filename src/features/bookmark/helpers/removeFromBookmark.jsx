@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const removeFromBookmark = createAsyncThunk(
-    "post/removeFromBookmark",
+    "user/removeFromBookmark",
     async ({ token, postId }, { rejectWithValue }) => {
         try {
             const { status, data } = await axios.post(

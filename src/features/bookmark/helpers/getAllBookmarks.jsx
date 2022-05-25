@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getAllBookmarks = createAsyncThunk(
-    "post/getAllBookmarks",
+    "user/getAllBookmarks",
     async ({ token }, { rejectWithValue }) => {
         try {
             const { status, data } = await axios.get(

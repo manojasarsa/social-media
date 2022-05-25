@@ -12,7 +12,7 @@ const bookmarkSlice = createSlice({
     initialState,
     reducers: {
         allBookmarks: state => {
-            state.bookmarks = []];
+            state.bookmarks = [];
         }
     },
     extraReducers: {
