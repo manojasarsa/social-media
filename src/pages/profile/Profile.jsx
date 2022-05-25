@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { AsideLeft, AsideRight, EditProfileModal, FollowInfoModal, Post } from "../../component";
+import { AsideLeft, AsideRight, EditProfileModal, FollowInfoModal, MobileNavBar, Post } from "../../component";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutHandler } from "../../features/auth/authSlice";
 import { FiLogOut } from "react-icons/fi";
 import 'react-responsive-modal/styles.css';
 import Loader from 'react-spinner-loader';
+import { Link } from "react-router-dom";
 
 export const Profile = () => {
 
@@ -31,22 +32,30 @@ export const Profile = () => {
 
     return (
         <div>
-            <div className="flex mx-12 my-4">
-                <div className="z-20">
-                    <Loader show={upLoadingPhoto} type="body" />
-                </div>
-                <div className="mx-auto flex px-32 h-screen w-screen">
+            <div className="z-20">
+                <Loader show={upLoadingPhoto} type="body" />
+            </div>
+
+            <MobileNavBar />
+
+            <div className="flex justify-center px-5 sm:px-32">
+                <div className="flex h-screen w-screen">
 
                     <AsideLeft />
 
-                    <main className="w-full basis-2/3">
+                    <main className="w-full sm:basis-2/3">
 
-                        <header className="flex p-4 w-full justify-between">
+                        <header className="hidden sm:flex p-4 w-full justify-between">
                             <h1 className="text-xl">Profile</h1>
                             <FiLogOut className="w-5 h-5 text-slate-700 cursor-pointer" onClick={() => dispatch(signOutHandler())} />
                         </header>
 
-                        <div className="ml-5 my-6 flex flex-col space-between">
+                        <header className="text-xl font-bold flex py-4 text-blue-600 sm:hidden justify-between">
+                            <Link to="/home"> ALCON </Link>
+                            <FiLogOut className="w-5 h-5 text-slate-700 cursor-pointer" onClick={() => dispatch(signOutHandler())} />
+                        </header>
+
+                        <div className="sm:ml-5 my-6 flex flex-col space-between">
 
                             <div className="flex mx-auto gap-8 ">
 
@@ -85,10 +94,10 @@ export const Profile = () => {
                                     setFollowersInfoModal={setFollowersInfoModal}
                                 />
 
-                                <h3 className="text-xl">0<span className="text-slate-600"> posts</span></h3>
+                                <h3 className="text-base sm:text-xl cursor-pointer">0<span className="text-slate-600 text-base sm:text-xl"> posts</span></h3>
 
                                 <h3 
-                                    className="text-xl cursor-pointer" 
+                                    className="text-base sm:text-xl cursor-pointer" 
                                     onClick={() => {
                                             setFollowersInfoModal(true);
                                             setShowFollowing(true)
@@ -101,7 +110,7 @@ export const Profile = () => {
                                 </h3>
 
                                 <h3 
-                                    className="text-xl cursor-pointer" 
+                                    className="text-base sm:text-xl cursor-pointer" 
                                     onClick={() => {
                                             setFollowersInfoModal(true);
                                             setShowFollowing(false)

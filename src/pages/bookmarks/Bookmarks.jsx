@@ -1,9 +1,12 @@
-import { AsideLeft, AsideRight, Post } from "../../component";
+import { AsideLeft, AsideRight, MobileNavBar, Post } from "../../component";
 import { Link } from "react-router-dom";
 
 export const Bookmarks = () => {
     return (
         <div>
+
+            <MobileNavBar />
+            
             <div className="flex justify-center px-5 sm:px-32">
                 <div className="flex h-screen w-screen">
 

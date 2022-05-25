@@ -12,7 +12,7 @@ export const Notifications = () => {
 
                     <AsideLeft />
 
-                    <main className="w-full basis-2/3">
+                    <main className="w-full sm:basis-2/3">
 
                         <header className="p-4 hidden sm:flex">
                             <h1 className="text-xl">Notifications</h1>
@@ -22,23 +22,25 @@ export const Notifications = () => {
                             <Link to="/home"> ALCON </Link>
                         </header>
 
-                        <div className="mx-6 my-8 flex space-between">
+                        <div className="flex flex-col my-8 w-full">
+                            <div className="p-4 flex space-between border">
 
-                            <img src="https://i.pravatar.cc/300?img=5" className="w-12 h-12 rounded-full" alt="avatar" />
+                                <img src="https://i.pravatar.cc/300?img=5" className="w-12 h-12 rounded-full" alt="avatar" />
 
-                            <div className="w-full flex flex-col pl-4">
-                                <h2 className="font-semibold">@veron_d12</h2>
-                                <h2> liked your post. </h2>
+                                <div className="w-full flex flex-col pl-4">
+                                    <h2 className="font-semibold">@veron_d12</h2>
+                                    <h2> liked your post. </h2>
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="m-6 flex space-between">
+                            <div className="p-4 flex space-between border">
 
-                            <img src="https://i.pravatar.cc/300?img=4" className="w-12 h-12 rounded-full" alt="avatar" />
+                                <img src="https://i.pravatar.cc/300?img=4" className="w-12 h-12 rounded-full" alt="avatar" />
 
-                            <div className="w-full flex flex-col pl-4">
-                                <h2 className="font-semibold">@rachel_dy3</h2>
-                                <h2> started following you. </h2>
+                                <div className="w-full flex flex-col pl-4">
+                                    <h2 className="font-semibold">@rachel_dy3</h2>
+                                    <h2> started following you. </h2>
+                                </div>
                             </div>
                         </div>
 
