@@ -11,7 +11,7 @@ export const AsideLeft = () => {
     const dispatch = useDispatch();
 
     return (
-        <aside className="w-full basis-1/6">
+        <aside className="hidden sm:block basis-1/6 lg:basis-1/12">
             <header className="font-sans m-4 text-xl xl:text-2xl">
                 <Link to="/home"> ALCON </Link>
             </header>

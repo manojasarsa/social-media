@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
-import { AsideLeft, AsideRight, Post } from "../../component";
+import { AsideLeft, AsideRight, MobileNavBar, Post } from "../../component";
 import { createPost, getAllPosts } from "../../features/post/helpers";
 import Loader from 'react-spinner-loader';
 
@@ -70,12 +70,16 @@ export const Home = () => {
                 <Loader show={isLoading} type="body" />
             </div>
 
-            <div className="flex mx-12 my-4">
-                <div className="mx-auto flex px-32 h-screen w-screen">
+            {/* Mobile Nav Bar */}
+
+            <MobileNavBar />
+
+            <div className="flex justify-center px-32">
+                <div className="flex h-screen w-screen">
 
                     <AsideLeft />
 
-                    <main className="w-full basis-2/3">
+                    <main className="w-full basis-1/6 sm:basis-2/3">
 
                         <header className="flex p-4">
                             <h1 className="text-xl">Home</h1>
@@ -83,7 +87,7 @@ export const Home = () => {
 
                         {/* create post */}
 
-                        <div className="border ml-3 flex px-5 py-3">
+                        <div className="border sm:ml-3 mr-7 sm:mr-0 flex px-5 py-3">
 
                             <div className="mt-3 w-12 h-12 text-lg flex-none">
                                 <img src={userData?.profilePicture} className="flex-none w-12 h-12 rounded-full" alt="avatar" />
@@ -110,7 +114,7 @@ export const Home = () => {
 
                         {/* filter posts by date and trending */}
 
-                        <div className="ml-3 flex px-5 py-3  justify-between relative">
+                        <div className="flex pl-0 pr-6 sm:px-5 py-3 justify-between relative">
 
                             <h1 className="text-xl">{sortPostBy} Posts</h1>
 

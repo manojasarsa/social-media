@@ -51,7 +51,7 @@ export const Post = ({ post }) => {
     }
 
     return (
-        <div className="border ml-3 flex px-5 py-3 hover:bg-slate-100">
+        <div className="border ml-0 mr-7 sm:mx-3 flex px-5 py-3 hover:bg-slate-100">
 
             <CreatePostModal />
 
