@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { AsideLeft, AsideRight, MobileNavBar, Post } from "../../component";
@@ -74,20 +75,24 @@ export const Home = () => {
 
             <MobileNavBar />
 
-            <div className="flex justify-center px-32">
+            <div className="flex justify-center px-5 sm:px-32">
                 <div className="flex h-screen w-screen">
 
                     <AsideLeft />
 
-                    <main className="w-full basis-1/6 sm:basis-2/3">
+                    <main className="w-full sm:basis-2/3">
 
-                        <header className="flex p-4">
+                        <header className="p-4 hidden sm:flex">
                             <h1 className="text-xl">Home</h1>
+                        </header>
+
+                        <header className="text-xl font-bold flex py-4 text-blue-600 sm:hidden">
+                            <Link to="/home"> ALCON </Link>
                         </header>
 
                         {/* create post */}
 
-                        <div className="border sm:ml-3 mr-7 sm:mr-0 flex px-5 py-3">
+                        <div className="border sm:ml-3 sm:mr-0 flex px-2 py-3">
 
                             <div className="mt-3 w-12 h-12 text-lg flex-none">
                                 <img src={userData?.profilePicture} className="flex-none w-12 h-12 rounded-full" alt="avatar" />
@@ -114,7 +119,7 @@ export const Home = () => {
 
                         {/* filter posts by date and trending */}
 
-                        <div className="flex pl-0 pr-6 sm:px-5 py-3 justify-between relative">
+                        <div className="flex pl-0.5 pr-0.5 sm:pr-6 sm:px-5 py-3 justify-between relative">
 
                             <h1 className="text-xl">{sortPostBy} Posts</h1>
 
