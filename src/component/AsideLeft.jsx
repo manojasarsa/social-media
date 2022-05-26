@@ -12,7 +12,8 @@ export const AsideLeft = () => {
 
     return (
         <aside className="hidden sm:block basis-1/6 lg:basis-1/12">
-            <header className="font-sans m-4 text-xl xl:text-2xl">
+
+            <header className="flex font-bold text-blue-600 mx-5 my-4 text-xl xl:text-2xl">
                 <Link to="/home"> ALCON </Link>
             </header>
 

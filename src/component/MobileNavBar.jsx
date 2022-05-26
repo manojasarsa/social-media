@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { GrEdit } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
 import { openPostModal } from "../features/post/postSlice";
-import { CreatePostModal } from "./CreatePostModal";
 
 export const MobileNavBar = () => {
 
