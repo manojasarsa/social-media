@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import { PrivateRoutes } from "./PrivateRoutes";
 import { useSelector } from "react-redux";
 import Mockman from "mockman-js";
+import { Post } from "../component";
 
 export const NavRoutes = () => {
 
@@ -35,7 +36,7 @@ export const NavRoutes = () => {
                 <Route path="/bookmarks" element={<Bookmarks />} />
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/profile/:username" element={<Profile />} />
-                {/* <Route path="/post/:postId" element={<Post />} */}
+                <Route path="/post/:postId" element={<Post />} />
             </Route>
             <Route path="*" element={<h2> OOPS! Page Not Found</h2>} />
         </Routes>

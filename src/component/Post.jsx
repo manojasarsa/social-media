@@ -23,7 +23,11 @@ export const Post = ({ post }) => {
         bookmarks: { bookmarks }
     } = useSelector(state => state);
 
+    console.log("bookmarks", bookmarks);
+
     const isBookmarked = bookmarks?.find(id => id === post?._id);
+
+    console.log("isbookmarked", isBookmarked);
 
     const isLiked = post?.likes?.likedBy?.find(user => user.username === userData.username);
 
@@ -123,12 +127,13 @@ export const Post = ({ post }) => {
                     {isBookmarked ? (
                         <BsBookmarksFill className="text-xl cursor-pointer" onClick={e => {
                             e.stopPropagation();
-                            dispatch(addToBookmark({ token, postId: post?._id }));
+                            dispatch(removeFromBookmark({ token, postId: post?._id }));
                         }} />
                     ) : (
+                        
                         <BsBookmark className="text-xl cursor-pointer" onClick={e => {
                             e.stopPropagation();
-                            dispatch(removeFromBookmark({ token, postId: post?._id }));
+                            dispatch(addToBookmark({ token, postId: post?._id }));
                         }} />
                     )}
 

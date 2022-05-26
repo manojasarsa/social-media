@@ -1,7 +1,25 @@
 import { AsideLeft, AsideRight, MobileNavBar, Post } from "../../component";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllBookmarks } from "../../features/bookmark/helpers";
 
 export const Bookmarks = () => {
+
+    const { 
+        auth: { token },
+        posts: { posts },
+        bookmarks: { bookmarks, isLoading}
+    } = useSelector(state => state);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllBookmarks({ token }));
+    }, [token, dispatch]);
+
+    const bookmarkList = posts?.filter(post => bookmarks.includes(post._id));
+
     return (
         <div>
 
@@ -22,7 +40,9 @@ export const Bookmarks = () => {
                             <Link to="/home"> ALCON </Link>
                         </header>
 
-                        <Post />
+                        {bookmarkList?.map(post => (
+                            <Post key={post?._id} post={post} />
+                        ))}
 
                     </main>
 

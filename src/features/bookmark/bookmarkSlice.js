@@ -8,7 +8,7 @@ const initialState = {
 }
 
 const bookmarkSlice = createSlice({
-    name: "post",
+    name: "bookmark",
     initialState,
     reducers: {
         allBookmarks: state => {

@@ -2,9 +2,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const addToBookmark = createAsyncThunk(
-    "user/addToBookmark",
+    "/user/addToBookmark",
     async ({ token, postId }, { rejectWithValue }) => {
         try {
+            console.log("hi")
             const { status, data } = await axios.post(
                 `/api/users/bookmark/${postId}`,
                 {},
@@ -15,6 +16,7 @@ export const addToBookmark = createAsyncThunk(
                 return data.bookmarks;
             }
         } catch (err) {
+            console.log("error", err);
             return rejectWithValue(err.response.data.errors[0]);
         }
     }
