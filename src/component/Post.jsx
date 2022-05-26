@@ -20,14 +20,11 @@ export const Post = ({ post }) => {
     const {
         user: { users },
         auth: { token, userData },
-        bookmarks: { bookmarks }
+        bookmarks: { bookmarks },
+        posts: { posts }
     } = useSelector(state => state);
 
-    console.log("bookmarks", bookmarks);
-
     const isBookmarked = bookmarks?.find(id => id === post?._id);
-
-    console.log("isbookmarked", isBookmarked);
 
     const isLiked = post?.likes?.likedBy?.find(user => user.username === userData.username);
 

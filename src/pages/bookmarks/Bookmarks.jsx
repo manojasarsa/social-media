@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllBookmarks } from "../../features/bookmark/helpers";
+import Loader from 'react-spinner-loader';
 
 export const Bookmarks = () => {
 
@@ -24,6 +25,10 @@ export const Bookmarks = () => {
         <div>
 
             <MobileNavBar />
+
+            <div className="z-990">
+                <Loader show={isLoading} type="body" />
+            </div>
             
             <div className="flex justify-center px-5 sm:px-32">
                 <div className="flex h-screen w-screen">
@@ -51,4 +56,4 @@ export const Bookmarks = () => {
             </div>
         </div>
     )
-}
+};
