@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { GoComment } from "react-icons/go";
-import { BsSuitHeart, BsBookmark, BsShare, BsSuitHeartFill, BsBookmarksFill } from "react-icons/bs";
+import { BsSuitHeart, BsShare, BsSuitHeartFill } from "react-icons/bs";
+import { MdOutlineBookmarkBorder, MdOutlineBookmark } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { getFormattedDate } from "../utilities/getFormattedDate";
 import { openPostModal, setEditPostObj } from "../features/post/postSlice";
 import { CreatePostModal } from "./CreatePostModal";
 import { unFollowUser } from "../features/user/helpers";
 import { likePost, dislikePost, deletePost } from "../features/post/helpers";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { addToBookmark, removeFromBookmark } from "../features/bookmark/helpers";
 
 export const Post = ({ post }) => {
@@ -23,6 +24,8 @@ export const Post = ({ post }) => {
         bookmarks: { bookmarks },
         posts: { posts }
     } = useSelector(state => state);
+
+    const navigate = useNavigate();
 
     const isBookmarked = bookmarks?.find(id => id === post?._id);
 
@@ -52,7 +55,10 @@ export const Post = ({ post }) => {
     }
 
     return (
-        <div className="flex border ml-0 sm:mr-0 sm:mx-3 pl-2 pr-1 sm:pr-0 sm:px-5 py-3 hover:bg-slate-100">
+        <div 
+            className="flex border ml-0 sm:mr-0 sm:mx-3 pl-2 pr-1 sm:pr-0 sm:px-5 py-3 hover:bg-slate-100" 
+            onClick={() => navigate(`/post/${post.id}`)}
+        >
 
             <CreatePostModal />
 
@@ -119,16 +125,22 @@ export const Post = ({ post }) => {
                         </span>
                     </div>
 
-                    <GoComment className="text-xl cursor-pointer" />
+                    <div className="flex">
+                        <GoComment className="text-xl cursor-pointer" />
+                        <span className="text-sm pl-4 font-semibold">
+                            {pathname.includes("post") ? "" : post?.comments?.length > 0 ? post?.comments?.length : ""}
+                        </span>
+                    </div>
+
 
                     {isBookmarked ? (
-                        <BsBookmarksFill className="text-xl cursor-pointer" onClick={e => {
+                        <MdOutlineBookmark className="text-xl cursor-pointer" onClick={e => {
                             e.stopPropagation();
                             dispatch(removeFromBookmark({ token, postId: post?._id }));
                         }} />
                     ) : (
                         
-                        <BsBookmark className="text-xl cursor-pointer" onClick={e => {
+                        <MdOutlineBookmarkBorder className="text-xl cursor-pointer" onClick={e => {
                             e.stopPropagation();
                             dispatch(addToBookmark({ token, postId: post?._id }));
                         }} />

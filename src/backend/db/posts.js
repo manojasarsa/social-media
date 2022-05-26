@@ -24,7 +24,7 @@ export const posts = [
     _id: uuid(),
     content: "Feel like it's too late? Life has passed you by – your dream is gone? Too many awful things have happened to you or you’ve made too many mistakes? In this 100th episode of the podcast, I explore these questions and will teach you how to have hope again. Join: http://lucy_st4.com/podcast",
     likes: {
-      likeCount: 4,
+      likeCount: 0,
       likedBy: [],
       dislikedBy: [],
     },
