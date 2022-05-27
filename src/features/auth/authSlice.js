@@ -17,6 +17,7 @@ export const authSlice = createSlice({
             state.userData = {};
         },
     },
+
     extraReducers: {
         [signInHandler.pending]: (state) => {
             state.isLoading = true;

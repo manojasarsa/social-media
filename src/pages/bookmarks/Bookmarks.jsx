@@ -23,12 +23,7 @@ export const Bookmarks = () => {
 
     return (
         <div>
-
             <MobileNavBar />
-
-            <div className="z-990">
-                <Loader show={isLoading} type="body" />
-            </div>
             
             <div className="flex justify-center px-5 sm:px-32">
                 <div className="flex h-screen w-screen">
@@ -44,10 +39,15 @@ export const Bookmarks = () => {
                         <header className="text-xl font-bold flex py-4 text-blue-600 sm:hidden">
                             <Link to="/home"> ALCON </Link>
                         </header>
-
-                        {bookmarkList?.map(post => (
-                            <Post key={post?._id} post={post} />
-                        ))}
+                        
+                        {isLoading ? (
+                            <div className="z-20">
+                                <Loader show={isLoading} />
+                            </div>
+                        ) : (
+                            bookmarkList?.map(post => (
+                            <Post key={post?._id} post={post} />))
+                        )}
 
                     </main>
 

@@ -57,7 +57,6 @@ export const Post = ({ post }) => {
     return (
         <div 
             className="flex border ml-0 sm:mr-0 sm:mx-3 pl-2 pr-1 sm:pr-0 sm:px-5 py-3 hover:bg-slate-100" 
-            onClick={() => navigate(`/post/${post.id}`)}
         >
 
             <CreatePostModal />
@@ -103,7 +102,12 @@ export const Post = ({ post }) => {
 
                 </div>
 
-                <p className="py-3">{post?.content}</p>
+                <p 
+                    className="py-3 cursor-pointer"  
+                    onClick={() => navigate(`/post/${post.id}`)}>
+                    
+                    {post?.content}
+                </p>
 
                 <p className="text-sm text-gray-600">{getFormattedDate(post?.createdAt)}</p>
 

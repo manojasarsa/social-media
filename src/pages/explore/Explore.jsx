@@ -20,12 +20,7 @@ export const Explore = () => {
 
     return (
         <div>
-
             <MobileNavBar />
-
-            <div className="z-20">
-                <Loader show={isLoading} type="body" />
-            </div>
 
             <div className="flex justify-center px-5 sm:px-32">
                 <div className="flex h-screen w-screen">
@@ -42,7 +37,13 @@ export const Explore = () => {
                             <Link to="/home"> ALCON </Link>
                         </header>
 
-                        {posts.map(post => <Post key={post._id} post={post} />)}
+                        {isLoading ? (
+                            <div className="z-20">
+                                <Loader show={isLoading} />
+                            </div>
+                        ) : (
+                            posts.map(post => <Post key={post._id} post={post} />)
+                        )}
 
                     </main>
 

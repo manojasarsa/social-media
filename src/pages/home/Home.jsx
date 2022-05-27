@@ -67,10 +67,6 @@ export const Home = () => {
 
     return (
         <div>
-            <div className="z-990">
-                <Loader show={isLoading} type="body" />
-            </div>
-
             <MobileNavBar />
 
             <div className="flex justify-center px-5 sm:px-32">
@@ -90,30 +86,37 @@ export const Home = () => {
 
                         {/* create post */}
 
-                        <div className="border sm:ml-3 sm:mr-0 flex px-2 py-3">
-
-                            <div className="mt-3 w-12 h-12 text-lg flex-none">
-                                <img src={userData?.profilePicture} className="flex-none w-12 h-12 rounded-full" alt="avatar" />
+                        {isLoading ? (
+                            <div className="z-20">
+                                <Loader show={isLoading} />
                             </div>
+                        ) : (
+                        <>
+                            <div className="border sm:ml-3 sm:mr-0 flex px-2 py-3">
 
-                            <div className="w-full px-4">
-                                <textarea 
-                                    value={content}
-                                    placeholder="What's happening?" 
-                                    className="resize-none mt-3 pb-3 w-full h-28 bg-slate-100 focus:outline-none rounded-xl p-2" 
-                                    onChange={(e) => setContent(e.target.value)} >
-                                </textarea>
+                                <div className="mt-3 w-12 h-12 text-lg flex-none">
+                                    <img src={userData?.profilePicture} className="flex-none w-12 h-12 rounded-full" alt="avatar" />
+                                </div>
 
-                                <div className="flex justify-end">
-                                    <button 
-                                        className="p-2.5 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md 
-                                        hover:shadow-lg transition duration-150 ease-in-out"
-                                        onClick={postHandler}>
-                                        Post
-                                    </button>
+                                <div className="w-full px-4">
+                                    <textarea 
+                                        value={content}
+                                        placeholder="What's happening?" 
+                                        className="resize-none mt-3 pb-3 w-full h-28 bg-slate-100 focus:outline-none rounded-xl p-2" 
+                                        onChange={(e) => setContent(e.target.value)} >
+                                    </textarea>
+
+                                    <div className="flex justify-end">
+                                        <button 
+                                            className="p-2.5 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md 
+                                            hover:shadow-lg transition duration-150 ease-in-out"
+                                            onClick={postHandler}>
+                                            Post
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        
 
                         {/* filter posts by date and trending */}
 
@@ -141,6 +144,9 @@ export const Home = () => {
                         {/* Show Posts */}
 
                         {sortedPosts.map(post => <Post key={post._id} post={post} />)}
+
+                        </>
+                        )}
 
                     </main>
 

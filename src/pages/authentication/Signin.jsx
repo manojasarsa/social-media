@@ -18,7 +18,7 @@ export const Signin = () => {
     const { username, password } = formInputs;
 
     const {
-        auth: { isLoading }
+        auth: { isLoading },
     } = useSelector(state => state);
 
     const dispatch = useDispatch();

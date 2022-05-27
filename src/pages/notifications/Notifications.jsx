@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 export const Notifications = () => {
     return (
         <div>
-
             <MobileNavBar />
 
             <div className="flex justify-center px-5 sm:px-32">

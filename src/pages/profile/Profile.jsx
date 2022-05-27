@@ -33,7 +33,7 @@ export const Profile = () => {
     return (
         <div>
             <div className="z-20">
-                <Loader show={upLoadingPhoto} type="body" />
+                <Loader show={upLoadingPhoto} />
             </div>
 
             <MobileNavBar />
@@ -45,8 +45,8 @@ export const Profile = () => {
 
                     <main className="w-full sm:basis-2/3">
 
-                        <header className="hidden sm:flex p-4 w-full justify-between">
-                            <h1 className="text-xl">Profile</h1>
+                        <header className="hidden sm:flex p-4 pt-6 w-full justify-between">
+                            <h1 className="text-xl pl-8">Profile</h1>
                             <FiLogOut className="w-5 h-5 text-slate-700 cursor-pointer" onClick={() => dispatch(signOutHandler())} />
                         </header>
 

@@ -50,7 +50,7 @@ export const EditProfileModal = ({ currentUser, showUpdateProfile, setShowUpdate
     return (
         <Modal
             styles={{
-                modal: { width: "20rem" },
+                modal: { width: "20rem", borderRadius: "1rem" },
             }}
             open={showUpdateProfile}
             onClose={showUpdateProfile}
