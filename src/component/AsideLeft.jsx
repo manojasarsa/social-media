@@ -27,7 +27,7 @@ export const AsideLeft = () => {
             <nav>
                 <ul className="px-2 mr-1">
                     <li >
-                        <NavLink to="/home" className="flex py-4 gap-3 px-3 cursor-pointer hover:bg-slate-100 rounded-[15rem] active:bg-slate-100">
+                        <NavLink to="/home" className="flex py-4 gap-3 px-3 cursor-pointer hover:bg-slate-200 rounded-[15rem] active:bg-slate-100">
                             {({ isActive }) => 
                                 isActive ? (
                                     <>
@@ -43,7 +43,7 @@ export const AsideLeft = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/explore" className="flex py-4 gap-3 px-3 cursor-pointer hover:bg-slate-100 rounded-[15rem] active:bg-slate-100">
+                        <NavLink to="/explore" className="flex py-4 gap-3 px-3 cursor-pointer hover:bg-slate-200 rounded-[15rem] active:bg-slate-100">
                             {({ isActive }) => 
                                 isActive ? (
                                     <>
@@ -59,7 +59,7 @@ export const AsideLeft = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/notifications" className="flex py-4 gap-3 px-3 cursor-pointer hover:bg-slate-100 rounded-[15rem] active:bg-slate-100">
+                        <NavLink to="/notifications" className="flex py-4 gap-3 px-3 cursor-pointer hover:bg-slate-200 rounded-[15rem] active:bg-slate-100">
                             {({ isActive }) => 
                                 isActive ? (
                                     <>
@@ -75,7 +75,7 @@ export const AsideLeft = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/bookmarks" className="flex py-4 gap-3 px-3 cursor-pointer hover:bg-slate-100 rounded-[15rem] active:bg-slate-100">
+                        <NavLink to="/bookmarks" className="flex py-4 gap-3 px-3 cursor-pointer hover:bg-slate-200 rounded-[15rem] active:bg-slate-100">
                             {({ isActive }) => 
                                 isActive ? (
                                     <>
@@ -91,7 +91,7 @@ export const AsideLeft = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to={`/profile/${userData?.username}`} className="flex py-4 gap-3 px-3 cursor-pointer hover:bg-slate-100 rounded-[15rem] active:bg-slate-100">
+                        <NavLink to={`/profile/${userData?.username}`} className="flex py-4 gap-3 px-3 cursor-pointer hover:bg-slate-200 rounded-[15rem] active:bg-slate-100">
                             {({ isActive }) => 
                                 isActive ? (
                                     <>
@@ -108,7 +108,7 @@ export const AsideLeft = () => {
                     </li>
                     <li className="my-2 mx-1">
                         <button 
-                            className="hidden xl:block my-8 mx-0 p-2 rounded-lg w-full text-x cursor-pointer text-center 
+                            className="hidden xl:block my-8 mx-0 p-2 rounded-[10rem] w-full text-x cursor-pointer text-center 
                             font-semibold text-white bg-blue-600 hover:bg-blue-800" 
                             onClick={() => dispatch(openPostModal()) }>
                             Post

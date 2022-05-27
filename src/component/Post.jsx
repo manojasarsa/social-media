@@ -70,7 +70,7 @@ export const Post = ({ post }) => {
                 <div className="w-full flex justify-between relative">
                     <h2 className="font-semibold">
                         {`${currentUser?.firstName} ${currentUser?.lastName}`}
-                        <span className="text-slate-600 pl-1.5">
+                        <span className="text-slate-500 font-normal pl-1.5">
                             @{post?.username}
                         </span>
                     </h2>

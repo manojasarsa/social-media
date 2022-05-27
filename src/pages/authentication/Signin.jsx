@@ -47,7 +47,7 @@ export const Signin = () => {
                     <img src="assets/social1.svg" alt="social-img" className="w-1/2 hidden md:block mx-10"></img>
                     <div className="mx-auto sm:mx-28 mt-16">
 
-                        <div className="flex flex-col mx-auto pb-8 shadow-none border-2 min-w-max ">
+                        <div className="flex flex-col mx-auto pb-8 shadow-none min-w-max bg-slate-100 rounded-lg">
 
                             <form className="mx-8 flex flex-col">
 
@@ -57,7 +57,7 @@ export const Signin = () => {
                                     <input
                                         name="username"
                                         value={username}
-                                        className="py-1 w-full mt-4 rounded-none border-2"
+                                        className="py-1 w-full mt-4 rounded-none border-2 focus:outline-blue-400"
                                         type="text"
                                         required={true}
                                         onChange={(e) => setFormInputs({ ...formInputs, username: e.target.value })}
@@ -68,7 +68,7 @@ export const Signin = () => {
                                     <input
                                         name="password"
                                         value={password}
-                                        className="py-1 w-full mt-4 rounded-none border-2"
+                                        className="py-1 w-full mt-4 rounded-none border-2 focus:outline-blue-400"
                                         type={showHide ? "text" : "password"}
                                         required={true}
                                         onChange={(e) => setFormInputs({ ...formInputs, password: e.target.value })}
@@ -88,7 +88,7 @@ export const Signin = () => {
                                 </Link>
 
                                 <Link 
-                                    to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-blue-800" 
+                                    to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-blue-800 hover:bg-slate-200" 
                                     onClick={(e) => formGuestSignInHandler(e)} > 
                                     Guest Login 
                                 </Link>
