@@ -56,8 +56,8 @@ export const posts = [
     },
     comments: [
       {
-        content: "https://veronicane.info",
-        id: uuid(),
+        content: "Here is mine build with HTML, CSS and JS: https://veronicane.info",
+        _id: uuid(),
         username: "veron_d12",
         createdAt: ""
       }

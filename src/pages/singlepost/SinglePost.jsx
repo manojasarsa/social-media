@@ -1,42 +1,48 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AsideLeft, AsideRight, MobileNavBar, CreatePostModal } from "../../component";
-import { getAllPosts } from "../../features/post/helpers";
-import Loader from 'react-spinner-loader';
-import { Link, NavLink } from "react-router-dom";
-
-import { HiDotsHorizontal } from "react-icons/hi";
+import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
 import { GoComment } from "react-icons/go";
 import { BsSuitHeart, BsShare, BsSuitHeartFill } from "react-icons/bs";
 import { MdOutlineBookmarkBorder, MdOutlineBookmark, MdArrowBack } from "react-icons/md";
-import { getFormattedDate } from "../../utilities/getFormattedDate";
-import { likePost, dislikePost } from "../../features/post/helpers";
+import { getAllPosts, likePost, dislikePost, addComment } from "../../features/post/helpers";
 import { addToBookmark, removeFromBookmark } from "../../features/bookmark/helpers";
+import { AsideLeft, AsideRight, MobileNavBar, CreatePostModal } from "../../component";
+import { getFormattedDate } from "../../utilities/getFormattedDate";
+import Loader from 'react-spinner-loader';
 
 export const SinglePost = () => {
 
-    const [commentText, setCommentText] = useState("");
+    const [commentData, setCommentData] = useState({ content: "" });
+
+    const { postId } = useParams();
+
+    const dispatch = useDispatch();
+
+    const commentRef = useRef(null);
 
     const {
         user: { users },
         auth: { token, userData },
         bookmarks: { bookmarks },
-        posts: { posts, isLoading }
+        posts: { isLoading }
     } = useSelector(state => state);
-
-    const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getAllPosts());
     }, [dispatch, token]);
 
-    const { postId } = useParams();
-
-    const navigate = useNavigate();
+    const { posts } = useSelector(state => state.posts);
 
     const currentPost = posts.filter(post => post.id === postId)[0];
+    
     const currentUser = users?.filter(user => user?.username === currentPost?.username)[0];
+    
+    const navigate = useNavigate();
+
+    const getCurrentCommentedUser = (comment) => {
+        const currentCommentedUser = users?.filter(user => user?.username === comment?.username)[0];
+        return currentCommentedUser;
+    }
 
     const isBookmarked = bookmarks?.find(id => id === currentPost?._id);
 
@@ -163,9 +169,10 @@ export const SinglePost = () => {
 
                                     <span className="flex-1">
                                         <input
-                                            value={commentText.content}
+                                            ref={commentRef}
+                                            value={commentData.content}
                                             onChange={e => 
-                                                setCommentText(prev => ({ ...prev, content: e.target.value }))
+                                                setCommentData(prev => ({ ...prev, content: e.target.value }))
                                             }
                                             className="w-full p-2 pl-6 rounded-[30rem] focus:outline-none"
                                             type="text"
@@ -173,16 +180,40 @@ export const SinglePost = () => {
                                         />
                                     </span>
 
+                                    
+
                                     <button 
                                         className="p-2 rounded-lg bg-blue-600 hover:bg-blue-800 text-white shadow-md 
                                         hover:shadow-lg"
-                                        disabled={!commentText.content.trim()}
-                                        onClick={() => {
-                                            dispatch(addComment({ postId: currentPost._id, token, commentText }));
-                                            setCommentText({ content: "" })
-                                        }}>
+                                        onClick={() => dispatch(addComment({ postId: currentPost._id, token, commentData }))}> Reply
                                     </button>
                                 </div>
+
+                                {console.log("length of comments - ", currentPost.comments.length)}
+
+                                {currentPost?.comments?.map(comment => (
+                                    <div className="flex ml-0 sm:mr-0 sm:mx-1 pl-0 pr-1 sm:pr-0 sm:px-1 py-3">
+    
+                                        <div className="mt-3 w-12 h-12 text-lg flex-none">
+                                            <img src={getCurrentCommentedUser(comment)?.profilePicture} className="flex-none w-12 h-12 rounded-full" alt="avatar" />
+                                        </div>
+        
+                                        <div className="w-full px-4 py-3">
+        
+                                            <div className="w-full flex flex-col justify-between relative">
+                                                <h2 className="font-semibold">
+                                                    {`${getCurrentCommentedUser(comment)?.firstName} ${getCurrentCommentedUser(comment)?.lastName}`}
+                                                    
+                                                </h2>
+                                                <span className="text-slate-600">
+                                                    @{comment?.username}
+                                                </span>
+                                            </div>
+
+                                            <span className="">{comment?.content}</span>
+                                        </div>
+                                    </div>
+                                ))}
 
                             </div>
                         </div>      
