@@ -79,4 +79,17 @@ export const posts = [
     createdAt: "06:00 AM January 23, 2018",
     updatedAt: formatDate(),
   },
+  {
+    _id: uuid(),
+    content: "Chase the vision, not the money, the money will end up following you.",
+    likes: {
+      likeCount: 3,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments: [],
+    username: "chrislevin22",
+    createdAt: "05:23 PM August 15, 2020",
+    updatedAt: formatDate(),
+  },
 ];

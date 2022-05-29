@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
 import { GoComment } from "react-icons/go";
+import { HiDotsHorizontal } from "react-icons/hi";
 import { BsSuitHeart, BsShare, BsSuitHeartFill } from "react-icons/bs";
 import { MdOutlineBookmarkBorder, MdOutlineBookmark, MdArrowBack } from "react-icons/md";
 import { getAllPosts, likePost, dislikePost, addComment } from "../../features/post/helpers";
@@ -13,6 +14,7 @@ import Loader from 'react-spinner-loader';
 export const SinglePost = () => {
 
     const [commentData, setCommentData] = useState({ content: "" });
+    const [openCommentModal, setCommentModal] = useState(false);
 
     const { postId } = useParams();
 
@@ -49,6 +51,13 @@ export const SinglePost = () => {
     const isLiked = currentPost?.likes?.likedBy?.find(user => user.username === userData.username);
 
     const { pathname } = useLocation();
+
+    // const editHandler = (e) => {
+    //     e.stopPropagation();            // prevent the post content from re-occurring in new post
+    //     dispatch(openPostModal());
+    //     dispatch(setEditPostObj(post));
+    //     setPostOptions(false);
+    // }
 
     return (
         <div>
@@ -104,27 +113,29 @@ export const SinglePost = () => {
 
                                 <p className="py-3">{currentPost?.content}</p>
 
-                                <p className="text-sm text-gray-600">{getFormattedDate(currentPost?.createdAt)}</p>
+                                <p className="text-sm text-gray-600 border-y-3">{getFormattedDate(currentPost?.createdAt)}</p>
 
-                                <hr className="mt-4 mb-1" />
+                                {/* <hr className="mt-4 mb-1" /> */}
 
-                                <span className="text-sm font-semibold">
-                                    {pathname.includes("post/postId") ? "" : currentPost?.likes?.likeCount ? currentPost?.likes?.likeCount : null}
-                                </span>
-                                <span className="pl-1 text-slate-500">
-                                    {currentPost?.likes?.likeCount === 0 ? "" : (currentPost?.likes?.likeCount === 1 ? "Like" : "Likes")}
-                                </span>
+                                <div className="border-y mt-4 py-2 px-3">
 
-                                <span className="text-sm pl-12 font-semibold">
-                                    {pathname.includes("post/postId") ? "" : currentPost?.comments?.length > 0 ? currentPost?.comments?.length : ""}
-                                </span>
-                                <span className="pl-1 text-slate-500">
-                                    {currentPost?.comments?.length === 0 ? "" : (currentPost?.comments?.length === 1 ? "Comment" : "Comments")}
-                                </span>
+                                    <span className="text-sm font-semibold">
+                                        {pathname.includes("post/postId") ? "" : currentPost?.likes?.likeCount ? currentPost?.likes?.likeCount : null}
+                                    </span>
+                                    <span className="pl-1 text-slate-500">
+                                        {currentPost?.likes?.likeCount === 0 ? "" : (currentPost?.likes?.likeCount === 1 ? "Like" : "Likes")}
+                                    </span>
 
-                                <hr className="mt-4 mb-1" />
+                                    <span className="text-sm pl-12 font-semibold">
+                                        {pathname.includes("post/postId") ? "" : currentPost?.comments?.length > 0 ? currentPost?.comments?.length : ""}
+                                    </span>
+                                    <span className="pl-1 text-slate-500">
+                                        {currentPost?.comments?.length === 0 ? "" : (currentPost?.comments?.length === 1 ? "Comment" : "Comments")}
+                                    </span>
 
-                                <div className="flex justify-between pt-4">
+                                </div>
+
+                                <div className="flex justify-between py-4 px-2 border-t">
                                     <div className="flex">
                                         {isLiked ? (
                                             <BsSuitHeartFill className="text-xl cursor-pointer text-red-600" onClick={e => {
@@ -160,10 +171,8 @@ export const SinglePost = () => {
                                     <BsShare className="text-xl cursor-pointer" />
                                 </div>
 
-                                <hr className="mt-4 mb-1" />
-
-                                <div className="flex justify-between items-center p-2 border-y-2 w-full">
-                                    <span className="mt-3 w-12 h-12 text-lg flex-none basis-12">
+                                <div className="flex justify-between items-center p-3 px-2 border-y-2 w-full focus:outline-none gap-4">
+                                    <span className="w-12 h-12 text-lg flex-none basis-12">
                                         <img src={userData?.profilePicture} className="flex-none w-12 h-12 rounded-full" alt="avatar" />
                                     </span>
 
@@ -174,43 +183,65 @@ export const SinglePost = () => {
                                             onChange={e => 
                                                 setCommentData(prev => ({ ...prev, content: e.target.value }))
                                             }
-                                            className="w-full p-2 pl-6 rounded-[30rem] focus:outline-none"
+                                            className="w-full p-2 rounded-[30rem] focus:outline-none bg-slate-100"
                                             type="text"
                                             placeholder="Add a comment..."
                                         />
                                     </span>
 
-                                    
-
                                     <button 
-                                        className="p-2 rounded-lg bg-blue-600 hover:bg-blue-800 text-white shadow-md 
-                                        hover:shadow-lg"
-                                        onClick={() => dispatch(addComment({ postId: currentPost._id, token, commentData }))}> Reply
+                                        className="p-2 rounded-[20rem] bg-blue-600 hover:bg-blue-800 text-white shadow-md 
+                                        hover:shadow-lg w-20"
+                                        onClick={() => {
+                                            dispatch(addComment({ postId: currentPost._id, token, commentData }));
+                                            setCommentData({ content: "" });
+                                        }}> Reply
                                     </button>
                                 </div>
 
-                                {console.log("length of comments - ", currentPost.comments.length)}
-
                                 {currentPost?.comments?.map(comment => (
-                                    <div className="flex ml-0 sm:mr-0 sm:mx-1 pl-0 pr-1 sm:pr-0 sm:px-1 py-3">
+                                    <div className="flex ml-0 sm:mr-0 sm:mx-1 pl-0 pr-1 sm:pr-0 sm:px-1 py-3 border-b">
     
                                         <div className="mt-3 w-12 h-12 text-lg flex-none">
                                             <img src={getCurrentCommentedUser(comment)?.profilePicture} className="flex-none w-12 h-12 rounded-full" alt="avatar" />
                                         </div>
         
-                                        <div className="w-full px-4 py-3">
+                                        <div className="w-full px-4 py-3 relative">
         
-                                            <div className="w-full flex flex-col justify-between relative">
+                                            <div className="w-full flex gap-2 justify-between">
                                                 <h2 className="font-semibold">
                                                     {`${getCurrentCommentedUser(comment)?.firstName} ${getCurrentCommentedUser(comment)?.lastName}`}
-                                                    
+                                                    <span className="text-slate-600 pl-2">
+                                                        @{comment?.username}
+                                                    </span>  
                                                 </h2>
-                                                <span className="text-slate-600">
+                                                
+                                                <HiDotsHorizontal className="cursor-pointer pr2" onClick={() => setCommentModal(prev => !prev)} />
+                                            </div>
+
+                                            <div className="flex gap-2">
+                                                <span className="text-slate-500">
+                                                    replying to
+                                                </span>
+                                                <span className="text-blue-600 font-semibold">
                                                     @{comment?.username}
                                                 </span>
                                             </div>
 
-                                            <span className="">{comment?.content}</span>
+                                            <div className="mt-3">{comment?.content}</div>
+
+                                            {/* Edit and Delete Comment Modal */}
+
+                                            {comment?.username === userData?.username && openCommentModal && <div
+                                                className="w-30 h-22 px-1 shadow-xl bg-white border border-slate-300 text-slate-600 font-semibold 
+                                                absolute right-10 top-2 rounded-xl">
+                                                <ul className="p-1 cursor-pointer text-center">
+                                                    <li className="my-1 p-1 hover:bg-slate-200 rounded" >Edit</li>
+                                                    <li className="my-1 p-1 hover:bg-slate-200 rounded" >Delete</li>
+                                                </ul>
+                                            </div>
+                                            }
+
                                         </div>
                                     </div>
                                 ))}

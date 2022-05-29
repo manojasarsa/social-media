@@ -105,7 +105,6 @@ export const Post = ({ post }) => {
                 <p 
                     className="py-3 cursor-pointer"  
                     onClick={() => navigate(`/post/${post.id}`)}>
-                    
                     {post?.content}
                 </p>
 

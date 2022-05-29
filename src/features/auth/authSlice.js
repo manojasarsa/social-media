@@ -39,7 +39,7 @@ export const authSlice = createSlice({
             state.token = payload.encodedToken;
             state.userData = payload.createdUser;
         },
-        [signUpHandler.rejected]: (state, { payload }) => {
+        [signUpHandler.rejected]: state => {
             state.isLoading = false;
         },
     },
