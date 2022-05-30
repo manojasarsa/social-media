@@ -22,7 +22,6 @@ export const Post = ({ post }) => {
         user: { users },
         auth: { token, userData },
         bookmarks: { bookmarks },
-        posts: { posts }
     } = useSelector(state => state);
 
     const navigate = useNavigate();
