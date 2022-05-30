@@ -15,6 +15,7 @@ export const editComment = createAsyncThunk(
                 return data.posts;
             }
         } catch (err) {
+            console.log(err)
             return rejectWithValue(err.response.data.errors[0]);
         }
     }

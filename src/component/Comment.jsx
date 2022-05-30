@@ -7,12 +7,13 @@ import Loader from 'react-spinner-loader';
 
 export const Comment = ({ postId, comment, postOwnerUsername }) => {
 
-    const [openCommentModal, setCommentModal] = useState(false);
+    const [openCommentModal, setCommentModal] = useState(false);    // for toggling comment modal
+    const [isEditing, setIsEditing] = useState(false);      // for toggling edit modal
+    const [editCommentData, setEditCommentData] = useState(comment);
 
     const {
         user: { users },
         auth: { token, userData },
-        bookmarks: { bookmarks },
         posts: { isLoading }
     } = useSelector(state => state);
 
@@ -24,22 +25,22 @@ export const Comment = ({ postId, comment, postOwnerUsername }) => {
 
     const currentUser = users?.filter(user => user?.username === comment?.username)[0];
 
-    console.log("postId", postId);
-    console.log("currentUser:", currentUser);
-    console.log("comment:", comment);
-    console.log("authorUSer:", postOwnerUsername);
-
     const getCurrentCommentedUser = (comment) => {
         const currentCommentedUser = users?.filter(user => user?.username === comment?.username)[0];
         return currentCommentedUser;
     }
 
-    const editCommentHandler = (e) => {
-        e.stopPropagation();
-        // dispatch(editComment({token, postId: currentPost._id, commentData: currentPost.content }));
+    const editBtnHandler = () => {
+        setIsEditing(prev => !prev);
+        setCommentModal(false);
     }
 
-    const deleteCommentHandler = (e) => {
+    const updateCommentHandler = () => {
+        dispatch(editComment({ postId, token, commentData: editCommentData }));
+        setIsEditing(false);
+    }
+
+    const deleteCommentHandler = () => {
         dispatch(deleteComment({ postId, token, commentId: comment?._id }));
     }
 
@@ -60,7 +61,7 @@ export const Comment = ({ postId, comment, postOwnerUsername }) => {
                         </span>
                     </h2>
 
-                    <HiDotsHorizontal className="cursor-pointer pr2" onClick={() => setCommentModal(prev => !prev)} />
+                    {comment?.username === userData?.username && <HiDotsHorizontal className="cursor-pointer pr2" onClick={() => setCommentModal(prev => !prev)} /> }
                 </div>
 
                 <div className="flex gap-2">
@@ -72,15 +73,48 @@ export const Comment = ({ postId, comment, postOwnerUsername }) => {
                     </span>
                 </div>
 
-                <div className="mt-3">{comment?.content}</div>
+                {isEditing ? 
+                (
+                    <div className="flex justify-between items-center mt-3 p-3 px-2 border-y-2 w-full focus:outline-none gap-4">
+
+                        <span className="flex-1">
+                            <input
+                                value={editCommentData?.content}
+                                className="w-full p-2 rounded-[30rem] focus:outline-none bg-slate-100"
+                                type="text"
+                                placeholder="Add a comment..."
+                                onChange={e => setEditCommentData(prev => ({ ...prev, content: e.target.value }))}
+                            />
+                        </span>
+
+                        <button
+                            className="p-2 rounded-[20rem] bg-blue-600 hover:bg-blue-800 text-white shadow-md 
+                            hover:shadow-lg w-20"
+                            onClick={() => setIsEditing(prev => !prev)}
+                            > Cancel
+                        </button>
+
+                        <button
+                            className="p-2 rounded-[20rem] bg-blue-600 hover:bg-blue-800 text-white shadow-md 
+                            hover:shadow-lg w-20"
+                            onClick={updateCommentHandler}
+                            > Update
+                        </button>
+
+                    </div>
+                ) : (
+                    <div className="mt-3">{comment?.content}</div>
+                )}
+
 
                 {/* Edit and Delete Comment Modal */}
 
-                {comment?.username === userData?.username && openCommentModal && <div
+                {comment?.username === userData?.username && openCommentModal && 
+                <div
                     className="w-30 h-22 px-1 shadow-xl bg-white border border-slate-300 text-slate-600 font-semibold 
-                                                absolute right-10 top-2 rounded-xl">
+                    absolute right-10 top-2 rounded-xl">
                     <ul className="p-1 cursor-pointer text-center">
-                        <li className="my-1 p-1 hover:bg-slate-200 rounded" onClick={editCommentHandler} >Edit</li>
+                        <li className="my-1 p-1 hover:bg-slate-200 rounded" onClick={editBtnHandler} >Edit</li>
                         <li className="my-1 p-1 hover:bg-slate-200 rounded" onClick={deleteCommentHandler} >Delete</li>
                     </ul>
                 </div>
