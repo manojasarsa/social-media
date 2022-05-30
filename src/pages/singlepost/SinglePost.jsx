@@ -2,10 +2,9 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
 import { GoComment } from "react-icons/go";
-import { HiDotsHorizontal } from "react-icons/hi";
 import { BsSuitHeart, BsShare, BsSuitHeartFill } from "react-icons/bs";
 import { MdOutlineBookmarkBorder, MdOutlineBookmark, MdArrowBack } from "react-icons/md";
-import { getAllPosts, likePost, dislikePost, addComment, editComment, deleteComment } from "../../features/post/helpers";
+import { getAllPosts, likePost, dislikePost, addComment } from "../../features/post/helpers";
 import { addToBookmark, removeFromBookmark } from "../../features/bookmark/helpers";
 import { AsideLeft, AsideRight, MobileNavBar, Comment } from "../../component";
 import { getFormattedDate } from "../../utilities/getFormattedDate";
@@ -184,8 +183,6 @@ export const SinglePost = () => {
                                 </div>
 
                                 {/* Comment Section */}
-
-                                
 
                                 {currentPost?.comments?.map(comment => (
 

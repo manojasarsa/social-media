@@ -1,9 +1,7 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
 import { HiDotsHorizontal } from "react-icons/hi";
-import { getAllPosts, addComment, editComment, deleteComment } from "../features/post/helpers";
-import Loader from 'react-spinner-loader';
+import { getAllPosts, editComment, deleteComment } from "../features/post/helpers";
 
 export const Comment = ({ postId, comment, postOwnerUsername }) => {
 
@@ -14,7 +12,6 @@ export const Comment = ({ postId, comment, postOwnerUsername }) => {
     const {
         user: { users },
         auth: { token, userData },
-        posts: { isLoading }
     } = useSelector(state => state);
 
     const dispatch = useDispatch();
@@ -22,8 +19,6 @@ export const Comment = ({ postId, comment, postOwnerUsername }) => {
     useEffect(() => {
         dispatch(getAllPosts());
     }, [dispatch, token]);
-
-    const currentUser = users?.filter(user => user?.username === comment?.username)[0];
 
     const getCurrentCommentedUser = (comment) => {
         const currentCommentedUser = users?.filter(user => user?.username === comment?.username)[0];

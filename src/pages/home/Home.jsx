@@ -48,10 +48,9 @@ export const Home = () => {
             temp.sort((a, b) => new Date(a?.createdAt) - new Date(b?.createdAt));
         }
 
-        // TODO
-
-        // if(sortPostBy === "Trending") {}
-
+        if(sortPostBy === "Trending") {
+            temp.sort((a, b) => b?.likes?.likeCount - a?.likes?.likeCount);
+        }
         return temp;
     }
 
@@ -133,9 +132,9 @@ export const Home = () => {
 
                                 {showFilterPostModal && <div className="w-30 h-22 px-1 shadow-xl bg-slate-100 border border-slate-300 text-slate-600 font-semibold absolute right-11 top-4 z-20 rounded-xl">
                                     <ul className="p-2 cursor-pointer text-center">
-                                        <li className="p-1 hover:bg-slate-200 rounded" onClick={() => setSortPostBy("Latest")}>Latest</li>
-                                        <li className="p-1 hover:bg-slate-200 rounded" onClick={() => setSortPostBy("Oldest")}>Oldest</li>
-                                        <li className="p-1 hover:bg-slate-200 rounded" onClick={() => setSortPostBy("Trending")}>Trending</li>
+                                        <li className="p-1 hover:bg-slate-200 rounded" onClick={() => { setSortPostBy("Latest"); setShowFilterModal(false); }}>Latest</li>
+                                        <li className="p-1 hover:bg-slate-200 rounded" onClick={() => { setSortPostBy("Oldest"); setShowFilterModal(false); }}>Oldest</li>
+                                        <li className="p-1 hover:bg-slate-200 rounded" onClick={() => { setSortPostBy("Trending"); setShowFilterModal(false); }}>Trending</li>
                                     </ul>
                                 </div> 
                                 }
