@@ -5,20 +5,17 @@ import { GoComment } from "react-icons/go";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { BsSuitHeart, BsShare, BsSuitHeartFill } from "react-icons/bs";
 import { MdOutlineBookmarkBorder, MdOutlineBookmark, MdArrowBack } from "react-icons/md";
-import { getAllPosts, likePost, dislikePost, addComment } from "../../features/post/helpers";
+import { getAllPosts, likePost, dislikePost, addComment, editComment, deleteComment } from "../../features/post/helpers";
 import { addToBookmark, removeFromBookmark } from "../../features/bookmark/helpers";
-import { AsideLeft, AsideRight, MobileNavBar, CreatePostModal } from "../../component";
+import { AsideLeft, AsideRight, MobileNavBar, Comment } from "../../component";
 import { getFormattedDate } from "../../utilities/getFormattedDate";
 import Loader from 'react-spinner-loader';
 
 export const SinglePost = () => {
 
     const [commentData, setCommentData] = useState({ content: "" });
-    const [openCommentModal, setCommentModal] = useState(false);
-
+    
     const { postId } = useParams();
-
-    const dispatch = useDispatch();
 
     const commentRef = useRef(null);
 
@@ -26,39 +23,27 @@ export const SinglePost = () => {
         user: { users },
         auth: { token, userData },
         bookmarks: { bookmarks },
-        posts: { isLoading }
+        posts: { posts, isLoading }
     } = useSelector(state => state);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getAllPosts());
     }, [dispatch, token]);
 
-    const { posts } = useSelector(state => state.posts);
-
-    const currentPost = posts.filter(post => post.id === postId)[0];
+    const currentPost = posts.filter(post => post.id === postId)[0];  // filter returns a new array of one single element (user). Therefore, index 0.
     
     const currentUser = users?.filter(user => user?.username === currentPost?.username)[0];
-    
-    const navigate = useNavigate();
 
-    const getCurrentCommentedUser = (comment) => {
-        const currentCommentedUser = users?.filter(user => user?.username === comment?.username)[0];
-        return currentCommentedUser;
-    }
+    const navigate = useNavigate();
 
     const isBookmarked = bookmarks?.find(id => id === currentPost?._id);
 
     const isLiked = currentPost?.likes?.likedBy?.find(user => user.username === userData.username);
 
     const { pathname } = useLocation();
-
-    // const editHandler = (e) => {
-    //     e.stopPropagation();            // prevent the post content from re-occurring in new post
-    //     dispatch(openPostModal());
-    //     dispatch(setEditPostObj(post));
-    //     setPostOptions(false);
-    // }
-
+    
     return (
         <div>
             <MobileNavBar />
@@ -88,8 +73,6 @@ export const SinglePost = () => {
 
                             <div className="flex ml-0 sm:mr-0 sm:mx-1 pl-0 pr-1 sm:pr-0 sm:px-1 py-3">
 
-                                <CreatePostModal />
-
                                 <div className="mt-3 w-12 h-12 text-lg flex-none">
                                     <img src={currentUser?.profilePicture} className="flex-none w-12 h-12 rounded-full" alt="avatar" />
                                 </div>
@@ -115,13 +98,12 @@ export const SinglePost = () => {
 
                                 <p className="text-sm text-gray-600 border-y-3">{getFormattedDate(currentPost?.createdAt)}</p>
 
-                                {/* <hr className="mt-4 mb-1" /> */}
-
                                 <div className="border-y mt-4 py-2 px-3">
 
                                     <span className="text-sm font-semibold">
                                         {pathname.includes("post/postId") ? "" : currentPost?.likes?.likeCount ? currentPost?.likes?.likeCount : null}
                                     </span>
+
                                     <span className="pl-1 text-slate-500">
                                         {currentPost?.likes?.likeCount === 0 ? "" : (currentPost?.likes?.likeCount === 1 ? "Like" : "Likes")}
                                     </span>
@@ -129,6 +111,7 @@ export const SinglePost = () => {
                                     <span className="text-sm pl-12 font-semibold">
                                         {pathname.includes("post/postId") ? "" : currentPost?.comments?.length > 0 ? currentPost?.comments?.length : ""}
                                     </span>
+
                                     <span className="pl-1 text-slate-500">
                                         {currentPost?.comments?.length === 0 ? "" : (currentPost?.comments?.length === 1 ? "Comment" : "Comments")}
                                     </span>
@@ -172,6 +155,7 @@ export const SinglePost = () => {
                                 </div>
 
                                 <div className="flex justify-between items-center p-3 px-2 border-y-2 w-full focus:outline-none gap-4">
+
                                     <span className="w-12 h-12 text-lg flex-none basis-12">
                                         <img src={userData?.profilePicture} className="flex-none w-12 h-12 rounded-full" alt="avatar" />
                                     </span>
@@ -199,51 +183,18 @@ export const SinglePost = () => {
                                     </button>
                                 </div>
 
+                                {/* Comment Section */}
+
+                                
+
                                 {currentPost?.comments?.map(comment => (
-                                    <div className="flex ml-0 sm:mr-0 sm:mx-1 pl-0 pr-1 sm:pr-0 sm:px-1 py-3 border-b">
-    
-                                        <div className="mt-3 w-12 h-12 text-lg flex-none">
-                                            <img src={getCurrentCommentedUser(comment)?.profilePicture} className="flex-none w-12 h-12 rounded-full" alt="avatar" />
-                                        </div>
-        
-                                        <div className="w-full px-4 py-3 relative">
-        
-                                            <div className="w-full flex gap-2 justify-between">
-                                                <h2 className="font-semibold">
-                                                    {`${getCurrentCommentedUser(comment)?.firstName} ${getCurrentCommentedUser(comment)?.lastName}`}
-                                                    <span className="text-slate-600 pl-2">
-                                                        @{comment?.username}
-                                                    </span>  
-                                                </h2>
-                                                
-                                                <HiDotsHorizontal className="cursor-pointer pr2" onClick={() => setCommentModal(prev => !prev)} />
-                                            </div>
 
-                                            <div className="flex gap-2">
-                                                <span className="text-slate-500">
-                                                    replying to
-                                                </span>
-                                                <span className="text-blue-600 font-semibold">
-                                                    @{comment?.username}
-                                                </span>
-                                            </div>
-
-                                            <div className="mt-3">{comment?.content}</div>
-
-                                            {/* Edit and Delete Comment Modal */}
-
-                                            {comment?.username === userData?.username && openCommentModal && <div
-                                                className="w-30 h-22 px-1 shadow-xl bg-white border border-slate-300 text-slate-600 font-semibold 
-                                                absolute right-10 top-2 rounded-xl">
-                                                <ul className="p-1 cursor-pointer text-center">
-                                                    <li className="my-1 p-1 hover:bg-slate-200 rounded" >Edit</li>
-                                                    <li className="my-1 p-1 hover:bg-slate-200 rounded" >Delete</li>
-                                                </ul>
-                                            </div>
-                                            }
-
-                                        </div>
-                                    </div>
+                                    <Comment 
+                                        key={comment._id}
+                                        postId={currentPost._id}
+                                        comment={comment}
+                                        postOwnerUsername={currentUser?.username}
+                                    />
                                 ))}
 
                             </div>
