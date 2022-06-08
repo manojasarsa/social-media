@@ -1,7 +1,10 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { GrEdit } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
 import { openPostModal } from "../features/post/postSlice";
+import { AiOutlineHome, AiFillHome  } from "react-icons/ai";
+import { MdOutlineExplore, MdExplore, MdOutlineBookmarkBorder, MdOutlineBookmark } from "react-icons/md";
+import { FaRegUser, FaUser } from "react-icons/fa";
 
 export const MobileNavBar = () => {
 
@@ -21,29 +24,60 @@ export const MobileNavBar = () => {
 
             <ul className="fixed bottom-0 w-full sm:pl-2 flex justify-around bg-slate-300 z-10">
                 <li >
-                    <Link to="/home" className="flex py-4 gap-3 px-3 cursor-pointer">
-                        <i className="text-xl fa-solid fa-house"></i>
-                    </Link>
+                    <NavLink to="/home" className="flex py-4 gap-3 px-3 cursor-pointer hover:bg-slate-200 rounded-[15rem] active:bg-slate-300">
+                        {({ isActive }) =>
+                            isActive ? (
+                                <>
+                                    <AiFillHome className="text-[1.6rem] font-bold" />
+                                </>
+                            ) : (
+                                <>
+                                    <AiOutlineHome className="text-[1.6rem]" />
+                                </>
+                            )}
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/explore" className="flex py-4 gap-3 px-3 cursor-pointer">
-                        <i className="text-xl fa-solid fa-hashtag"></i>
-                    </Link>
+                    <NavLink to="/explore" className="flex py-4 gap-3 px-3 cursor-pointer hover:bg-slate-200 rounded-[15rem] active:bg-slate-100">
+                        {({ isActive }) => 
+                            isActive ? (
+                                <>
+                                    <MdExplore className="text-[1.6rem] font-bold"/> 
+                                </>
+                            ) : (
+                                <>
+                                    <MdOutlineExplore className="text-[1.6rem]"/>
+                                </>
+                            )}
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/notifications" className="flex py-4 gap-3 px-3 cursor-pointer">
-                        <i className="text-xl fa-solid fa-bell"></i>
-                    </Link>
+                    <NavLink to="/bookmarks" className="flex py-4 gap-3 px-3 cursor-pointer hover:bg-slate-200 rounded-[15rem] active:bg-slate-100">
+                        {({ isActive }) => 
+                            isActive ? (
+                                <>
+                                    <MdOutlineBookmark className="text-[1.6rem] font-bold"/> 
+                                </>
+                            ) : (
+                                <>
+                                    <MdOutlineBookmarkBorder className="text-[1.6rem]"/>
+                                </>
+                            )}
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/bookmarks" className="flex py-4 gap-3 px-3 cursor-pointer">
-                        <i className="text-xl fa-solid fa-bookmark"></i>
-                    </Link>
-                </li>
-                <li>
-                    <Link to={`/profile/${userData?.username}`} className="flex py-4 gap-3 px-3 cursor-pointer">
-                        <i className="text-xl fa-solid fa-user"></i>
-                    </Link>
+                    <NavLink to={`/profile/${userData?.username}`} className="flex py-4 gap-3 px-3 cursor-pointer hover:bg-slate-200 rounded-[15rem] active:bg-slate-100">
+                        {({ isActive }) => 
+                            isActive ? (
+                                <>
+                                    <FaUser className="text-[1.6rem] font-bold"/> 
+                                </>
+                            ) : (
+                                <>
+                                    <FaRegUser className="text-[1.6rem]"/>
+                                </>
+                            )}
+                    </NavLink>
                 </li>
             </ul>
         </nav>

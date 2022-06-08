@@ -5,9 +5,7 @@ import { CreatePostModal } from "./CreatePostModal";
 import { BiEditAlt } from "react-icons/bi";
 import { AiOutlineHome, AiFillHome  } from "react-icons/ai";
 import { MdOutlineExplore, MdExplore, MdOutlineBookmarkBorder, MdOutlineBookmark } from "react-icons/md";
-import { IoMdNotificationsOutline, IoMdNotifications } from "react-icons/io";
 import { FaRegUser, FaUser } from "react-icons/fa";
-// import { Link } from "react-router-dom";
 
 export const AsideLeft = () => {
 
@@ -54,22 +52,6 @@ export const AsideLeft = () => {
                                     <>
                                         <MdOutlineExplore className="text-[1.6rem]"/>
                                         <h2 className="text-xl px-1 hidden xl:block"> Explore </h2>
-                                    </>
-                                )}
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/notifications" className="flex py-4 gap-3 px-3 cursor-pointer hover:bg-slate-200 rounded-[15rem] active:bg-slate-100">
-                            {({ isActive }) => 
-                                isActive ? (
-                                    <>
-                                        <IoMdNotifications className="text-[1.6rem] font-bold"/> 
-                                        <h2 className="text-xl px-1 hidden xl:block font-bold"> Notifications </h2>
-                                    </>
-                                ) : (
-                                    <>
-                                        <IoMdNotificationsOutline className="text-[1.6rem]"/>
-                                        <h2 className="text-xl px-1 hidden xl:block"> Notifications </h2>
                                     </>
                                 )}
                         </NavLink>
