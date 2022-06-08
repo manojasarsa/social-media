@@ -45,6 +45,7 @@ export const Bookmarks = () => {
                                 <Loader show={isLoading} />
                             </div>
                         ) : (
+                            bookmarkList?.length === 0 ? <h1 className="text-2xl text-center mt-4 font-semibold">No Bookmark Added!</h1> :
                             bookmarkList?.map(post => (
                             <Post key={post?._id} post={post} />))
                         )}

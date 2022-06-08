@@ -44,11 +44,14 @@ export const Signin = () => {
             </div>
             <div className="m-16 mx-auto w-full ">
                 <div className="md:container md:mx-auto mx-auto flex">
+
                     <img src="assets/social1.svg" alt="social-img" className="w-1/2 hidden md:block mx-10"></img>
-                    <div className="mx-auto sm:mx-28 mt-16">
 
+                    <div className="mx-auto sm:mx-28 sm:mt-16">
+                        <header className="text-3xl font-bold text-center py-2 mb-2 text-blue-600 sm:hidden">
+                            <Link to="/home"> ALCON </Link>
+                        </header>
                         <div className="flex flex-col mx-auto pb-8 shadow-none min-w-max bg-slate-100 rounded-lg">
-
                             <form className="mx-8 flex flex-col">
 
                                 <h2 className="my-6 text-left text-slate-900 text-lg">Sign In</h2>
