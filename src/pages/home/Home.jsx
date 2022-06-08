@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
-import { AsideLeft, AsideRight, Post } from "../../component";
+import { AsideLeft, AsideRight, MobileNavBar, Post } from "../../component";
 import { createPost, getAllPosts } from "../../features/post/helpers";
 import Loader from 'react-spinner-loader';
 
@@ -47,10 +48,9 @@ export const Home = () => {
             temp.sort((a, b) => new Date(a?.createdAt) - new Date(b?.createdAt));
         }
 
-        // TODO
-
-        // if(sortPostBy === "Trending") {}
-
+        if(sortPostBy === "Trending") {
+            temp.sort((a, b) => b?.likes?.likeCount - a?.likes?.likeCount);
+        }
         return temp;
     }
 
@@ -66,51 +66,60 @@ export const Home = () => {
 
     return (
         <div>
-            <div className="z-990">
-                <Loader show={isLoading} type="body" />
-            </div>
+            <MobileNavBar />
 
-            <div className="flex mx-12 my-4">
-                <div className="mx-auto flex px-32 h-screen w-screen">
+            <div className="flex justify-center px-5 sm:px-32">
+                <div className="flex h-screen w-screen">
 
                     <AsideLeft />
 
-                    <main className="w-full basis-2/3">
+                    <main className="w-full sm:basis-2/3">
 
-                        <header className="flex p-4">
+                        <header className="p-4 hidden sm:flex">
                             <h1 className="text-xl">Home</h1>
+                        </header>
+
+                        <header className="text-xl font-bold flex py-4 text-blue-600 sm:hidden">
+                            <Link to="/home"> ALCON </Link>
                         </header>
 
                         {/* create post */}
 
-                        <div className="border ml-3 flex px-5 py-3">
-
-                            <div className="mt-3 w-12 h-12 text-lg flex-none">
-                                <img src={userData?.profilePicture} className="flex-none w-12 h-12 rounded-full" alt="avatar" />
+                        {isLoading ? (
+                            <div className="z-20">
+                                <Loader show={isLoading} />
                             </div>
+                        ) : (
+                        <>
+                            <div className="border sm:ml-3 sm:mr-0 flex px-2 py-3">
 
-                            <div className="w-full px-4">
-                                <textarea 
-                                    value={content}
-                                    placeholder="What's happening?" 
-                                    className="resize-none mt-3 pb-3 w-full h-28 bg-slate-100 focus:outline-none rounded-xl p-2" 
-                                    onChange={(e) => setContent(e.target.value)} >
-                                </textarea>
+                                <div className="mt-3 w-12 h-12 text-lg flex-none">
+                                    <img src={userData?.profilePicture} className="flex-none w-12 h-12 rounded-full" alt="avatar" />
+                                </div>
 
-                                <div className="flex justify-end">
-                                    <button 
-                                        className="p-2.5 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md 
-                                        hover:shadow-lg transition duration-150 ease-in-out"
-                                        onClick={postHandler}>
-                                        Post
-                                    </button>
+                                <div className="w-full px-4">
+                                    <textarea 
+                                        value={content}
+                                        placeholder="What's happening?" 
+                                        className="resize-none mt-3 pb-3 w-full h-28 bg-slate-100 focus:outline-none rounded-xl p-2" 
+                                        onChange={(e) => setContent(e.target.value)} >
+                                    </textarea>
+
+                                    <div className="flex justify-end">
+                                        <button 
+                                            className="p-2.5 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md 
+                                            hover:shadow-lg transition duration-150 ease-in-out"
+                                            onClick={postHandler}>
+                                            Post
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        
 
                         {/* filter posts by date and trending */}
 
-                        <div className="ml-3 flex px-5 py-3  justify-between relative">
+                        <div className="flex pl-0.5 pr-0.5 sm:pr-6 sm:px-5 py-3 justify-between relative">
 
                             <h1 className="text-xl">{sortPostBy} Posts</h1>
 
@@ -123,9 +132,9 @@ export const Home = () => {
 
                                 {showFilterPostModal && <div className="w-30 h-22 px-1 shadow-xl bg-slate-100 border border-slate-300 text-slate-600 font-semibold absolute right-11 top-4 z-20 rounded-xl">
                                     <ul className="p-2 cursor-pointer text-center">
-                                        <li className="p-1 hover:bg-slate-200 rounded" onClick={() => setSortPostBy("Latest")}>Latest</li>
-                                        <li className="p-1 hover:bg-slate-200 rounded" onClick={() => setSortPostBy("Oldest")}>Oldest</li>
-                                        <li className="p-1 hover:bg-slate-200 rounded" onClick={() => setSortPostBy("Trending")}>Trending</li>
+                                        <li className="p-1 hover:bg-slate-200 rounded" onClick={() => { setSortPostBy("Latest"); setShowFilterModal(false); }}>Latest</li>
+                                        <li className="p-1 hover:bg-slate-200 rounded" onClick={() => { setSortPostBy("Oldest"); setShowFilterModal(false); }}>Oldest</li>
+                                        <li className="p-1 hover:bg-slate-200 rounded" onClick={() => { setSortPostBy("Trending"); setShowFilterModal(false); }}>Trending</li>
                                     </ul>
                                 </div> 
                                 }
@@ -134,6 +143,9 @@ export const Home = () => {
                         {/* Show Posts */}
 
                         {sortedPosts.map(post => <Post key={post._id} post={post} />)}
+
+                        </>
+                        )}
 
                     </main>
 

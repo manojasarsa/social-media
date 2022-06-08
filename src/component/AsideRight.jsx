@@ -15,7 +15,7 @@ export const AsideRight = () => {
     )
 
     return (
-        <aside className="w-full basis-2/6 flex flex-col ml-3">
+        <aside className="w-full basis-2/6 flex-col ml-3 hidden sm:flex">
 
             <div className="sticky mt-3 flex items-center pl-4 pr-10 w-full rounded-md">
                 <span className="basis-8 text-xl">

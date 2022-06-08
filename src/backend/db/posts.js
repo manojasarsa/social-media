@@ -11,7 +11,7 @@ export const posts = [
     _id: uuid(),
     content: "The more I talk to founders and builders, the more I realise that the market is huge and there is so much opportunity to create an impact.",
     likes: {
-      likeCount: 0,
+      likeCount: 8,
       likedBy: [],
       dislikedBy: [],
     },
@@ -37,7 +37,7 @@ export const posts = [
     _id: uuid(),
     content: "Programming is a game of persistence where devs usually mindlessly scroll google/stackoverflow/github smashing ctrl-c ctrl-v until a new bug appears because we love pain.",
     likes: {
-      likeCount: 0,
+      likeCount: 1,
       likedBy: [],
       dislikedBy: [],
     },
@@ -50,14 +50,14 @@ export const posts = [
     _id: uuid(),
     content: "I'm finally going to build my own website with a blog! Send the coolest personal websites that you've seen.",
     likes: {
-      likeCount: 0,
+      likeCount: 8,
       likedBy: [],
       dislikedBy: [],
     },
     comments: [
       {
-        content: "https://veronicane.info",
-        id: uuid(),
+        content: "Here is mine build with HTML, CSS and JS: https://veronicane.info",
+        _id: uuid(),
         username: "veron_d12",
         createdAt: ""
       }
@@ -70,13 +70,26 @@ export const posts = [
     _id: uuid(),
     content: "Yesterday, I received around 135+ emails from people exploring career opportunities with us. Do yourself a favour and learn excellent e-mail writing skills. You can beat 99% of your immediate competition if pitching to Startups.",
     likes: {
-      likeCount: 0,
+      likeCount: 7,
       likedBy: [],
       dislikedBy: [],
     },
     comments: [],
     username: "chrislevin22",
     createdAt: "06:00 AM January 23, 2018",
+    updatedAt: formatDate(),
+  },
+  {
+    _id: uuid(),
+    content: "Chase the vision, not the money, the money will end up following you.",
+    likes: {
+      likeCount: 3,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments: [],
+    username: "chrislevin22",
+    createdAt: "05:23 PM August 15, 2020",
     updatedAt: formatDate(),
   },
 ];

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { AsideLeft, AsideRight, Post } from "../../component";
+import { AsideLeft, AsideRight, MobileNavBar, Post } from "../../component";
 import { getAllPosts } from "../../features/post/helpers";
 import Loader from 'react-spinner-loader';
 
@@ -19,22 +20,30 @@ export const Explore = () => {
 
     return (
         <div>
-            <div className="flex mx-12 my-4">
-                <div className="mx-auto flex px-32 h-screen w-screen">
+            <MobileNavBar />
 
-                    <div className="z-20">
-                        <Loader show={isLoading} type="body" />
-                    </div>
+            <div className="flex justify-center px-5 sm:px-32">
+                <div className="flex h-screen w-screen">
 
                     <AsideLeft />
 
-                    <main className="w-full basis-2/3">
+                    <main className="w-full sm:basis-2/3">
 
-                        <header className="flex p-4">
+                        <header className="p-4 hidden sm:flex">
                             <h1 className="text-xl">Explore</h1>
                         </header>
 
-                        {posts.map(post => <Post key={post._id} post={post} />)}
+                        <header className="text-xl font-bold flex py-4 text-blue-600 sm:hidden">
+                            <Link to="/home"> ALCON </Link>
+                        </header>
+
+                        {isLoading ? (
+                            <div className="z-20">
+                                <Loader show={isLoading} />
+                            </div>
+                        ) : (
+                            posts.map(post => <Post key={post._id} post={post} />)
+                        )}
 
                     </main>
 

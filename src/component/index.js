@@ -5,3 +5,5 @@ export { EditProfileModal } from "./EditProfileModal";
 export { FollowInfoModal } from "./FollowInfoModal";
 export { UserDetails } from "./UserDetails";
 export { CreatePostModal } from "./CreatePostModal";
+export { MobileNavBar } from "./MobileNavBar";
+export { Comment } from "./Comment";

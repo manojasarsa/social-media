@@ -43,7 +43,7 @@ export const Signup = () => {
     }
 
     return (
-        <div className="flex flex-col pb-1 shadow-none border-2 w-1/4 mx-auto mt-12 min-w-max">
+        <div className="flex flex-col pb-1 shadow-none bg-slate-100 rounded-lg w-1/4 mx-auto mt-12 min-w-max">
 
             <div className="z-20">
                 <Loader show={isLoading} type="body" />
@@ -57,7 +57,7 @@ export const Signup = () => {
                     <input
                         name="firstName"
                         value={firstName}
-                        className="py-1 w-full mt-4 rounded-none border-2"
+                        className="py-1 w-full mt-4 rounded-none border-2 focus:outline-blue-400"
                         type="text"
                         required={true}
                         onChange={(e) => setFormInputs({ ...formInputs, firstName: e.target.value })}
@@ -68,7 +68,7 @@ export const Signup = () => {
                     <input
                         name="lastName"
                         value={lastName}
-                        className="py-1 w-full mt-4 rounded-none border-2"
+                        className="py-1 w-full mt-4 rounded-none border-2 focus:outline-blue-400"
                         type="text"
                         required={true}
                         onChange={(e) => setFormInputs({ ...formInputs, lastName: e.target.value })}
@@ -80,7 +80,7 @@ export const Signup = () => {
                     <input
                         name="username"
                         value={username}
-                        className="py-1 w-full mt-4 rounded-none border-2"
+                        className="py-1 w-full mt-4 rounded-none border-2 focus:outline-blue-400"
                         type="text"
                         required={true}
                         onChange={(e) => setFormInputs({ ...formInputs, username: e.target.value })}
@@ -92,7 +92,7 @@ export const Signup = () => {
                     <input
                         name="password"
                         value={password}
-                        className="py-1 w-full mt-4 rounded-none border-2"
+                        className="py-1 w-full mt-4 rounded-none border-2 focus:outline-blue-400"
                         type={showHideOne ? "text" : "password"}
                         required={true}
                         onChange={(e) => setFormInputs({ ...formInputs, password: e.target.value })}
@@ -108,7 +108,7 @@ export const Signup = () => {
                     <input
                         name="confirmPassword"
                         value={confirmPassword}
-                        className="py-1 w-full mt-4 rounded-none border-2"
+                        className="py-1 w-full mt-4 rounded-none border-2 focus:outline-blue-400"
                         type={showHideTwo ? "text" : "password"}
                         required={true}
                         onChange={(e) => setFormInputs({ ...formInputs, confirmPassword: e.target.value })}
