@@ -137,7 +137,7 @@ export const SinglePost = () => {
                                     </div>
 
                                     {isBookmarked ? (
-                                        <MdOutlineBookmark className="text-xl cursor-pointer" onClick={e => {
+                                        <MdOutlineBookmark className="text-xl cursor-pointer text-blue-700" onClick={e => {
                                             e.stopPropagation();
                                             dispatch(removeFromBookmark({ token, postId: currentPost?._id }));
                                         }} />

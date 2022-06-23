@@ -12,7 +12,7 @@ export const signInHandler = createAsyncThunk(
 
             if (status === 200) {
                 localStorage.setItem("Alcon_User", JSON.stringify({ token: data.encodedToken, userData: data.foundUser }));
-                toast("Welcome Back!", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
+                toast("Welcome Back!", { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
             }
             return data;
         } catch (err) {

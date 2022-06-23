@@ -84,7 +84,6 @@ export const Home = () => {
                         </header>
 
                         {/* create post */}
-
                         
                         <>
                             <div className="border sm:ml-3 sm:mr-0 flex px-2 py-3">
@@ -103,8 +102,8 @@ export const Home = () => {
 
                                     <div className="flex justify-end">
                                         <button 
-                                            className="p-2.5 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md 
-                                            hover:shadow-lg transition duration-150 ease-in-out"
+                                            disabled={!content.trim().length}
+                                            className="p-2.5 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out disabled:cursor-not-allowed"
                                             onClick={postHandler}>
                                             Post
                                         </button>

@@ -24,15 +24,15 @@ export const userSlice = createSlice({
             state.upLoadingPhoto = true;
         },
     },
-    // searchUser: (state, { payload }) => {
-    //     state.searchTerm = payload;
-    //     state.foundUsers = state.users.filter(
-    //         user =>
-    //             user.username.toLowerCase().includes(payload.trim().toLowerCase()) ||
-    //             user.firstName.toLowerCase().includes(payload.trim().toLowerCase()) ||
-    //             user.lastName.toLowerCase().includes(payload.trim().toLowerCase())
-    //     );
-    // },
+    searchUser: (state, { payload }) => {
+        state.searchTerm = payload;
+        state.foundUsers = state.users.filter(
+            user =>
+                user.username.toLowerCase().includes(payload.trim().toLowerCase()) ||
+                user.firstName.toLowerCase().includes(payload.trim().toLowerCase()) ||
+                user.lastName.toLowerCase().includes(payload.trim().toLowerCase())
+        );
+    },
     extraReducers: {
 
         //getUser 
@@ -59,7 +59,7 @@ export const userSlice = createSlice({
         [updateUser.fulfilled]: (state, { payload }) => {
             state.upLoadingPhoto = false;
             state.users = state.users.map(user => (user.username === payload.username ? payload : user));
-            toast("Updated Profile", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
+            toast("Updated Profile", { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
         },
         [updateUser.rejected]: (state, { payload }) => {
             state.upLoadingPhoto = false;
@@ -83,7 +83,7 @@ export const userSlice = createSlice({
                 return user;
             });
             state.isLoading = false;
-            toast("User Followed", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
+            toast("User Followed", { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
         },
         [followUser.rejected]: (state, { payload }) => {
             state.isLoading = false;
@@ -107,7 +107,7 @@ export const userSlice = createSlice({
                 return user;
             });
             state.isLoading = false;
-            toast("User Unfollowed", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
+            toast("User Unfollowed", { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
         },
         [unFollowUser.rejected]: (state, { payload }) => {
             state.isLoading = false;
@@ -116,6 +116,6 @@ export const userSlice = createSlice({
     }
 });
 
-export const { setLoading, startUpLoading } = userSlice.actions;
+export const { setLoading, startUpLoading, searchUser } = userSlice.actions;
 
 export default userSlice.reducer;

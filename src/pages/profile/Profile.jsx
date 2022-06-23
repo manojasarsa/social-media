@@ -26,6 +26,10 @@ export const Profile = () => {
 
     const currentUserPosts = posts.filter(post => post.username === username);
 
+    const sortedPosts = currentUserPosts.slice();     // for creating new pure array
+    
+    sortedPosts.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt));  // to get latest posts first
+    
     const dispatch = useDispatch();
 
     const authUser = users.find(user => user.username === userData?.username);
@@ -43,7 +47,7 @@ export const Profile = () => {
 
                         <header className="hidden sm:flex p-4 pt-6 w-full justify-between">
                             <h1 className="text-xl pl-8">Profile</h1>
-                            <FiLogOut className="w-5 h-5 text-slate-700 cursor-pointer" onClick={() => dispatch(signOutHandler())} />
+                            <FiLogOut className="w-5 h-5 text-blue-700 cursor-pointer" onClick={() => dispatch(signOutHandler())} />
                         </header>
 
                         <header className="text-xl font-bold flex py-4 text-blue-600 sm:hidden justify-between">
@@ -59,7 +63,7 @@ export const Profile = () => {
 
                             <div className="sm:ml-5 my-6 flex flex-col space-between">
 
-                                <div className="flex mx-auto gap-8 ">
+                                <div className="flex mx-auto gap-8">
 
                                     <img src={currentUser?.profilePicture} className="w-32 h-32 rounded-full" alt="avatar" />
 
@@ -96,7 +100,11 @@ export const Profile = () => {
                                         setFollowersInfoModal={setFollowersInfoModal}
                                     />
 
-                                    <h3 className="text-base sm:text-xl cursor-pointer">0<span className="text-slate-600 text-base sm:text-xl"> posts</span></h3>
+                                    <h3 className="text-base sm:text-xl cursor-pointer">
+                                        {currentUserPosts.length} 
+                                        <span className="text-slate-600 text-base sm:text-xl"> posts
+                                        </span>
+                                    </h3>
 
                                     <h3
                                         className="text-base sm:text-xl cursor-pointer"
@@ -128,7 +136,7 @@ export const Profile = () => {
 
                                 <h1 className="text-2xl text-center mb-6">Your Posts</h1>
 
-                                {currentUserPosts.map(post => <Post key={post._id} post={post} />)}
+                                {sortedPosts.map(post => <Post key={post._id} post={post} />)}
 
                             </div>
                         )}
