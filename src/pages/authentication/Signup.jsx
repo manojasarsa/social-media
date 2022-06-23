@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signUpHandler } from "../../features/auth/helpers";
 import Loader from 'react-spinner-loader';
+import { toast } from "react-toastify";
 
 export const Signup = () => {
 
@@ -16,6 +17,7 @@ export const Signup = () => {
         password: "",
         confirmPassword: ""
     }
+    const regex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
 
     const {
         auth: { isLoading }
@@ -31,14 +33,20 @@ export const Signup = () => {
         e.preventDefault();
 
         if (firstName && lastName && password && confirmPassword) {
-            if (formInputs.password === formInputs.confirmPassword) {
-                dispatch(signUpHandler({ firstName, lastName, username, password }));
-            }
-            else {
-                console.error("password doesn't match");
-            }
+
+            if (password.length < 8) {
+                toast.error("Password must be at least 8 characters", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            } else if (!regex.test(password)) {         // test() search a match bw regex & pwd
+                toast.error("Required 1 Uppercase, 1 Lowercase letter, 1 Special character, and 1 number", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            } else {
+                if (formInputs.password === formInputs.confirmPassword) {
+                    dispatch(signUpHandler({ firstName, lastName, username, password }));
+                } else {
+                    toast.error("Password does not match!", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+                }
+            }   
         } else {
-            console.error("Enter all values");
+            toast.error("All fields are required!", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
         }
     }
 

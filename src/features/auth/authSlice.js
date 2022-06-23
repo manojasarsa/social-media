@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { signInHandler, signUpHandler } from "./helpers";
+import { toast } from 'react-toastify';
 
 const initialState = {
     token: localStorage.getItem("Alcon_token")?.token || "",
@@ -29,6 +30,7 @@ export const authSlice = createSlice({
         },
         [signInHandler.rejected]: (state, { payload }) => {
             state.isLoading = false;
+            toast.error("Password does not match!", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
         },
 
         [signUpHandler.pending]: (state) => {
