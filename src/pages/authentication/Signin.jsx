@@ -38,11 +38,15 @@ export const Signin = () => {
 
     return (
 
-        <div className="flex justify-items-center items-center">
+        <div className="flex flex-col justify-items-center items-center">
             <div className="z-20">
                 <Loader show={isLoading} type="body" />
             </div>
-            <div className="m-16 mx-auto w-full ">
+
+            <h1 className="mt-16 text-4xl font-bold text-blue-600 hidden lg:block">ALCON</h1>
+            {/* <h1 className="mt-2 text-xl font-bold text-blue-400">Always Connected</h1> */}
+
+            <div className="mx-auto w-full ">
                 <div className="md:container md:mx-auto mx-auto flex">
 
                     <img src="assets/social1.svg" alt="social-img" className="w-1/2 hidden md:block mx-10"></img>
@@ -50,7 +54,7 @@ export const Signin = () => {
                     <div className="mx-auto sm:mx-28 sm:mt-16">
                         <header className="text-3xl font-bold text-center py-2 mb-2 text-blue-600 sm:hidden">
                             <Link to="/home"> ALCON </Link>
-                        </header>
+                        </header> 
                         <div className="flex flex-col mx-auto pb-8 shadow-none min-w-max bg-slate-100 rounded-lg">
                             <form className="mx-8 flex flex-col">
 

@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getUsers, updateUser, followUser, unFollowUser } from "./helpers";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure();
 
 const initialState = {
     users: [],
@@ -43,6 +46,7 @@ export const userSlice = createSlice({
         [updateUser.fulfilled]: (state, { payload }) => {
             state.upLoadingPhoto = false;
             state.users = state.users.map(user => (user.username === payload.username ? payload : user));
+            toast("Updated Profile", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
         },
         [updateUser.rejected]: (state) => {
             state.upLoadingPhoto = false;
@@ -64,6 +68,7 @@ export const userSlice = createSlice({
                 return user;
             });
             state.isLoading = false;
+            toast("User Followed", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
         },
         [followUser.rejected]: (state) => {
             state.isLoading = false;
@@ -85,6 +90,7 @@ export const userSlice = createSlice({
                 return user;
             });
             state.isLoading = false;
+            toast("User Unfollowed", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
         },
         [unFollowUser.rejected]: (state) => {
             state.isLoading = false;
