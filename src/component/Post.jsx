@@ -54,8 +54,8 @@ export const Post = ({ post }) => {
     }
 
     return (
-        <div 
-            className="flex border ml-0 sm:mr-0 sm:mx-3 pl-2 pr-1 sm:pr-0 sm:px-5 py-3 hover:bg-slate-100" 
+        <div
+            className="flex border ml-0 sm:mr-0 sm:mx-3 pl-2 pr-1 sm:pr-0 sm:px-5 py-3 hover:bg-slate-100"
         >
 
             <CreatePostModal />
@@ -74,7 +74,7 @@ export const Post = ({ post }) => {
                         </span>
                     </h2>
 
-                    <HiDotsHorizontal className="cursor-pointer" onClick={() => setPostOptions(prev => !prev)} />
+                    <HiDotsHorizontal className="cursor-pointer mr-3" onClick={() => setPostOptions(prev => !prev)} />
 
                     {/* Post Options Modal */}
 
@@ -82,8 +82,8 @@ export const Post = ({ post }) => {
                         postOptions &&
                         <div
                             className="w-30 h-22 px-1 shadow-xl bg-white border border-slate-300 text-slate-600 font-semibold 
-                                absolute right-4 top-2 z-20 rounded-xl">
-                            <ul className="p-1 cursor-pointer text-center">
+                                absolute right-7 top-0 z-20 rounded-xl">
+                            <ul className="p-1 cursor-pointer text-start">
                                 <li className="my-1 p-1 hover:bg-slate-200 rounded" onClick={editHandler}>Edit Post</li>
                                 <li className="my-1 p-1 hover:bg-slate-200 rounded" onClick={deletePostHandler}>Delete Post</li>
                             </ul>
@@ -101,15 +101,15 @@ export const Post = ({ post }) => {
 
                 </div>
 
-                <p 
-                    className="py-3 cursor-pointer"  
+                <p
+                    className="py-3 cursor-pointer"
                     onClick={() => navigate(`/post/${post.id}`)}>
                     {post?.content}
                 </p>
 
                 <p className="text-sm text-gray-600">{getFormattedDate(post?.createdAt)}</p>
 
-                <div className="flex justify-between pt-4">
+                <div className="flex justify-between pt-8">
                     <div className="flex">
                         {isLiked ? (
                             <BsSuitHeartFill className="text-xl cursor-pointer text-red-600" onClick={e => {
@@ -128,7 +128,7 @@ export const Post = ({ post }) => {
                     </div>
 
                     <div className="flex">
-                        <GoComment className="text-xl cursor-pointer" />
+                        <GoComment onClick={() => navigate(`/post/${post.id}`)} className="text-xl cursor-pointer" />
                         <span className="text-sm pl-4 font-semibold">
                             {pathname.includes("post") ? "" : post?.comments?.length > 0 ? post?.comments?.length : ""}
                         </span>
@@ -136,19 +136,18 @@ export const Post = ({ post }) => {
 
 
                     {isBookmarked ? (
-                        <MdOutlineBookmark className="text-xl cursor-pointer" onClick={e => {
+                        <MdOutlineBookmark className="text-xl cursor-pointer mr-3 text-blue-600" onClick={e => {
                             e.stopPropagation();
                             dispatch(removeFromBookmark({ token, postId: post?._id }));
                         }} />
                     ) : (
-                        
-                        <MdOutlineBookmarkBorder className="text-xl cursor-pointer" onClick={e => {
+
+                        <MdOutlineBookmarkBorder className="text-xl cursor-pointer mr-3" onClick={e => {
                             e.stopPropagation();
                             dispatch(addToBookmark({ token, postId: post?._id }));
                         }} />
                     )}
 
-                    <BsShare className="text-xl cursor-pointer" />
                 </div>
             </div>
         </div>

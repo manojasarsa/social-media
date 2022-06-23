@@ -96,15 +96,12 @@ const postSlice = createSlice({
         // add comment
 
         [addComment.pending]: state => {
-            state.isLoading = true;
         },
         [addComment.fulfilled]: (state, { payload }) => {
-            state.isLoading = false;
             state.posts = payload;
             toast("Comment Added", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
         },
         [addComment.rejected]: (state, { payload }) => {
-            state.isLoading = false;
             state.error = payload;
         },
 

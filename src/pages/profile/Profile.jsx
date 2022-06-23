@@ -18,7 +18,7 @@ export const Profile = () => {
 
     const {
         auth: { userData },
-        user: { users, upLoadingPhoto },
+        user: { users, upLoadingPhoto, isLoading },
         posts: { posts }
     } = useSelector(state => state);
 
@@ -28,14 +28,10 @@ export const Profile = () => {
 
     const dispatch = useDispatch();
 
-    const authUser = users.find(user => user.username === userData?.username); 
+    const authUser = users.find(user => user.username === userData?.username);
 
     return (
         <div>
-            <div className="z-20">
-                <Loader show={upLoadingPhoto} />
-            </div>
-
             <MobileNavBar />
 
             <div className="flex justify-center px-5 sm:px-32">
@@ -55,82 +51,89 @@ export const Profile = () => {
                             <FiLogOut className="w-5 h-5 text-slate-700 cursor-pointer" onClick={() => dispatch(signOutHandler())} />
                         </header>
 
-                        <div className="sm:ml-5 my-6 flex flex-col space-between">
+                        {upLoadingPhoto ?  (
+                            <div className="z-20">
+                                <Loader show={upLoadingPhoto} />
+                            </div>
+                        ) : (
 
-                            <div className="flex mx-auto gap-8 ">
+                            <div className="sm:ml-5 my-6 flex flex-col space-between">
 
-                                <img src={currentUser?.profilePicture} className="w-32 h-32 rounded-full" alt="avatar" />
+                                <div className="flex mx-auto gap-8 ">
 
-                                <div className="flex flex-col mt-2">
+                                    <img src={currentUser?.profilePicture} className="w-32 h-32 rounded-full" alt="avatar" />
 
-                                    <h2 className="font-semibold">{`${currentUser?.firstName} ${currentUser?.lastName}`}</h2>
+                                    <div className="flex flex-col mt-2">
 
-                                    <h2> @{currentUser?.username} </h2>
+                                        <h2 className="font-semibold">{`${currentUser?.firstName} ${currentUser?.lastName}`}</h2>
 
-                                    <button 
-                                        className="border my-3 p-1 rounded-lg text-x cursor-pointer text-center font-semibold text-slate-600 hover:bg-slate-200" 
-                                        onClick={() => setShowUpdateProfile(true)} >
-                                        Edit Profile
-                                    </button>
+                                        <h2> @{currentUser?.username} </h2>
 
-                                    {/* Modal for Edit Profile */}
+                                        <button
+                                            className="border my-3 p-1 rounded-lg text-x cursor-pointer text-center font-semibold text-slate-600 bg-slate-200 hover:bg-slate-100"
+                                            onClick={() => setShowUpdateProfile(true)} >
+                                            Edit Profile
+                                        </button>
 
-                                    <EditProfileModal currentUser={authUser} showUpdateProfile={showUpdateProfile} setShowUpdateProfile={setShowUpdateProfile} />
+                                        {/* Modal for Edit Profile */}
 
+                                        <EditProfileModal currentUser={authUser} showUpdateProfile={showUpdateProfile} setShowUpdateProfile={setShowUpdateProfile} />
+
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className="mt-4 flex flex-col items-center">
-                                <h2 className="font-semibold">{currentUser?.bio}</h2>
-                                <h2 className="font-semibold text-blue-600">{currentUser?.website}</h2>
-                            </div>
+                                <div className="mt-4 flex flex-col items-center">
+                                    <h2 className="font-semibold">{currentUser?.bio}</h2>
+                                    <h2 className="font-semibold text-blue-600">{currentUser?.website}</h2>
+                                </div>
 
-                            <div className="flex gap-6 pl-4 mt-4 mb-16 justify-items-center mx-auto">
+                                <div className="flex gap-6 pl-4 mt-4 mb-16 justify-items-center mx-auto">
 
-                                <FollowInfoModal 
-                                    currentUser={currentUser}
-                                    followersInfoModal={followersInfoModal}
-                                    showFollowing={showFollowing}
-                                    setFollowersInfoModal={setFollowersInfoModal}
-                                />
+                                    <FollowInfoModal
+                                        currentUser={currentUser}
+                                        followersInfoModal={followersInfoModal}
+                                        showFollowing={showFollowing}
+                                        setFollowersInfoModal={setFollowersInfoModal}
+                                    />
 
-                                <h3 className="text-base sm:text-xl cursor-pointer">0<span className="text-slate-600 text-base sm:text-xl"> posts</span></h3>
+                                    <h3 className="text-base sm:text-xl cursor-pointer">0<span className="text-slate-600 text-base sm:text-xl"> posts</span></h3>
 
-                                <h3 
-                                    className="text-base sm:text-xl cursor-pointer" 
-                                    onClick={() => {
+                                    <h3
+                                        className="text-base sm:text-xl cursor-pointer"
+                                        onClick={() => {
                                             setFollowersInfoModal(true);
                                             setShowFollowing(true)
                                         }
-                                    }>
-                                    { currentUser?.following.length } 
-                                    <span className="text-slate-600 pl-1">
-                                        following
-                                    </span>
-                                </h3>
+                                        }>
+                                        {currentUser?.following.length}
+                                        <span className="text-slate-600 pl-1">
+                                            following
+                                        </span>
+                                    </h3>
 
-                                <h3 
-                                    className="text-base sm:text-xl cursor-pointer" 
-                                    onClick={() => {
+                                    <h3
+                                        className="text-base sm:text-xl cursor-pointer"
+                                        onClick={() => {
                                             setFollowersInfoModal(true);
                                             setShowFollowing(false)
                                         }
-                                    }>
-                                    { currentUser?.followers.length } 
-                                    <span className="text-slate-600 pl-1">
-                                        followers
-                                    </span>
-                                </h3>
+                                        }>
+                                        {currentUser?.followers.length}
+                                        <span className="text-slate-600 pl-1">
+                                            followers
+                                        </span>
+                                    </h3>
+
+                                </div>
+
+                                <h1 className="text-2xl text-center mb-6">Your Posts</h1>
+
+                                {currentUserPosts.map(post => <Post key={post._id} post={post} />)}
 
                             </div>
-
-                            <h1 className="text-2xl text-center mb-6">Your Posts</h1>
-
-                            {currentUserPosts.map(post => <Post key={post._id} post={post} />)}
-
-                        </div>
+                        )}
                     </main>
-                    
+
                     <AsideRight />
                 </div>
             </div>

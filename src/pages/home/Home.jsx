@@ -85,11 +85,7 @@ export const Home = () => {
 
                         {/* create post */}
 
-                        {isLoading ? (
-                            <div className="z-20">
-                                <Loader show={isLoading} />
-                            </div>
-                        ) : (
+                        
                         <>
                             <div className="border sm:ml-3 sm:mr-0 flex px-2 py-3">
 
@@ -131,7 +127,7 @@ export const Home = () => {
                                 {/* filter modal */}
 
                                 {showFilterPostModal && <div className="w-30 h-22 px-1 shadow-xl bg-slate-100 border border-slate-300 text-slate-600 font-semibold absolute right-11 top-4 z-20 rounded-xl">
-                                    <ul className="p-2 cursor-pointer text-center">
+                                    <ul className="p-2 cursor-pointer text-start">
                                         <li className="p-1 hover:bg-slate-200 rounded" onClick={() => { setSortPostBy("Latest"); setShowFilterModal(false); }}>Latest</li>
                                         <li className="p-1 hover:bg-slate-200 rounded" onClick={() => { setSortPostBy("Oldest"); setShowFilterModal(false); }}>Oldest</li>
                                         <li className="p-1 hover:bg-slate-200 rounded" onClick={() => { setSortPostBy("Trending"); setShowFilterModal(false); }}>Trending</li>
@@ -142,10 +138,18 @@ export const Home = () => {
 
                         {/* Show Posts */}
 
-                        {sortedPosts.map(post => <Post key={post._id} post={post} />)}
+                        {isLoading ? (
+                            <div className="z-20">
+                                <Loader show={isLoading} />
+                            </div>
+                        ) : (
+                            !sortedPosts.length ? 
+                                <h1 className="text-2xl font-bold text-center mt-8">No Posts, Add one!</h1> :
+                                sortedPosts?.map(post => <Post key={post._id} post={post} />
+                            )
+                        )}
 
                         </>
-                        )}
 
                     </main>
 

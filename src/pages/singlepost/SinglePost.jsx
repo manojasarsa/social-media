@@ -13,7 +13,7 @@ import Loader from 'react-spinner-loader';
 export const SinglePost = () => {
 
     const [commentData, setCommentData] = useState({ content: "" });
-    
+
     const { postId } = useParams();
 
     const commentRef = useRef(null);
@@ -32,7 +32,7 @@ export const SinglePost = () => {
     }, [dispatch, token]);
 
     const currentPost = posts.filter(post => post.id === postId)[0];  // filter returns a new array of one single element (user). Therefore, index 0.
-    
+
     const currentUser = users?.filter(user => user?.username === currentPost?.username)[0];
 
     const navigate = useNavigate();
@@ -42,14 +42,10 @@ export const SinglePost = () => {
     const isLiked = currentPost?.likes?.likedBy?.find(user => user.username === userData.username);
 
     const { pathname } = useLocation();
-    
+
     return (
         <div>
             <MobileNavBar />
-
-            <div className="z-20">
-                <Loader show={isLoading} type="body" />
-            </div>
 
             <div className="flex justify-center px-5 sm:px-32">
                 <div className="flex h-screen w-screen">
@@ -59,8 +55,8 @@ export const SinglePost = () => {
                     <main className="w-full sm:basis-2/3">
 
                         <header className="pl-2 pt-5 pb-3 hidden sm:flex">
-                            <MdArrowBack className="text-xl mt-1 ml-1 hover:bg-slate-100 rounded-full" 
-                            onClick={() => navigate(-1)} />
+                            <MdArrowBack className="text-xl mt-1 ml-1 hover:bg-slate-100 rounded-full"
+                                onClick={() => navigate(-1)} />
                             <h1 className="text-xl pl-2">Post</h1>
                         </header>
 
@@ -81,11 +77,11 @@ export const SinglePost = () => {
                                     <div className="w-full flex flex-col justify-between relative">
                                         <h2 className="font-semibold">
                                             {`${currentUser?.firstName} ${currentUser?.lastName}`}
-                                            
+
                                         </h2>
                                         <span className="text-slate-600">
-                                                @{currentPost?.username}
-                                            </span>
+                                            @{currentPost?.username}
+                                        </span>
                                     </div>
                                 </div>
 
@@ -93,7 +89,11 @@ export const SinglePost = () => {
 
                             <div className="px-3">
 
-                                <p className="py-3">{currentPost?.content}</p>
+                                {isLoading ? (
+                                    <div className="z-20">
+                                        <Loader show={isLoading} />
+                                    </div>
+                                ) : <p className="py-3">{currentPost?.content}</p>}
 
                                 <p className="text-sm text-gray-600 border-y-3">{getFormattedDate(currentPost?.createdAt)}</p>
 
@@ -136,7 +136,6 @@ export const SinglePost = () => {
                                         <GoComment className="text-xl cursor-pointer" />
                                     </div>
 
-
                                     {isBookmarked ? (
                                         <MdOutlineBookmark className="text-xl cursor-pointer" onClick={e => {
                                             e.stopPropagation();
@@ -150,7 +149,6 @@ export const SinglePost = () => {
                                         }} />
                                     )}
 
-                                    <BsShare className="text-xl cursor-pointer" />
                                 </div>
 
                                 <div className="flex justify-between items-center p-3 px-2 border-y-2 w-full focus:outline-none gap-4">
@@ -163,7 +161,7 @@ export const SinglePost = () => {
                                         <input
                                             ref={commentRef}
                                             value={commentData.content}
-                                            onChange={e => 
+                                            onChange={e =>
                                                 setCommentData(prev => ({ ...prev, content: e.target.value }))
                                             }
                                             className="w-full p-2 rounded-[30rem] focus:outline-none bg-slate-100"
@@ -172,7 +170,7 @@ export const SinglePost = () => {
                                         />
                                     </span>
 
-                                    <button 
+                                    <button
                                         className="p-2 rounded-[20rem] bg-blue-600 hover:bg-blue-800 text-white shadow-md 
                                         hover:shadow-lg w-20"
                                         onClick={() => {
@@ -186,7 +184,7 @@ export const SinglePost = () => {
 
                                 {currentPost?.comments?.map(comment => (
 
-                                    <Comment 
+                                    <Comment
                                         key={comment._id}
                                         postId={currentPost._id}
                                         comment={comment}
@@ -195,7 +193,7 @@ export const SinglePost = () => {
                                 ))}
 
                             </div>
-                        </div>      
+                        </div>
                     </main>
 
                     <AsideRight />
