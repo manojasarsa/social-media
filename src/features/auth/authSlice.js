@@ -30,7 +30,7 @@ export const authSlice = createSlice({
         },
         [signInHandler.rejected]: (state, { payload }) => {
             state.isLoading = false;
-            toast.error("Password does not match!", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            toast.error("Password does not match!", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         },
 
         [signUpHandler.pending]: (state) => {

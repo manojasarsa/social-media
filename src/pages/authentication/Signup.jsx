@@ -35,18 +35,18 @@ export const Signup = () => {
         if (firstName && lastName && password && confirmPassword) {
 
             if (password.length < 8) {
-                toast.error("Password must be at least 8 characters", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+                toast.error("Password must be at least 8 characters", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
             } else if (!regex.test(password)) {         // test() search a match bw regex & pwd
-                toast.error("Required 1 Uppercase, 1 Lowercase letter, 1 Special character, and 1 number", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+                toast.error("Required 1 Uppercase, 1 Lowercase letter, 1 Special character, and 1 number", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
             } else {
                 if (formInputs.password === formInputs.confirmPassword) {
                     dispatch(signUpHandler({ firstName, lastName, username, password }));
                 } else {
-                    toast.error("Password does not match!", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+                    toast.error("Password does not match!", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
                 }
             }   
         } else {
-            toast.error("All fields are required!", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            toast.error("All fields are required!", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         }
     }
 

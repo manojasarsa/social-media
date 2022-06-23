@@ -14,7 +14,7 @@ export const signUpHandler = createAsyncThunk(
 
             if (status === 201) {
                 localStorage.setItem("Alcon_User", JSON.stringify({ token: data.encodedToken, userData: data.createdUser }));
-                toast("Welcome to ALCON!", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+                toast("Welcome to ALCON!", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
                 return data;
             }
         } catch (err) {

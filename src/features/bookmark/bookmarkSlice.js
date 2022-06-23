@@ -42,7 +42,7 @@ const bookmarkSlice = createSlice({
         [addToBookmark.fulfilled]: (state, { payload }) => {
             state.isLoading = false;
             state.bookmarks = payload;
-            toast("Added to Bookmarks", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            toast("Added to Bookmarks", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         },
         [addToBookmark.rejected]: (state, { payload }) => {
             state.isLoading = false;
@@ -58,7 +58,7 @@ const bookmarkSlice = createSlice({
         [removeFromBookmark.fulfilled]: (state, { payload }) => {
             state.isLoading = false;
             state.bookmarks = payload;
-            toast("Removed from Bookmarks", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            toast("Removed from Bookmarks", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         },
         [removeFromBookmark.rejected]: (state, { payload }) => {
             state.isLoading = false;

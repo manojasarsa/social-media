@@ -27,7 +27,7 @@ export const Signin = () => {
     const formSignInHandler = (e) => {
         e.preventDefault();
         if(!username || !password) {
-            toast.error("All fields are required!", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            toast.error("All fields are required!", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         } else {
             dispatch(signInHandler({ username, password }));
         }
@@ -49,7 +49,6 @@ export const Signin = () => {
             </div>
 
             <h1 className="mt-16 text-4xl font-bold text-blue-600 hidden lg:block tracking-wider">ALCON</h1>
-            {/* <h1 className="mt-2 text-xl font-bold text-blue-400">Always Connected</h1> */}
 
             <div className="mx-auto w-full ">
                 <div className="md:container md:mx-auto mx-auto flex">

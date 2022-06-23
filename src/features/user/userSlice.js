@@ -59,7 +59,7 @@ export const userSlice = createSlice({
         [updateUser.fulfilled]: (state, { payload }) => {
             state.upLoadingPhoto = false;
             state.users = state.users.map(user => (user.username === payload.username ? payload : user));
-            toast("Updated Profile", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            toast("Updated Profile", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         },
         [updateUser.rejected]: (state, { payload }) => {
             state.upLoadingPhoto = false;
@@ -83,7 +83,7 @@ export const userSlice = createSlice({
                 return user;
             });
             state.isLoading = false;
-            toast("User Followed", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            toast("User Followed", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         },
         [followUser.rejected]: (state, { payload }) => {
             state.isLoading = false;
@@ -107,7 +107,7 @@ export const userSlice = createSlice({
                 return user;
             });
             state.isLoading = false;
-            toast("User Unfollowed", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            toast("User Unfollowed", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         },
         [unFollowUser.rejected]: (state, { payload }) => {
             state.isLoading = false;

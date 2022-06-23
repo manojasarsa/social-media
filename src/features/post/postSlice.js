@@ -45,7 +45,7 @@ const postSlice = createSlice({
         [createPost.fulfilled]: (state, { payload }) => {
             state.posts = payload;
             state.error = "";
-            toast("Post Created", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            toast("Post Created", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         },
         [createPost.rejected]: (state, { payload }) => {
             state.error = payload;
@@ -56,7 +56,7 @@ const postSlice = createSlice({
         [editPost.fulfilled]: (state, { payload }) => {
             state.posts = payload;
             state.error = "";
-            toast("Post Edited", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            toast("Post Edited", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         },
         [editPost.rejected]: (state, { payload }) => {
             state.error = payload;
@@ -67,7 +67,7 @@ const postSlice = createSlice({
         [deletePost.fulfilled]: (state, { payload }) => {
             state.posts = payload;
             state.error = "";
-            toast("Post Deleted", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            toast("Post Deleted", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         },
         [deletePost.rejected]: (state, { payload }) => {
             state.error = payload;
@@ -77,7 +77,7 @@ const postSlice = createSlice({
 
         [likePost.fulfilled]: (state, { payload }) => {
             state.posts = payload;
-            toast("Added to Liked", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            toast("Added to Liked", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         },
         [likePost.rejected]: (state, { payload }) => {
             state.error = payload;
@@ -87,7 +87,7 @@ const postSlice = createSlice({
 
         [dislikePost.fulfilled]: (state, { payload }) => {
             state.posts = payload;
-            toast("Removed from Liked", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            toast("Removed from Liked", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         },
         [dislikePost.rejected]: (state, { payload }) => {
             state.error = payload;
@@ -99,7 +99,7 @@ const postSlice = createSlice({
         },
         [addComment.fulfilled]: (state, { payload }) => {
             state.posts = payload;
-            toast("Comment Added", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            toast("Comment Added", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         },
         [addComment.rejected]: (state, { payload }) => {
             state.error = payload;
@@ -109,7 +109,7 @@ const postSlice = createSlice({
 
         [editComment.fulfilled]: (state, { payload }) => {
             state.posts = payload;
-            toast("Comment Edited", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            toast("Comment Edited", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         },
         [editComment.rejected]: (state, { payload }) => {
             state.error = payload;
@@ -119,7 +119,7 @@ const postSlice = createSlice({
 
         [deleteComment.fulfilled]: (state, { payload }) => {
             state.posts = payload;
-            toast("Comment Deleted", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
+            toast("Comment Deleted", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
         },
         [deleteComment.rejected]: (state, { payload }) => {
             state.error = payload;
