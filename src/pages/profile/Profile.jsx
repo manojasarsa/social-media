@@ -3,6 +3,7 @@ import { AsideLeft, AsideRight, EditProfileModal, FollowInfoModal, MobileNavBar,
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutHandler } from "../../features/auth/authSlice";
+import { followUser, unFollowUser } from "../../features/user/helpers";
 import { FiLogOut } from "react-icons/fi";
 import 'react-responsive-modal/styles.css';
 import Loader from 'react-spinner-loader';
@@ -17,8 +18,8 @@ export const Profile = () => {
     const { username } = useParams();
 
     const {
-        auth: { userData },
-        user: { users, upLoadingPhoto, isLoading },
+        auth: { userData, token },
+        user: { users, upLoadingPhoto },
         posts: { posts }
     } = useSelector(state => state);
 
@@ -27,9 +28,9 @@ export const Profile = () => {
     const currentUserPosts = posts.filter(post => post.username === username);
 
     const sortedPosts = currentUserPosts.slice();     // for creating new pure array
-    
+
     sortedPosts.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt));  // to get latest posts first
-    
+
     const dispatch = useDispatch();
 
     const authUser = users.find(user => user.username === userData?.username);
@@ -55,7 +56,7 @@ export const Profile = () => {
                             <FiLogOut className="w-5 h-5 text-slate-700 cursor-pointer" onClick={() => dispatch(signOutHandler())} />
                         </header>
 
-                        {upLoadingPhoto ?  (
+                        {upLoadingPhoto ? (
                             <div className="z-20">
                                 <Loader show={upLoadingPhoto} />
                             </div>
@@ -73,11 +74,25 @@ export const Profile = () => {
 
                                         <h2> @{currentUser?.username} </h2>
 
-                                        <button
+                                        {authUser.username === currentUser.username ? 
+                                        (<button
                                             className="border my-3 p-1 rounded-lg text-x cursor-pointer text-center font-semibold text-slate-600 bg-slate-200 hover:bg-slate-100"
                                             onClick={() => setShowUpdateProfile(true)} >
                                             Edit Profile
+                                        </button> 
+                                        ) : ( authUser?.following.find(eachUser => eachUser?.username === currentUser?.username) ? (
+                                        <button
+                                            className="mr-8 mt-4 px-3 w-18 h-8 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out"
+                                            onClick={() => dispatch(unFollowUser({ followUserId: currentUser._id, token }))} >
+                                            Unfollow
+                                        </button> 
+                                        ) : (
+                                        <button
+                                            className="mr-8 mt-4 px-3 w-18 h-8 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out"
+                                            onClick={() => dispatch(followUser({ followUserId: currentUser._id, token }))} >
+                                            Follow
                                         </button>
+                                        ))}
 
                                         {/* Modal for Edit Profile */}
 
@@ -101,7 +116,7 @@ export const Profile = () => {
                                     />
 
                                     <h3 className="text-base sm:text-xl cursor-pointer">
-                                        {currentUserPosts.length} 
+                                        {currentUserPosts.length}
                                         <span className="text-slate-600 text-base sm:text-xl"> posts
                                         </span>
                                     </h3>

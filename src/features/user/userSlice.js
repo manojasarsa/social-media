@@ -9,8 +9,8 @@ const initialState = {
     upLoadingPhoto: false,
     isLoading: false,
     error: "",
-    foundUsers: [],
-    searchTerm: "",
+    searchResults: [],
+    searchQuery: "",
 }
 
 export const userSlice = createSlice({
@@ -23,15 +23,15 @@ export const userSlice = createSlice({
         startUpLoading: (state) => {
             state.upLoadingPhoto = true;
         },
-    },
-    searchUser: (state, { payload }) => {
-        state.searchTerm = payload;
-        state.foundUsers = state.users.filter(
-            user =>
-                user.username.toLowerCase().includes(payload.trim().toLowerCase()) ||
-                user.firstName.toLowerCase().includes(payload.trim().toLowerCase()) ||
-                user.lastName.toLowerCase().includes(payload.trim().toLowerCase())
-        );
+        searchUser: (state, { payload }) => {
+            state.searchQuery = payload;
+            state.searchResults = state.users.filter(
+                user =>
+                    user.username.toLowerCase().includes(payload.trim().toLowerCase()) ||
+                    user.firstName.toLowerCase().includes(payload.trim().toLowerCase()) ||
+                    user.lastName.toLowerCase().includes(payload.trim().toLowerCase())
+            );
+        },
     },
     extraReducers: {
 
