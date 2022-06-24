@@ -27,7 +27,7 @@ export const Signin = () => {
     const formSignInHandler = (e) => {
         e.preventDefault();
         if(!username || !password) {
-            toast.error("All fields are required!", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
+            toast.error("All fields are required!", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
         } else {
             dispatch(signInHandler({ username, password }));
         }
@@ -68,7 +68,7 @@ export const Signin = () => {
                                     <input
                                         name="username"
                                         value={username}
-                                        className="py-1 w-full mt-4 rounded-none border-2 focus:outline-blue-400"
+                                        className="py-1 px-2 w-full mt-4 rounded-none border-2 focus:outline-blue-400"
                                         type="text"
                                         required={true}
                                         onChange={(e) => setFormInputs({ ...formInputs, username: e.target.value })}
@@ -79,7 +79,7 @@ export const Signin = () => {
                                     <input
                                         name="password"
                                         value={password}
-                                        className="py-1 w-full mt-4 rounded-none border-2 focus:outline-blue-400"
+                                        className="py-1 px-2 w-full mt-4 rounded-none border-2 focus:outline-blue-400"
                                         type={showHide ? "text" : "password"}
                                         required={true}
                                         onChange={(e) => setFormInputs({ ...formInputs, password: e.target.value })}
