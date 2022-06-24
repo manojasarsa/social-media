@@ -39,21 +39,21 @@ export const Profile = () => {
         <div>
             <MobileNavBar />
 
-            <div className="flex justify-center px-5 sm:px-32">
+            <div className="flex justify-center px-5 sm:px-32 md:mt-4">
                 <div className="flex h-screen w-screen">
 
                     <AsideLeft />
 
-                    <main className="w-full sm:basis-2/3">
+                    <main className="md:mx-4 w-full sm:basis-2/3">
 
-                        <header className="hidden sm:flex p-4 pt-6 w-full justify-between">
-                            <h1 className="text-xl pl-8">Profile</h1>
-                            <FiLogOut className="w-5 h-5 text-blue-700 cursor-pointer" onClick={() => dispatch(signOutHandler())} />
+                        <header className="hidden sm:flex m-4 w-full justify-between">
+                            <h1 className="text-xl">Profile</h1>
+                            <FiLogOut className="mr-2 w-5 h-5 text-blue-700 cursor-pointer" onClick={() => dispatch(signOutHandler())} />
                         </header>
 
                         <header className="text-xl font-bold flex py-4 text-blue-600 sm:hidden justify-between">
                             <Link to="/home"> ALCON </Link>
-                            <FiLogOut className="w-5 h-5 text-slate-700 cursor-pointer" onClick={() => dispatch(signOutHandler())} />
+                            <FiLogOut className="w-5 h-5 text-blue-700 cursor-pointer" onClick={() => dispatch(signOutHandler())} />
                         </header>
 
                         {upLoadingPhoto ? (

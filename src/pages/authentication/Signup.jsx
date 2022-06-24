@@ -51,7 +51,12 @@ export const Signup = () => {
     }
 
     return (
-        <div className="flex flex-col pb-1 shadow-none bg-slate-100 rounded-lg w-1/4 mx-auto mt-12 min-w-max">
+        <div className="flex flex-col mt-4">
+            <header className="place-self-center text-xl font-bold flex py-4 text-blue-600">
+                ALCON 
+            </header>
+        
+        <div className="flex flex-col pb-1 shadow-none bg-slate-100 rounded-lg w-1/4 mx-auto min-w-max">
 
             <div className="z-20">
                 <Loader show={isLoading} type="body" />
@@ -130,11 +135,12 @@ export const Signup = () => {
 
                 <button className="my-3 text-x cursor-pointer text-center py-1 border2 bg-blue-600 hover:bg-blue-700 text-white font-semibold" onClick={(e) => formSignUpHandler(e)} >Sign Up</button>
 
-                <p className="my-2 text-center text-sm self-center text-slate-900 font-medium">
+                <p className="my-2 text-center text-sm self-center text-blue-700 font-medium">
                     <Link to="/">Already have an account {">"} </Link>
                 </p>
 
             </form>
+        </div>
         </div>
     )
 };

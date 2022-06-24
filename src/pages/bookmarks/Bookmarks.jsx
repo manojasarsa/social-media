@@ -25,14 +25,14 @@ export const Bookmarks = () => {
         <div>
             <MobileNavBar />
             
-            <div className="flex justify-center px-5 sm:px-32">
+            <div className="flex justify-center px-5 sm:px-32 md:mt-4">
                 <div className="flex h-screen w-screen">
 
                     <AsideLeft />
 
-                    <main className="w-full sm:basis-2/3">
+                    <main className="md:mx-4 w-full sm:basis-2/3">
 
-                        <header className="p-4 hidden sm:flex">
+                        <header className="m-4 hidden sm:flex">
                             <h1 className="text-xl">Bookmarks</h1>
                         </header>
 
@@ -45,7 +45,7 @@ export const Bookmarks = () => {
                                 <Loader show={isLoading} />
                             </div>
                         ) : (
-                            bookmarkList?.length === 0 ? <h1 className="text-2xl text-center mt-4 font-semibold">No Bookmark Added!</h1> :
+                            bookmarkList?.length === 0 ? <h1 className="text-2xl text-center mt-4 font-semi-bold">No Bookmark Added!</h1> :
                             bookmarkList?.map(post => (
                             <Post key={post?._id} post={post} />))
                         )}

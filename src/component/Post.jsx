@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getFormattedDate } from "../utilities/getFormattedDate";
 import { openPostModal, setEditPostObj } from "../features/post/postSlice";
 import { CreatePostModal } from "./CreatePostModal";
-import { unFollowUser } from "../features/user/helpers";
+import { followUser, unFollowUser } from "../features/user/helpers";
 import { likePost, dislikePost, deletePost } from "../features/post/helpers";
 import { useLocation, useNavigate } from "react-router-dom";
 import { addToBookmark, removeFromBookmark } from "../features/bookmark/helpers";
@@ -34,6 +34,8 @@ export const Post = ({ post }) => {
 
     const currentUser = users.find(user => user.username === post?.username);
 
+    const authUser = users.find(user => user.username === userData.username);
+
     const editHandler = (e) => {
         e.stopPropagation();            // prevent the post content from re-occurring in new post
         dispatch(openPostModal());
@@ -53,6 +55,12 @@ export const Post = ({ post }) => {
         setPostOptions(false);
     }
 
+    const followHandler = (e) => {
+        e.stopPropagation();
+        dispatch(followUser({ followUserId: currentUser?._id, token }));
+        setPostOptions(false);
+    }
+
     return (
         <div
             className="flex border ml-0 sm:mr-0 sm:mx-3 pl-2 pr-1 sm:pr-0 sm:px-5 py-3 hover:bg-slate-100"
@@ -61,13 +69,20 @@ export const Post = ({ post }) => {
             <CreatePostModal />
 
             <div className="mt-3 w-12 h-12 text-lg flex-none">
-                <img src={currentUser?.profilePicture} className="flex-none w-12 h-12 rounded-full" alt="avatar" />
+                <img 
+                    onClick={() => navigate(`/profile/${currentUser?.username}`)}
+                    src={currentUser?.profilePicture} 
+                    className="flex-none w-12 h-12 rounded-full cursor-pointer" 
+                    alt={currentUser?.username} 
+                />
             </div>
 
             <div className="w-full px-4 py-3">
 
                 <div className="w-full flex justify-between relative">
-                    <h2 className="font-semibold">
+                    <h2 
+                        onClick={() => navigate(`/profile/${currentUser?.username}`)}
+                        className="font-semibold cursor-pointer">
                         {`${currentUser?.firstName} ${currentUser?.lastName}`}
                         <span className="text-slate-500 font-normal pl-1.5">
                             @{post?.username}
@@ -83,18 +98,25 @@ export const Post = ({ post }) => {
                         <div
                             className="w-30 h-22 px-1 shadow-xl bg-white border border-slate-300 text-slate-600 font-semibold 
                                 absolute right-7 top-0 z-20 rounded-xl">
-                            <ul className="p-1 cursor-pointer text-start">
+                            <ul className="p-0.5 cursor-pointer text-start">
                                 <li className="my-1 p-1 hover:bg-slate-200 rounded" onClick={editHandler}>Edit Post</li>
                                 <li className="my-1 p-1 hover:bg-slate-200 rounded" onClick={deletePostHandler}>Delete Post</li>
                             </ul>
                         </div>
 
-                    ) : (
+                    ) : authUser?.following.find(eachUser => eachUser?.username === post?.username) ? (
                         postOptions &&
-                        <div className="w-30 h-22 px-1 shadow-xl hover:bg-slate-200 bg-white border border-slate-300 text-slate-600 font-semibold 
-                            absolute right-3 top-2 z-20 rounded-xl">
-                            <ul className="p-1.5 cursor-pointer text-center">
-                                <li className="rounded" onClick={unFollowHandler}>Unfollow</li>
+                        <div className="w-30 h-22 px-1 shadow-xl bg-white border border-slate-300 text-slate-600 font-semibold 
+                        absolute right-8 top-0 z-20 rounded-xl">
+                            <ul className="p-0.5 cursor-pointer text-start">
+                                <li className="my-1 p-1 hover:bg-slate-200 rounded" onClick={unFollowHandler}>Unfollow</li>
+                            </ul>
+                        </div>
+                    ) : ( postOptions &&
+                        <div className="w-30 h-22 px-1 shadow-xl bg-white border border-slate-300 text-slate-600 font-semibold 
+                        absolute right-8 top-0 z-20 rounded-xl">
+                            <ul className="p-0.5 cursor-pointer text-start">
+                                <li className="my-1 p-1 hover:bg-slate-200 rounded" onClick={followHandler}>Follow</li>
                             </ul>
                         </div>
                     )}

@@ -22,14 +22,14 @@ export const Explore = () => {
         <div>
             <MobileNavBar />
 
-            <div className="flex justify-center px-5 sm:px-32">
+            <div className="flex justify-center px-5 sm:px-32 md:mt-4">
                 <div className="flex h-screen w-screen">
 
                     <AsideLeft />
 
-                    <main className="w-full sm:basis-2/3">
+                    <main className="md:mx-4 w-full sm:basis-2/3">
 
-                        <header className="p-4 hidden sm:flex">
+                        <header className="m-4 hidden sm:flex">
                             <h1 className="text-xl">Explore</h1>
                         </header>
 

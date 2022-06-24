@@ -68,15 +68,15 @@ export const Home = () => {
         <div>
             <MobileNavBar />
 
-            <div className="flex justify-center px-5 sm:px-32">
+            <div className="flex justify-center px-5 sm:px-32 md:mt-4">
                 <div className="flex h-screen w-screen">
 
                     <AsideLeft />
 
-                    <main className="w-full sm:basis-2/3">
+                    <main className="md:mx-4 w-full sm:basis-2/3">
 
-                        <header className="p-4 hidden sm:flex">
-                            <h1 className="text-xl">Home</h1>
+                        <header className="m-4 hidden sm:flex">
+                            <h1 className="text-xl font-semi-bold">Home</h1>
                         </header>
 
                         <header className="text-xl font-bold flex py-4 text-blue-600 sm:hidden">

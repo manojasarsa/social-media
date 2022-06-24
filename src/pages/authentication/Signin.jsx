@@ -55,8 +55,8 @@ export const Signin = () => {
 
                     <img src="assets/social1.svg" alt="social-img" className="w-1/2 hidden md:block ml-10"></img>
 
-                    <div className="mx-auto sm:mx-28 sm:mt-16">
-                        <header className="text-3xl font-bold text-center py-2 mb-2 text-blue-600 sm:hidden">
+                    <div className="mx-auto mt-14 sm:mx-28 sm:mt-16">
+                        <header className="text-2xl font-bold text-center py-2 mb-2 text-blue-600 sm:hidden">
                             <Link to="/home"> ALCON </Link>
                         </header> 
                         <div className="flex flex-col mx-auto pb-8 shadow-none min-w-max bg-slate-100 rounded-lg">

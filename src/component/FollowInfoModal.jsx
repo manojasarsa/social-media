@@ -15,7 +15,7 @@ export const FollowInfoModal = ({ currentUser, followersInfoModal, showFollowing
         >
             <div className="flex justify-end">
                 <button
-                    className=""
+                    className="font-bold text-md"
                     onClick={() => setFollowersInfoModal(false)}>
                     x
                 </button>

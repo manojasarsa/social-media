@@ -23,7 +23,7 @@ export const AsideRight = () => {
     }, [dispatch]);
 
     return (
-        <aside className="w-full basis-2/6 flex-col ml-3 hidden sm:flex ">
+        <aside className="w-full basis-2/6 flex-col ml-7 hidden sm:flex md:mt-2">
 
             <div className="sticky mt-3 flex items-center pl-4 pr-10 w-full rounded-md">
                 <div className="flex-1">
