@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { GiSettingsKnobs } from "react-icons/gi";
+import { BsFillImageFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { AsideLeft, AsideRight, MobileNavBar, Post } from "../../component";
 import { createPost, getAllPosts } from "../../features/post/helpers";
@@ -14,11 +15,13 @@ export const Home = () => {
 
     const [content, setContent] = useState("");
 
+    const [postImageUrl, setPostImageUrl] = useState("");
+
     const {
         posts: { posts, isLoading },
         auth: { userData, token },
         user: { users }
-    } = useSelector( state => state );
+    } = useSelector(state => state);
 
     const dispatch = useDispatch();
 
@@ -37,18 +40,18 @@ export const Home = () => {
     })
 
     const getSortedPosts = () => {
-        
+
         const temp = userFeedPosts.slice();     // for creating new pure array
 
-        if(sortPostBy === "Latest") {
+        if (sortPostBy === "Latest") {
             temp.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt));
         }
 
-        if(sortPostBy === "Oldest") {
+        if (sortPostBy === "Oldest") {
             temp.sort((a, b) => new Date(a?.createdAt) - new Date(b?.createdAt));
         }
 
-        if(sortPostBy === "Trending") {
+        if (sortPostBy === "Trending") {
             temp.sort((a, b) => b?.likes?.likeCount - a?.likes?.likeCount);
         }
         return temp;
@@ -56,12 +59,36 @@ export const Home = () => {
 
     const sortedPosts = getSortedPosts();
 
-    const postHandler = (e) => {
+    const cloudinaryUrl = "https://api.cloudinary.com/v1_1/dytvl1fnk/image/upload";
+
+    const postHandler = async (e) => {
         e.preventDefault();
-        if (content) {
+        if (postImageUrl) {
+            const file = postImageUrl;
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", "alcon-social");
+            formData.append("folder", "alcon");
+
+            try {
+                const res = await fetch(cloudinaryUrl, {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const { url } = await res.json();
+
+                dispatch(createPost({ postData: { content, postImageUrl: url }, token }));
+
+            } catch (err) {
+                console.error("error occured", err);
+            }
+            
+        } else {
             dispatch(createPost({ postData: { content }, token }));
-            setContent("");
         }
+        setContent("");
+        setPostImageUrl("");
     }
 
     return (
@@ -84,7 +111,7 @@ export const Home = () => {
                         </header>
 
                         {/* create post */}
-                        
+
                         <>
                             <div className="border sm:ml-3 sm:mr-0 flex px-2 py-3">
 
@@ -93,16 +120,31 @@ export const Home = () => {
                                 </div>
 
                                 <div className="w-full px-4">
-                                    <textarea 
+                                    <textarea
                                         value={content}
-                                        placeholder="What's happening?" 
-                                        className="resize-none mt-3 pb-3 w-full h-28 bg-slate-100 focus:outline-none rounded-xl p-2" 
+                                        placeholder="What's happening?"
+                                        className="resize-none mt-3 pb-3 w-full h-28 bg-slate-100 focus:outline-none rounded-xl p-2"
                                         onChange={(e) => setContent(e.target.value)} >
                                     </textarea>
+                                    <div className="w-20 my-1">
+                                        <img
+                                            src={postImageUrl ? URL.createObjectURL(postImageUrl) : ""}
+                                            className={postImageUrl ? "block rounded-xl" : "hidden"}
+                                            alt="avatar"
+                                        />
+                                    </div>
 
-                                    <div className="flex justify-end">
-                                        <button 
-                                            disabled={!content.trim().length}
+                                    <div className="flex justify-between">
+                                        <label className="flex m-2">
+                                            <input
+                                                className="hidden"
+                                                type="file"
+                                                onChange={(e) => setPostImageUrl(e.target.files[0])}
+                                            />
+                                            <BsFillImageFill className="text-2xl mt-1 text-blue-700 cursor-pointer" />
+                                        </label>
+                                        <button
+                                            disabled={!content.trim().length && !postImageUrl}
                                             className="p-2.5 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-150 ease-in-out disabled:cursor-not-allowed"
                                             onClick={postHandler}>
                                             Post
@@ -110,19 +152,19 @@ export const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                        
 
-                        {/* filter posts by date and trending */}
 
-                        <div className="flex pl-0.5 pr-0.5 sm:pr-6 sm:px-5 py-3 justify-between relative">
+                            {/* filter posts by date and trending */}
 
-                            <h1 className="text-xl">{sortPostBy} Posts</h1>
+                            <div className="flex pl-0.5 pr-0.5 sm:pr-6 sm:px-5 py-3 justify-between relative">
+
+                                <h1 className="text-xl">{sortPostBy} Posts</h1>
 
                                 <GiSettingsKnobs
                                     className="fill-blue-600 stroke-0 hover:stroke-2 text-2xl cursor-pointer"
                                     onClick={() => setShowFilterModal(prev => !prev)}>
                                 </GiSettingsKnobs>
-                                
+
                                 {/* filter modal */}
 
                                 {showFilterPostModal && <div className="w-30 h-22 px-1 shadow-xl bg-slate-100 border border-slate-300 text-slate-600 font-semibold absolute right-11 top-4 z-20 rounded-xl">
@@ -131,22 +173,22 @@ export const Home = () => {
                                         <li className="p-1 hover:bg-slate-200 rounded" onClick={() => { setSortPostBy("Oldest"); setShowFilterModal(false); }}>Oldest</li>
                                         <li className="p-1 hover:bg-slate-200 rounded" onClick={() => { setSortPostBy("Trending"); setShowFilterModal(false); }}>Trending</li>
                                     </ul>
-                                </div> 
+                                </div>
                                 }
-                        </div>
-
-                        {/* Show Posts */}
-
-                        {isLoading ? (
-                            <div className="z-20">
-                                <Loader show={isLoading} />
                             </div>
-                        ) : (
-                            !sortedPosts.length ? 
-                                <h1 className="text-2xl font-bold text-center mt-8">No Posts, Add one!</h1> :
-                                sortedPosts?.map(post => <Post key={post._id} post={post} />
-                            )
-                        )}
+
+                            {/* Show Posts */}
+
+                            {isLoading ? (
+                                <div className="z-20">
+                                    <Loader show={isLoading} />
+                                </div>
+                            ) : (
+                                !sortedPosts.length ?
+                                    <h1 className="text-2xl font-bold text-center mt-8">No Posts, Add one!</h1> :
+                                    sortedPosts?.map(post => <Post key={post._id} post={post} />
+                                    )
+                            )}
 
                         </>
 

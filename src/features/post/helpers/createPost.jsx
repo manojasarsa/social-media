@@ -5,6 +5,7 @@ export const createPost = createAsyncThunk(
     "post/createPost",
     async ({ postData, token }, { rejectWithValue }) => {
         try {
+            console.log("inside");
             const { status, data } = await axios.post(
                 "/api/posts",
                 { postData },
@@ -15,6 +16,7 @@ export const createPost = createAsyncThunk(
                 return data.posts;
             }
         } catch (err) {
+            console.log("error");
             return rejectWithValue(err.response.data.errors[0]);
         }
     }

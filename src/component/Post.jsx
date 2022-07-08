@@ -69,18 +69,18 @@ export const Post = ({ post }) => {
             <CreatePostModal />
 
             <div className="mt-3 w-12 h-12 text-lg flex-none">
-                <img 
+                <img
                     onClick={() => navigate(`/profile/${currentUser?.username}`)}
-                    src={currentUser?.profilePicture} 
-                    className="flex-none w-12 h-12 rounded-full cursor-pointer" 
-                    alt={currentUser?.username} 
+                    src={currentUser?.profilePicture}
+                    className="flex-none w-12 h-12 rounded-full cursor-pointer"
+                    alt={currentUser?.username}
                 />
             </div>
 
             <div className="w-full px-4 py-3">
 
                 <div className="w-full flex justify-between relative">
-                    <h2 
+                    <h2
                         onClick={() => navigate(`/profile/${currentUser?.username}`)}
                         className="font-semibold cursor-pointer">
                         {`${currentUser?.firstName} ${currentUser?.lastName}`}
@@ -112,7 +112,7 @@ export const Post = ({ post }) => {
                                 <li className="my-1 p-1 hover:bg-slate-200 rounded" onClick={unFollowHandler}>Unfollow</li>
                             </ul>
                         </div>
-                    ) : ( postOptions &&
+                    ) : (postOptions &&
                         <div className="w-30 h-22 px-1 shadow-xl bg-white border border-slate-300 text-slate-600 font-semibold 
                         absolute right-8 top-0 z-20 rounded-xl">
                             <ul className="p-0.5 cursor-pointer text-start">
@@ -128,6 +128,14 @@ export const Post = ({ post }) => {
                     onClick={() => navigate(`/post/${post.id}`)}>
                     {post?.content}
                 </p>
+
+                {post?.postImageUrl ? (<div className="max-w-3xl max-h-80 mx-auto bg-blue-100 rounded-md">
+                    <img
+                        src={post?.postImageUrl}
+                        className="max-w-full max-h-80 rounded-md my-2 mx-auto"
+                        alt="avatar"
+                    />
+                </div>) : null}
 
                 <p className="text-sm text-gray-600">{getFormattedDate(post?.createdAt)}</p>
 

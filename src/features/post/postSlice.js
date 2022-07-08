@@ -24,7 +24,7 @@ const postSlice = createSlice({
         },
         setEditPostObj: (state, { payload }) => {
             state.editPostObj = payload;
-        }
+        },
     },
     extraReducers: {
         [getAllPosts.pending]: state => {
