@@ -104,7 +104,7 @@ export const CreatePostModal = () => {
     return (
         <Modal
             styles={{
-                modal: { width: "20rem", height: "fit-content", paddingTop: "0.2rem", borderRadius: "1rem", boxShadow: "none", margin: "0 auto" },
+                modal: { width: "20rem", height: "fit-content", paddingTop: "0.2rem", borderRadius: "1rem", margin: "0 auto" },
                 overlay: { backgroundColor: "rgba(0,0,0,0.1)" },
             }}
             open={showPostModal}
