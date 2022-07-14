@@ -26,7 +26,7 @@ export const Signin = () => {
 
     const formSignInHandler = (e) => {
         e.preventDefault();
-        if(!username || !password) {
+        if (!username || !password) {
             toast.error("All fields are required!", { position: toast.POSITION.BOTTOM_RIGHT, autoClose: 2000 });
         } else {
             dispatch(signInHandler({ username, password }));
@@ -36,7 +36,7 @@ export const Signin = () => {
     const guestUser = { username: "chrislevin22", password: "chrislevin@123" };
 
     const formGuestSignInHandler = (e) => {
-        e.preventDefault();  
+        e.preventDefault();
         setFormInputs(guestUser);
         dispatch(signInHandler(guestUser));
     }
@@ -58,13 +58,13 @@ export const Signin = () => {
                     <div className="mx-auto mt-14 sm:mx-28 sm:mt-16">
                         <header className="text-2xl font-bold text-center py-2 mb-2 text-blue-600 sm:hidden">
                             <Link to="/home"> ALCON </Link>
-                        </header> 
+                        </header>
                         <div className="flex flex-col mx-auto pb-8 shadow-none min-w-max bg-slate-100 rounded-lg">
                             <form className="mx-8 flex flex-col">
 
                                 <h2 className="my-6 text-left text-slate-900 text-lg">Sign In</h2>
 
-                                <label className="text-sm py-1 text-slate-900">Username<span className="form_label">*</span>
+                                <label className="text-sm py-1 text-slate-900">Username<span className="form_label"></span>
                                     <input
                                         name="username"
                                         value={username}
@@ -75,7 +75,7 @@ export const Signin = () => {
                                     />
                                 </label>
 
-                                <label className="relative text-sm py-1 text-slate-900">Password<span className="form_label">*</span>
+                                <label className="relative text-sm py-1 text-slate-900">Password<span className="form_label"></span>
                                     <input
                                         name="password"
                                         value={password}
@@ -85,23 +85,26 @@ export const Signin = () => {
                                         onChange={(e) => setFormInputs({ ...formInputs, password: e.target.value })}
                                     />
 
-                                    <i className="absolute right-2 bottom-2.5 fa-solid fa-eye show_hide_btn"
+                                    {showHide ? <i className="absolute right-2 bottom-2.5 text-slate-500 fa-solid fa-eye show_hide_btn"
                                         onClick={() => setShowHide((prev) => !prev)}>
-                                    </i>
+                                    </i> :
+                                        <i className="absolute right-2 bottom-2.5 text-slate-500 fa-solid fa-eye-slash show_hide_btn"
+                                            onClick={() => setShowHide((prev) => !prev)}>
+                                        </i>}
 
                                 </label>
 
-                                <Link 
-                                    to="/home" 
-                                    className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  bg-blue-600 hover:bg-blue-700 text-white" 
+                                <Link
+                                    to="/home"
+                                    className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  bg-blue-600 hover:bg-blue-700 text-white"
                                     onClick={(e) => formSignInHandler(e)} >
-                                    Login 
+                                    Login
                                 </Link>
 
-                                <Link 
-                                    to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-blue-700 hover:bg-slate-200" 
-                                    onClick={(e) => formGuestSignInHandler(e)} > 
-                                    Guest Login 
+                                <Link
+                                    to="/home" className="my-3 text-x cursor-pointer text-center py-1 border-2 font-semibold  text-blue-700 hover:bg-slate-200"
+                                    onClick={(e) => formGuestSignInHandler(e)} >
+                                    Guest Login
                                 </Link>
 
                                 <p className="my-2 text-center text-sm text-slate-800 self-center font-medium"> New to Alcon?

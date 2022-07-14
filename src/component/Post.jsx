@@ -129,7 +129,9 @@ export const Post = ({ post }) => {
                     {post?.content}
                 </p>
 
-                {post?.postImageUrl ? (<div className="max-w-3xl max-h-80 mx-auto bg-blue-100 rounded-md">
+                {post?.postImageUrl ? (<div 
+                    className="max-w-3xl max-h-80 mx-auto bg-blue-100 rounded-md cursor-pointer"
+                    onClick={() => navigate(`/post/${post.id}`)}>
                     <img
                         src={post?.postImageUrl}
                         className="max-w-full max-h-80 rounded-md my-2 mx-auto"

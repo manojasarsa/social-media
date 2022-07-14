@@ -95,6 +95,14 @@ export const SinglePost = () => {
                                     </div>
                                 ) : <p className="py-3">{currentPost?.content}</p>}
 
+                                {currentPost?.postImageUrl ? (<div className="max-w-3xl max-h-80 mx-auto bg-blue-100 rounded-md">
+                                    <img
+                                        src={currentPost?.postImageUrl}
+                                        className="max-w-full max-h-80 rounded-md my-2 mx-auto"
+                                        alt="avatar"
+                                    />
+                                </div>) : null}
+
                                 <p className="text-sm text-gray-600 border-y-3">{getFormattedDate(currentPost?.createdAt)}</p>
 
                                 <div className="border-y mt-4 py-2 px-3">
@@ -171,7 +179,8 @@ export const SinglePost = () => {
                                     </span>
 
                                     <button
-                                        className="p-2 rounded-[20rem] bg-blue-600 hover:bg-blue-800 text-white shadow-md 
+                                        disabled={!commentData.content.trim().length}
+                                        className="disabled:cursor-not-allowed p-2 rounded-[20rem] bg-blue-600 hover:bg-blue-800 text-white shadow-md 
                                         hover:shadow-lg w-20"
                                         onClick={() => {
                                             dispatch(addComment({ postId: currentPost._id, token, commentData }));

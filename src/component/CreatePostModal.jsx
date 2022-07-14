@@ -4,12 +4,15 @@ import { Modal } from 'react-responsive-modal';
 import { BsFillImageFill } from "react-icons/bs";
 import { createPost, editPost } from "../features/post/helpers";
 import { closePostModal, setEditPostObj } from "../features/post/postSlice";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure();
 
 export const CreatePostModal = () => {
 
-    const [content, setContent] = useState("");
-
     const [postData, setPostData] = useState(null);
+
+    const [isFetching, setIsFetching] = useState(false);
 
     const {
         auth: { userData, token },
@@ -18,10 +21,38 @@ export const CreatePostModal = () => {
 
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        setPostData(editPostObj);
+        return () => {
+            setPostData(null);
+        };
+    }, [editPostObj]);
+
+    useEffect(() => {
+        if(postData?.postImageUrl) {
+            if (isFetching) {
+                if (editPostObj) {
+                    toast("Editing Post", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
+                } else {
+                    toast("Adding Post", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
+                }
+            }
+        } else {
+            if (isFetching) {
+                if (editPostObj) {
+                    toast("Editing Post", { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
+                } else {
+                    toast("Adding Post", { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
+                }
+            }
+        }
+    }, [isFetching]);
+
     const cloudinaryUrl = "https://api.cloudinary.com/v1_1/dytvl1fnk/image/upload";
 
     const postHandler = async (e) => {
         e.preventDefault();
+        setIsFetching(true);
         if (postData) {
             if (
                 postData?.postImageUrl !== editPostObj?.postImageUrl ||
@@ -42,36 +73,39 @@ export const CreatePostModal = () => {
 
                         const { url } = await res.json();
 
-                        editPostObj
-                            ? dispatch(editPost({ postData: { content, postImageUrl: url }, token, post: editPostObj }))
-                            : dispatch(createPost({ postData: { content, postImageUrl: url }, token }));
+                        if (editPostObj) {
+                            dispatch(editPost({ postData: { ...postData, postImageUrl: url }, token, post: editPostObj }));
+                            setIsFetching(false);
+                        } else {
+                            dispatch(createPost({ postData: { ...postData, postImageUrl: url }, token }));
+                            setIsFetching(false);
+                        }
 
                     } catch (err) {
                         console.error("error occured", err);
                     }
 
                 } else {
-                    dispatch(createPost({ postData: { content }, token }));
+                    if (editPostObj) {
+                        dispatch(editPost({ postData: postData, token, post: editPostObj }));
+                        setIsFetching(false);
+                    } else {
+                        dispatch(createPost({ postData: postData, token }));
+                        setIsFetching(false);
+                    }
                 }
-                setPostData({ content: "", postImageUrl: "" });
-                dispatch(closePostModal());
-                dispatch(setEditPostObj(null));
             }
         }
+        setPostData({ content: "", postImageUrl: "" });
+        dispatch(closePostModal());
+        dispatch(setEditPostObj(null));
     }
-
-    useEffect(() => {
-        setPostData(editPostObj);
-        return () => {
-            setPostData(null);
-        };
-    }, [editPostObj]);
 
     return (
         <Modal
             styles={{
                 modal: { width: "22rem", height: "fit-content", paddingTop: "0.2rem", borderRadius: "1rem", boxShadow: "none" },
-                overlay: { backgroundColor: "rgba(0,0,0,0.3)" },
+                overlay: { backgroundColor: "rgba(0,0,0,0.1)" },
             }}
             open={showPostModal}
             onClose={showPostModal}
@@ -99,10 +133,10 @@ export const CreatePostModal = () => {
                         className="resize-none mt-3 pb-3 w-full h-28 bg-slate-100 focus:outline-none rounded-xl p-2"
                         onChange={(e) => setPostData({ ...postData, content: e.target.value })} >
                     </textarea>
-                    <div className="w-30 my-1">
+                    <div className="max-w-xl max-h-80 mx-auto rounded-md">
                         <img
                             src={typeof postData?.postImageUrl === "object" ? URL.createObjectURL(postData?.postImageUrl) : postData?.postImageUrl}
-                            className={postData?.postImageUrl ? "block rounded-xl" : "hidden"}
+                            className={postData?.postImageUrl ? "block max-w-full max-h-20 rounded-md my-2 cursor-pointer" : "hidden"}
                             alt="postImage"
                         />
                     </div>
@@ -113,11 +147,13 @@ export const CreatePostModal = () => {
                                 className="hidden"
                                 type="file"
                                 onChange={(e) => setPostData({ ...postData, postImageUrl: e.target.files[0] })}
+                                accept="image/*"
                             />
                             <BsFillImageFill className="text-2xl mt-1 text-blue-700 cursor-pointer" />
                         </label>
                         <button
-                            className="p-2.5 pt-3 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md 
+                            disabled={!postData?.content.trim().length && !postData?.postImageUrl}
+                            className="disabled:cursor-not-allowed p-2.5 pt-3 bg-blue-600 hover:bg-blue-800 text-white rounded-xl shadow-md 
                             hover:shadow-lg transition duration-150 ease-in-out"
                             onClick={postHandler}>
                             {editPostObj ? "Update" : "Post"}

@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { AsideLeft, AsideRight, MobileNavBar, Post } from "../../component";
 import { createPost, getAllPosts } from "../../features/post/helpers";
 import Loader from 'react-spinner-loader';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure();
 
 export const Home = () => {
 
@@ -16,6 +19,8 @@ export const Home = () => {
     const [content, setContent] = useState("");
 
     const [postImageUrl, setPostImageUrl] = useState("");
+
+    const [isFetching, setIsFetching] = useState(false);
 
     const {
         posts: { posts, isLoading },
@@ -61,8 +66,18 @@ export const Home = () => {
 
     const cloudinaryUrl = "https://api.cloudinary.com/v1_1/dytvl1fnk/image/upload";
 
+    useEffect(() => {
+        if(postImageUrl) {
+            isFetching && toast("Adding Post", { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
+        } else {
+            isFetching && toast("Adding Post", { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
+        }
+    }, [isFetching]);
+
     const postHandler = async (e) => {
         e.preventDefault();
+        setIsFetching(true);
+        
         if (postImageUrl) {
             const file = postImageUrl;
             const formData = new FormData();
@@ -79,6 +94,7 @@ export const Home = () => {
                 const { url } = await res.json();
 
                 dispatch(createPost({ postData: { content, postImageUrl: url }, token }));
+                setIsFetching(false);
 
             } catch (err) {
                 console.error("error occured", err);
@@ -126,10 +142,10 @@ export const Home = () => {
                                         className="resize-none mt-3 pb-3 w-full h-28 bg-slate-100 focus:outline-none rounded-xl p-2"
                                         onChange={(e) => setContent(e.target.value)} >
                                     </textarea>
-                                    <div className="w-20 my-1">
+                                    <div className="max-w-xl max-h-80 mx-auto rounded-md">
                                         <img
                                             src={postImageUrl ? URL.createObjectURL(postImageUrl) : ""}
-                                            className={postImageUrl ? "block rounded-xl" : "hidden"}
+                                            className={postImageUrl ? "block max-w-full max-h-20 rounded-md my-2 cursor-pointer" : "hidden"}
                                             alt="avatar"
                                         />
                                     </div>
