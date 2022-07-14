@@ -2,6 +2,7 @@ import { AsideLeft, AsideRight, MobileNavBar, Post } from "../../component";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { AiOutlineArrowUp } from "react-icons/ai";
 import { getAllBookmarks } from "../../features/bookmark/helpers";
 import Loader from 'react-spinner-loader';
 
@@ -37,7 +38,7 @@ export const Bookmarks = () => {
                         </header>
 
                         <header className="text-xl font-bold flex py-4 text-blue-600 sm:hidden">
-                            <Link to="/home"> ALCON </Link>
+                            <Link to="/home" id="hero-logo"> ALCON </Link>
                         </header>
                         
                         {isLoading ? (
@@ -53,6 +54,9 @@ export const Bookmarks = () => {
                     </main>
 
                     <AsideRight />
+                    <a href="#">
+                        <AiOutlineArrowUp className="hidden sm:block fixed bottom-0 right-20 bg-blue-300 text-slate-50 text-5xl p-3 rounded-full mb-2 mr-20 hover:bg-blue-500" />
+                    </a>
                 </div>
             </div>
         </div>

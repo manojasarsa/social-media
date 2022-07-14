@@ -1,0 +1,19 @@
+.customOverlay {
+    width: 22rem;
+    height: fit-content;
+    padding-top: 0.2rem;
+    border-radius: 1rem;
+    box-shadow: none;
+    background-color: yellow;
+}
+
+.customModal {
+    background-color: rgba(0,0,0,0.1);
+} 
+
+@media (max-width: 380px) {
+    .customModal {
+        background: yellow;
+        margin: 0 auto;
+    }
+}

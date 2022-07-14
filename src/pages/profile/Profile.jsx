@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signOutHandler } from "../../features/auth/authSlice";
 import { followUser, unFollowUser } from "../../features/user/helpers";
 import { FiLogOut } from "react-icons/fi";
+import { AiOutlineArrowUp } from "react-icons/ai";
 import 'react-responsive-modal/styles.css';
 import Loader from 'react-spinner-loader';
 import { Link } from "react-router-dom";
@@ -52,7 +53,7 @@ export const Profile = () => {
                         </header>
 
                         <header className="text-xl font-bold flex py-4 text-blue-600 sm:hidden justify-between">
-                            <Link to="/home"> ALCON </Link>
+                            <Link to="/home" id="hero-logo"> ALCON </Link>
                             <FiLogOut className="w-5 h-5 text-blue-700 cursor-pointer" onClick={() => dispatch(signOutHandler())} />
                         </header>
 
@@ -158,6 +159,9 @@ export const Profile = () => {
                     </main>
 
                     <AsideRight />
+                    <a href="#">
+                        <AiOutlineArrowUp className="hidden sm:block fixed bottom-0 right-20 bg-blue-300 text-slate-50 text-5xl p-3 rounded-full mb-2 mr-20 hover:bg-blue-500" />
+                    </a>
                 </div>
             </div>
         </div>

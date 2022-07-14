@@ -1,3 +1,4 @@
+import "./modal.css";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal } from 'react-responsive-modal';
@@ -103,14 +104,18 @@ export const CreatePostModal = () => {
 
     return (
         <Modal
-            styles={{
-                modal: { width: "22rem", height: "fit-content", paddingTop: "0.2rem", borderRadius: "1rem", boxShadow: "none" },
-                overlay: { backgroundColor: "rgba(0,0,0,0.1)" },
-            }}
+            // styles={{
+            //     modal: { width: "22rem", height: "fit-content", paddingTop: "0.2rem", borderRadius: "1rem", boxShadow: "none" },
+            //     overlay: { backgroundColor: "rgba(0,0,0,0.1)" },
+            // }}
             open={showPostModal}
             onClose={showPostModal}
             showCloseIcon={false}
             center={true}
+            classNames={{
+                overlay: 'customOverlay',
+                modal: 'customModal',
+            }}
         >
             <div className="flex justify-end">
                 <button
