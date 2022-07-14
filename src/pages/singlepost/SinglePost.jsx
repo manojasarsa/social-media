@@ -93,7 +93,7 @@ export const SinglePost = () => {
                                     <div className="z-20">
                                         <Loader show={isLoading} />
                                     </div>
-                                ) : <p className="py-3">{currentPost?.content}</p>}
+                                ) : <p className="py-3 max-w-xl break-words">{currentPost?.content}</p>}
 
                                 {currentPost?.postImageUrl ? (<div className="max-w-3xl max-h-80 mx-auto bg-blue-100 rounded-md">
                                     <img

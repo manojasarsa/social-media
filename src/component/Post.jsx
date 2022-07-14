@@ -124,7 +124,7 @@ export const Post = ({ post }) => {
                 </div>
 
                 <p
-                    className="py-3 cursor-pointer"
+                    className="py-3 cursor-pointer max-w-lg break-words"
                     onClick={() => navigate(`/post/${post.id}`)}>
                     {post?.content}
                 </p>
