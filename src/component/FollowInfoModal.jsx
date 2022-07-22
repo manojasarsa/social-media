@@ -15,7 +15,7 @@ export const FollowInfoModal = ({ currentUser, followersInfoModal, showFollowing
         >
             <div className="flex justify-end">
                 <button
-                    className=""
+                    className="font-bold text-md"
                     onClick={() => setFollowersInfoModal(false)}>
                     x
                 </button>
@@ -24,12 +24,14 @@ export const FollowInfoModal = ({ currentUser, followersInfoModal, showFollowing
             {showFollowing ? (
                 <div className="flex flex-col">
                     <h1 className="text-xl  mx-auto font-semibold">Following</h1>
-                    {currentUser?.following.map(user => <UserDetails key={user._id} currentUser={user} showFollowing={showFollowing} />)}
+                    {!currentUser?.following.length ? <h3 className='text-center text-slate-800 mt-2'>Not following anyone</h3>  :
+                    currentUser?.following.map(user => <UserDetails key={user._id} currentUser={user} showFollowing={showFollowing} />)}
                 </div>
             ) : (
                 <div className="flex flex-col">
                     <h1 className="text-xl mx-auto font-semibold">Followers</h1>
-                    {currentUser?.followers.map(user => <UserDetails key={user._id} currentUser={user} showFollowing={showFollowing} />)}     
+                    {!currentUser?.followers.length ? <h3 className='text-center text-slate-800 mt-2'>No followers</h3>  :
+                    currentUser?.followers.map(user => <UserDetails key={user._id} currentUser={user} showFollowing={showFollowing} />)}     
                 </div>
             )}
 

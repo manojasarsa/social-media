@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getAllBookmarks, addToBookmark, removeFromBookmark } from "./helpers";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure();
+
 
 const initialState = {
     error: "",
@@ -38,6 +42,7 @@ const bookmarkSlice = createSlice({
         [addToBookmark.fulfilled]: (state, { payload }) => {
             state.isLoading = false;
             state.bookmarks = payload;
+            toast("Added to Bookmarks", { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
         },
         [addToBookmark.rejected]: (state, { payload }) => {
             state.isLoading = false;
@@ -53,6 +58,7 @@ const bookmarkSlice = createSlice({
         [removeFromBookmark.fulfilled]: (state, { payload }) => {
             state.isLoading = false;
             state.bookmarks = payload;
+            toast("Removed from Bookmarks", { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
         },
         [removeFromBookmark.rejected]: (state, { payload }) => {
             state.isLoading = false;

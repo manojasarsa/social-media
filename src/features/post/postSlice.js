@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getAllPosts, createPost, editPost, deletePost, likePost, dislikePost, addComment, editComment, deleteComment } from "./helpers";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure();
 
 const initialState = {
     isLoading: false,
@@ -21,7 +24,7 @@ const postSlice = createSlice({
         },
         setEditPostObj: (state, { payload }) => {
             state.editPostObj = payload;
-        }
+        },
     },
     extraReducers: {
         [getAllPosts.pending]: state => {
@@ -42,6 +45,7 @@ const postSlice = createSlice({
         [createPost.fulfilled]: (state, { payload }) => {
             state.posts = payload;
             state.error = "";
+            toast("Post Created", { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
         },
         [createPost.rejected]: (state, { payload }) => {
             state.error = payload;
@@ -52,6 +56,7 @@ const postSlice = createSlice({
         [editPost.fulfilled]: (state, { payload }) => {
             state.posts = payload;
             state.error = "";
+            toast("Post Edited", { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
         },
         [editPost.rejected]: (state, { payload }) => {
             state.error = payload;
@@ -62,6 +67,7 @@ const postSlice = createSlice({
         [deletePost.fulfilled]: (state, { payload }) => {
             state.posts = payload;
             state.error = "";
+            toast("Post Deleted", { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
         },
         [deletePost.rejected]: (state, { payload }) => {
             state.error = payload;
@@ -71,6 +77,7 @@ const postSlice = createSlice({
 
         [likePost.fulfilled]: (state, { payload }) => {
             state.posts = payload;
+            toast("Liked added", { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
         },
         [likePost.rejected]: (state, { payload }) => {
             state.error = payload;
@@ -80,6 +87,7 @@ const postSlice = createSlice({
 
         [dislikePost.fulfilled]: (state, { payload }) => {
             state.posts = payload;
+            toast("Liked removed", { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
         },
         [dislikePost.rejected]: (state, { payload }) => {
             state.error = payload;
@@ -88,14 +96,12 @@ const postSlice = createSlice({
         // add comment
 
         [addComment.pending]: state => {
-            state.isLoading = true;
         },
         [addComment.fulfilled]: (state, { payload }) => {
-            state.isLoading = false;
             state.posts = payload;
+            toast("Comment Added", { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
         },
         [addComment.rejected]: (state, { payload }) => {
-            state.isLoading = false;
             state.error = payload;
         },
 
@@ -103,6 +109,7 @@ const postSlice = createSlice({
 
         [editComment.fulfilled]: (state, { payload }) => {
             state.posts = payload;
+            toast("Comment Edited", { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
         },
         [editComment.rejected]: (state, { payload }) => {
             state.error = payload;
@@ -112,6 +119,7 @@ const postSlice = createSlice({
 
         [deleteComment.fulfilled]: (state, { payload }) => {
             state.posts = payload;
+            toast("Comment Deleted", { position: toast.POSITION.TOP_CENTER, autoClose: 1000 });
         },
         [deleteComment.rejected]: (state, { payload }) => {
             state.error = payload;
