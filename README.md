@@ -19,10 +19,6 @@ ALCON is a Social Media App to connect with people. <br/>
 </tr> 
 </table>
 
-<p align="center">
-<img height="375" src="https://user-images.githubusercontent.com/36642146/172560648-2f822d54-538c-4ee1-9032-8f66f962701b.png">
-</p>
-
 ## Tech Stack -
 
 - React JS
